@@ -18,6 +18,9 @@
 		<checkstyle.skip>${wc.qa.skip}</checkstyle.skip>
 		<findbugs.skip>${wc.qa.skip}</findbugs.skip>
 		<pmd.skip>${wc.qa.skip}</pmd.skip>
+		<badges.skip>${wc.qa.skip}</badges.skip>
+		<javadoc.excluded.packages></javadoc.excluded.packages>
+		<checkstyle.excludes></checkstyle.excludes>
 	</properties>
 
 	<description>
@@ -37,6 +40,7 @@
 					<configLocation>bordertech/checkstyle.xml</configLocation>
 					<consoleOutput>true</consoleOutput>
 					<failsOnError>true</failsOnError>
+					<failOnViolation>true</failOnViolation>
 					<linkXRef>false</linkXRef>
 					<includeTestSourceDirectory>false</includeTestSourceDirectory>
 				</configuration>
@@ -86,6 +90,7 @@
 				<artifactId>findbugs-maven-plugin</artifactId>
 				<version>3.0.3</version>
 				<configuration>
+					<failOnError>true</failOnError>
 					<effort>Max</effort>
 					<includeTests>false</includeTests>
 					<threshold>Medium</threshold>
@@ -108,6 +113,203 @@
 					</execution>
 				</executions>
 			</plugin>
+
+			<!-- Code coverage. -->
+			<!-- Run twice for the report. -->
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.7.5.201505241946</version>
+				<executions>
+					<!-- Prepare jacco agent. -->
+					<execution>
+						<id>jacoco-agent</id>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+						<configuration>
+							<propertyName>surefireArgLine</propertyName>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- Generate badges. -->
+			<plugin>
+				<groupId>com.github.bordertech.buildtools</groupId>
+				<artifactId>badger</artifactId>
+				<version>1.0.1-SNAPSHOT</version>
+				<executions>
+					<execution>
+						<phase>post-site</phase>
+						<goals>
+							<goal>badges</goal>
+						</goals>
+						<configuration>
+							<skip>${badges.skip}</skip>
+							<outputDir>target/site/badges</outputDir>
+							<inputFiles>
+								<inputFile>target/pmd.xml</inputFile>
+								<inputFile>target/findbugs-report.xml</inputFile>
+								<inputFile>target/findbugsXml.xml</inputFile>
+								<inputFile>target/checkstyle-result.xml</inputFile>
+								<inputFile>target/coverage-report.xml</inputFile>
+							</inputFiles>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
 		</plugins>
 	</build>
+
+	<reporting>
+		<plugins>
+
+			<!-- Generate Reports Information about the project. -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-project-info-reports-plugin</artifactId>
+				<version>2.8.1</version>
+				<reportSets>
+					<reportSet>
+						<reports>
+							<report>index</report>
+							<report>license</report>
+							<report>mailing-list</report>
+							<report>summary</report>
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
+
+			<!-- Self Aggregating. Plugin automatically aggregates sub modules. -->
+			<!-- Produce a cross-reference of the project's source. (Self Aggregating). -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jxr-plugin</artifactId>
+				<version>2.5</version>
+				<reportSets>
+					<reportSet>
+						<inherited>false</inherited>
+						<reports>
+							<report>aggregate</report>
+							<!--
+							<report>test-aggregate</report>
+							-->
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
+
+			<!-- Generate Javadoc. (Self Aggregating)-->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.10.3</version>
+				<configuration>
+					<charset>UTF-8</charset>
+					<encoding>UTF-8</encoding>
+					<docencoding>UTF-8</docencoding>
+					<breakiterator>true</breakiterator>
+					<version>true</version>
+					<keywords>true</keywords>
+					<excludePackageNames>${javadoc.excluded.packages}</excludePackageNames>
+				</configuration>
+				<reportSets>
+					<reportSet>
+						<inherited>false</inherited>
+						<reports>
+							<report>aggregate</report>
+							<!--
+							<report>test-aggregate</report>
+							-->
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
+
+			<!-- Generate the web interface version of the test results (Aggregate Parameter). -->
+			<!-- Run site twice to get correct results. -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-report-plugin</artifactId>
+				<version>${surefire.version}</version>
+				<configuration>
+					<aggregate>true</aggregate>
+				</configuration>
+				<reportSets>
+					<reportSet>
+						<inherited>false</inherited>
+						<reports>
+							<report>report</report>
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
+
+			<!-- QA Reports. -->
+			<!-- Generate the Checkstyle report. (Self Aggregating) -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+				<version>2.17</version>
+				<configuration>
+					<skip>false</skip>
+					<configLocation>bordertech/checkstyle.xml</configLocation>
+					<consoleOutput>true</consoleOutput>
+					<excludes>${checkstyle.excludes}</excludes>
+					<headerFile />
+				</configuration>
+				<reportSets>
+					<reportSet>
+						<inherited>false</inherited>
+						<reports>
+							<report>checkstyle-aggregate</report>
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
+
+			<!-- PMD and CPD Reports (Aggregate Parameter). -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-pmd-plugin</artifactId>
+				<version>3.5</version>
+				<configuration>
+					<skip>false</skip>
+					<aggregate>true</aggregate>
+					<failurePriority>5</failurePriority>
+				</configuration>
+				<reportSets>
+					<reportSet>
+						<inherited>false</inherited>
+						<reports>
+							<report>pmd</report>
+							<report>cpd</report>
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
+
+			<!-- Generate Findbugs reports. (Does not support aggregate.) -->
+			<!-- Run site twice to get Findbugs report.-->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>findbugs-maven-plugin</artifactId>
+				<version>3.0.3</version>
+				<configuration>
+					<skip>false</skip>
+					<effort>Max</effort>
+					<includeTests>false</includeTests>
+					<excludeFilterFile>bordertech/findbugs-exclude-filter.xml</excludeFilterFile>
+					<threshold>Low</threshold>
+					<failOnError>false</failOnError>
+					<findbugsXmlOutputDirectory>${project.build.directory}/findbugs-rep</findbugsXmlOutputDirectory>
+				</configuration>
+			</plugin>
+
+		</plugins>
+	</reporting>
+
 </project>

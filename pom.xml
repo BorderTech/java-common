@@ -151,14 +151,6 @@
 					</configuration>
 				</plugin>
 
-				<!-- Compile the java source. -->
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-compiler-plugin</artifactId>
-					<version>3.3</version>
-				</plugin>
-
-
 				<!-- Generate the site. -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -194,9 +186,68 @@
 						<releaseProfiles>release</releaseProfiles>
 					</configuration>
 				</plugin>
+
 			</plugins>
 		</pluginManagement>
+
 		<plugins>
+			<!-- Compile the java source. -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.3</version>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.10.3</version>
+				<configuration>
+					<archive>
+						<manifestEntries>
+							<Built-By /><!-- blank build user in manifest file -->
+						</manifestEntries>
+					</archive>
+					<charset>UTF-8</charset>
+					<encoding>UTF-8</encoding>
+					<docencoding>UTF-8</docencoding>
+					<breakiterator>true</breakiterator>
+					<version>true</version>
+					<keywords>true</keywords>
+				</configuration>
+				<executions>
+					<execution>
+						<!-- A release to Maven Central MUST include javadoc Jars - even if they are dummy jars -->
+						<id>attach-javadocs</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- Generate the site. -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-site-plugin</artifactId>
+				<version>3.4</version>
+				<dependencies>
+					<dependency>
+						<groupId>org.apache.maven.doxia</groupId>
+						<artifactId>doxia-module-markdown</artifactId>
+						<version>1.6</version>
+					</dependency>
+				</dependencies>
+				<executions>
+					<execution>
+						<id>attach-descriptor</id>
+						<goals>
+							<goal>attach-descriptor</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-enforcer-plugin</artifactId>
@@ -225,6 +276,20 @@
 					</dependency>
 				</dependencies>
 			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>${surefire.version}</version>
+				<dependencies>
+					<dependency>
+						<groupId>org.apache.maven.surefire</groupId>
+						<artifactId>surefire-junit47</artifactId>
+						<version>${surefire.version}</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+			
 		</plugins>
 	</build>
 
@@ -236,9 +301,12 @@
 			-->
 			<id>release</id>
 			<build>
-				<!-- Could move sources generation here, javadoc too, site? -->
+
 				<plugins>
-					<!-- Create jar of the source files. -->
+					<!--
+						Create jar of the source files.
+						This is required for release to Maven repo.
+					-->
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-source-plugin</artifactId>
@@ -270,33 +338,6 @@
 							</execution>
 						</executions>
 					</plugin>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-javadoc-plugin</artifactId>
-						<version>2.10.3</version>
-						<configuration>
-							<archive>
-								<manifestEntries>
-									<Built-By /><!-- blank build user in manifest file -->
-								</manifestEntries>
-							</archive>
-							<charset>UTF-8</charset>
-							<encoding>UTF-8</encoding>
-							<docencoding>UTF-8</docencoding>
-							<breakiterator>true</breakiterator>
-							<version>true</version>
-							<keywords>true</keywords>
-						</configuration>
-						<executions>
-							<execution>
-								<!-- A release to Maven Central MUST include javadoc Jars - even if they are dummy jars -->
-								<id>attach-javadocs</id>
-								<goals>
-									<goal>jar</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
 
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
@@ -313,6 +354,7 @@
 						</executions>
 					</plugin>
 				</plugins>
+
 			</build>
 		</profile>
 	</profiles>
