@@ -21,6 +21,9 @@
 		<badges.skip>${wc.qa.skip}</badges.skip>
 		<javadoc.excluded.packages />
 		<checkstyle.excludes />
+		<bt.owasp.cve.mirror>https://nvd.nist.gov/feeds/xml/cve</bt.owasp.cve.mirror>
+		<bt.owasp.cve.12.path>1.2</bt.owasp.cve.12.path>
+		<bt.owasp.cve.20.path>2.0</bt.owasp.cve.20.path>
 	</properties>
 
 	<description>
@@ -307,6 +310,27 @@
 					<failOnError>false</failOnError>
 					<findbugsXmlOutputDirectory>${project.build.directory}/findbugs-rep</findbugsXmlOutputDirectory>
 				</configuration>
+			</plugin>
+
+			<!-- Generate the dependency vulnerability check report -->
+			<plugin>
+				<groupId>org.owasp</groupId>
+				<artifactId>dependency-check-maven</artifactId>
+				<version>3.3.1</version>
+				<configuration>
+					<failOnError>false</failOnError>
+					<cveUrl12Modified>${bt.owasp.cve.mirror}/${bt.owasp.cve.12.path}/nvdcve-Modified.xml.gz</cveUrl12Modified>
+					<cveUrl20Modified>${bt.owasp.cve.mirror}/${bt.owasp.cve.20.path}/nvdcve-2.0-Modified.xml.gz</cveUrl20Modified>
+					<cveUrl12Base>${bt.owasp.cve.mirror}/${bt.owasp.cve.12.path}/nvdcve-%d.xml.gz</cveUrl12Base>
+					<cveUrl20Base>${bt.owasp.cve.mirror}/${bt.owasp.cve.20.path}/nvdcve-2.0-%d.xml.gz</cveUrl20Base>
+				</configuration>
+				<reportSets>
+					<reportSet>
+						<reports>
+							<report>aggregate</report>
+						</reports>
+					</reportSet>
+				</reportSets>
 			</plugin>
 
 		</plugins>
