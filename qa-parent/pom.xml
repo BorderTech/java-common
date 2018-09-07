@@ -21,6 +21,7 @@
 		<badges.skip>${wc.qa.skip}</badges.skip>
 		<javadoc.excluded.packages />
 		<checkstyle.excludes />
+		<!-- properties to allow for mirroring of CVE definitions -->
 		<bt.owasp.cve.mirror>https://nvd.nist.gov/feeds/xml/cve</bt.owasp.cve.mirror>
 		<bt.owasp.cve.12.path>1.2</bt.owasp.cve.12.path>
 		<bt.owasp.cve.20.path>2.0</bt.owasp.cve.20.path>
