@@ -21,10 +21,14 @@
 		<badges.skip>${wc.qa.skip}</badges.skip>
 		<javadoc.excluded.packages />
 		<checkstyle.excludes />
+
+		<!-- OWASP dependency vulnerability scanner-->
+		<bt.owasp.dependency-check.version>3.3.1</bt.owasp.dependency-check.version>
+		<bt.owasp.dependency-check.skip>false</bt.owasp.dependency-check.skip>
 		<!-- properties to allow for mirroring of CVE definitions -->
-		<bt.owasp.cve.mirror>https://nvd.nist.gov/feeds/xml/cve</bt.owasp.cve.mirror>
-		<bt.owasp.cve.12.path>1.2</bt.owasp.cve.12.path>
-		<bt.owasp.cve.20.path>2.0</bt.owasp.cve.20.path>
+		<bt.owasp.dependency-check.cve.mirror>https://nvd.nist.gov/feeds/xml/cve</bt.owasp.dependency-check.cve.mirror>
+		<bt.owasp.dependency-check.cve.12.path>1.2</bt.owasp.dependency-check.cve.12.path>
+		<bt.owasp.dependency-check.cve.20.path>2.0</bt.owasp.dependency-check.cve.20.path>
 	</properties>
 
 	<description>
@@ -160,6 +164,29 @@
 								<inputFile>target/coverage-report.xml</inputFile>
 							</inputFiles>
 						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.owasp</groupId>
+				<artifactId>dependency-check-maven</artifactId>
+				<version>${bt.owasp.dependency-check.version}</version>
+				<configuration>
+					<skip>${bt.owasp.dependency-check.skip}</skip>
+					<failBuildOnAnyVulnerability>true</failBuildOnAnyVulnerability>
+					<cveUrl12Modified>${bt.owasp.dependency-check.cve.mirror}/${bt.owasp.dependency-check.cve.12.path}/nvdcve-Modified.xml.gz</cveUrl12Modified>
+					<cveUrl20Modified>${bt.owasp.dependency-check.cve.mirror}/${bt.owasp.dependency-check.cve.20.path}/nvdcve-2.0-Modified.xml.gz</cveUrl20Modified>
+					<cveUrl12Base>${bt.owasp.dependency-check.cve.mirror}/${bt.owasp.dependency-check.cve.12.path}/nvdcve-%d.xml.gz</cveUrl12Base>
+					<cveUrl20Base>${bt.owasp.dependency-check.cve.mirror}/${bt.owasp.dependency-check.cve.20.path}/nvdcve-2.0-%d.xml.gz</cveUrl20Base>
+				</configuration>
+				<executions>
+					<execution>
+						<id>checkDependencies</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>check</goal>
+						</goals>
 					</execution>
 				</executions>
 			</plugin>
@@ -317,19 +344,20 @@
 			<plugin>
 				<groupId>org.owasp</groupId>
 				<artifactId>dependency-check-maven</artifactId>
-				<version>3.3.1</version>
-				<configuration>
-					<failOnError>false</failOnError>
-					<cveUrl12Modified>${bt.owasp.cve.mirror}/${bt.owasp.cve.12.path}/nvdcve-Modified.xml.gz</cveUrl12Modified>
-					<cveUrl20Modified>${bt.owasp.cve.mirror}/${bt.owasp.cve.20.path}/nvdcve-2.0-Modified.xml.gz</cveUrl20Modified>
-					<cveUrl12Base>${bt.owasp.cve.mirror}/${bt.owasp.cve.12.path}/nvdcve-%d.xml.gz</cveUrl12Base>
-					<cveUrl20Base>${bt.owasp.cve.mirror}/${bt.owasp.cve.20.path}/nvdcve-2.0-%d.xml.gz</cveUrl20Base>
-				</configuration>
+				<version>${bt.owasp.dependency-check.version}</version>
 				<reportSets>
 					<reportSet>
 						<reports>
 							<report>aggregate</report>
 						</reports>
+						<configuration>
+							<skip>false</skip>
+							<failOnError>false</failOnError>
+							<cveUrl12Modified>${bt.owasp.dependency-check.cve.mirror}/${bt.owasp.dependency-check.cve.12.path}/nvdcve-Modified.xml.gz</cveUrl12Modified>
+							<cveUrl20Modified>${bt.owasp.dependency-check.cve.mirror}/${bt.owasp.dependency-check.cve.20.path}/nvdcve-2.0-Modified.xml.gz</cveUrl20Modified>
+							<cveUrl12Base>${bt.owasp.dependency-check.cve.mirror}/${bt.owasp.dependency-check.cve.12.path}/nvdcve-%d.xml.gz</cveUrl12Base>
+							<cveUrl20Base>${bt.owasp.dependency-check.cve.mirror}/${bt.owasp.dependency-check.cve.20.path}/nvdcve-2.0-%d.xml.gz</cveUrl20Base>
+						</configuration>
 					</reportSet>
 				</reportSets>
 			</plugin>
