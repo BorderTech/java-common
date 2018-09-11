@@ -12,7 +12,7 @@
 
 	<properties>
 		<surefireArgLine />
-		<surefire.version>2.20</surefire.version>
+		<surefire.version>2.22.0</surefire.version>
 		<maven.compiler.target>1.7</maven.compiler.target>
 		<maven.compiler.source>1.7</maven.compiler.source>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -155,12 +155,12 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-site-plugin</artifactId>
-					<version>3.4</version>
+					<version>3.7.1</version>
 					<dependencies>
 						<dependency>
 							<groupId>org.apache.maven.doxia</groupId>
 							<artifactId>doxia-module-markdown</artifactId>
-							<version>1.6</version>
+							<version>1.8</version>
 						</dependency>
 					</dependencies>
 					<executions>
@@ -195,13 +195,13 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.3</version>
+				<version>3.8.0</version>
 			</plugin>
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>2.10.3</version>
+				<version>3.0.1</version>
 				<configuration>
 					<archive>
 						<manifestEntries>
@@ -230,12 +230,12 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-site-plugin</artifactId>
-				<version>3.4</version>
+				<version>3.7.1</version>
 				<dependencies>
 					<dependency>
 						<groupId>org.apache.maven.doxia</groupId>
 						<artifactId>doxia-module-markdown</artifactId>
-						<version>1.6</version>
+						<version>1.8</version>
 					</dependency>
 				</dependencies>
 				<executions>
@@ -251,7 +251,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-enforcer-plugin</artifactId>
-				<version>1.4.1</version>
+				<version>3.0.0-M2</version>
 				<executions>
 					<execution>
 						<id>enforce-require-property-diverges</id>
@@ -272,7 +272,7 @@
 					<dependency>
 						<groupId>org.codehaus.mojo</groupId>
 						<artifactId>extra-enforcer-rules</artifactId>
-						<version>1.0-beta-6</version>
+						<version>1.0-beta-9</version>
 					</dependency>
 				</dependencies>
 			</plugin>
@@ -310,7 +310,7 @@
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-source-plugin</artifactId>
-						<version>2.4</version>
+						<version>3.0.1</version>
 						<configuration>
 							<archive>
 								<manifestEntries>
