@@ -22,13 +22,26 @@
 		<javadoc.excluded.packages />
 		<checkstyle.excludes />
 
-		<!-- OWASP dependency vulnerability scanner-->
-		<bt.owasp.dependency-check.version>3.3.1</bt.owasp.dependency-check.version>
-		<bt.owasp.dependency-check.skip>false</bt.owasp.dependency-check.skip>
+		<!--
+			OWASP dependency vulnerability scanner.
+		-->
+		<bt.owasp.dependency-check.version>3.3.2</bt.owasp.dependency-check.version>
+		<bt.owasp.dependency-check.enable>false</bt.owasp.dependency-check.enable>
 		<!-- properties to allow for mirroring of CVE definitions -->
 		<bt.owasp.dependency-check.cve.mirror>https://nvd.nist.gov/feeds/xml/cve</bt.owasp.dependency-check.cve.mirror>
 		<bt.owasp.dependency-check.cve.12.path>1.2</bt.owasp.dependency-check.cve.12.path>
 		<bt.owasp.dependency-check.cve.20.path>2.0</bt.owasp.dependency-check.cve.20.path>
+		<!-- Non java analysers are off by default because, well this is a Maven builder! -->
+		<!-- nodejs nsp requires nsp on the path at scan time -->
+		<bt.owasp.dependency-check.enableNsp>false</bt.owasp.dependency-check.enableNsp>
+		<!-- RetireJs analyser has a known bug https://github.com/jeremylong/DependencyCheck/issues/1467 -->
+		<bt.owasp.dependency-check.enableRetireJs>false</bt.owasp.dependency-check.enableRetireJs>
+		<!-- nuspec analyser -->
+		<bt.owasp.dependency-check.enableNuspec>false</bt.owasp.dependency-check.enableNuspec>
+		<!-- swift analyser -->
+		<bt.owasp.dependency-check.enableSwift>false</bt.owasp.dependency-check.enableSwift>
+		<!-- assembly .net analyser -->
+		<bt.owasp.dependency-check.enableAssembly.Net>false</bt.owasp.dependency-check.enableAssembly.Net>
 	</properties>
 
 	<description>
@@ -37,7 +50,29 @@
 		configuration from bordertech-parent.
 	</description>
 
+
 	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.owasp</groupId>
+					<artifactId>dependency-check-maven</artifactId>
+					<version>${bt.owasp.dependency-check.version}</version>
+					<configuration>
+						<failBuildOnAnyVulnerability>true</failBuildOnAnyVulnerability>
+						<cveUrl12Modified>${bt.owasp.dependency-check.cve.mirror}/${bt.owasp.dependency-check.cve.12.path}/nvdcve-Modified.xml.gz</cveUrl12Modified>
+						<cveUrl20Modified>${bt.owasp.dependency-check.cve.mirror}/${bt.owasp.dependency-check.cve.20.path}/nvdcve-2.0-Modified.xml.gz</cveUrl20Modified>
+						<cveUrl12Base>${bt.owasp.dependency-check.cve.mirror}/${bt.owasp.dependency-check.cve.12.path}/nvdcve-%d.xml.gz</cveUrl12Base>
+						<cveUrl20Base>${bt.owasp.dependency-check.cve.mirror}/${bt.owasp.dependency-check.cve.20.path}/nvdcve-2.0-%d.xml.gz</cveUrl20Base>
+						<retireJsAnalyzerEnabled>${bt.owasp.dependency-check.enableRetireJs}</retireJsAnalyzerEnabled><!-- see https://github.com/jeremylong/DependencyCheck/issues/1467 before turning this on -->
+						<nspAnalyzerEnabled>${bt.owasp.dependency-check.enableNsp}</nspAnalyzerEnabled>
+						<nuspecAnalyzerEnabled>${bt.owasp.dependency-check.enableNuspec}</nuspecAnalyzerEnabled>
+						<swiftPackageManagerAnalyzerEnabled>${bt.owasp.dependency-check.enableSwift}</swiftPackageManagerAnalyzerEnabled>
+						<assemblyAnalyzerEnabled>${bt.owasp.dependency-check.enableAssembly.Net}</assemblyAnalyzerEnabled>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 		<plugins>
 			<!-- Check the code style. -->
 			<plugin>
@@ -171,14 +206,8 @@
 			<plugin>
 				<groupId>org.owasp</groupId>
 				<artifactId>dependency-check-maven</artifactId>
-				<version>${bt.owasp.dependency-check.version}</version>
 				<configuration>
-					<skip>${bt.owasp.dependency-check.skip}</skip>
-					<failBuildOnAnyVulnerability>true</failBuildOnAnyVulnerability>
-					<cveUrl12Modified>${bt.owasp.dependency-check.cve.mirror}/${bt.owasp.dependency-check.cve.12.path}/nvdcve-Modified.xml.gz</cveUrl12Modified>
-					<cveUrl20Modified>${bt.owasp.dependency-check.cve.mirror}/${bt.owasp.dependency-check.cve.20.path}/nvdcve-2.0-Modified.xml.gz</cveUrl20Modified>
-					<cveUrl12Base>${bt.owasp.dependency-check.cve.mirror}/${bt.owasp.dependency-check.cve.12.path}/nvdcve-%d.xml.gz</cveUrl12Base>
-					<cveUrl20Base>${bt.owasp.dependency-check.cve.mirror}/${bt.owasp.dependency-check.cve.20.path}/nvdcve-2.0-%d.xml.gz</cveUrl20Base>
+					<skip>${bt.owasp.dependency-check.enable}</skip>
 				</configuration>
 				<executions>
 					<execution>
@@ -357,6 +386,11 @@
 							<cveUrl20Modified>${bt.owasp.dependency-check.cve.mirror}/${bt.owasp.dependency-check.cve.20.path}/nvdcve-2.0-Modified.xml.gz</cveUrl20Modified>
 							<cveUrl12Base>${bt.owasp.dependency-check.cve.mirror}/${bt.owasp.dependency-check.cve.12.path}/nvdcve-%d.xml.gz</cveUrl12Base>
 							<cveUrl20Base>${bt.owasp.dependency-check.cve.mirror}/${bt.owasp.dependency-check.cve.20.path}/nvdcve-2.0-%d.xml.gz</cveUrl20Base>
+							<retireJsAnalyzerEnabled>${bt.owasp.dependency-check.enableRetireJs}</retireJsAnalyzerEnabled><!-- see https://github.com/jeremylong/DependencyCheck/issues/1467 before turning this on -->
+							<nspAnalyzerEnabled>${bt.owasp.dependency-check.enableNsp}</nspAnalyzerEnabled>
+							<nuspecAnalyzerEnabled>${bt.owasp.dependency-check.enableNuspec}</nuspecAnalyzerEnabled>
+							<swiftPackageManagerAnalyzerEnabled>${bt.owasp.dependency-check.enableSwift}</swiftPackageManagerAnalyzerEnabled>
+							<assemblyAnalyzerEnabled>${bt.owasp.dependency-check.enableAssembly.Net}</assemblyAnalyzerEnabled>
 						</configuration>
 					</reportSet>
 				</reportSets>
