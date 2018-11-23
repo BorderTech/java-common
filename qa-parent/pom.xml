@@ -26,7 +26,6 @@
 			OWASP dependency vulnerability scanner.
 		-->
 		<bt.owasp.dependency-check.version>3.3.2</bt.owasp.dependency-check.version>
-		<bt.owasp.dependency-check.enable>false</bt.owasp.dependency-check.enable>
 		<!-- properties to allow for mirroring of CVE definitions -->
 		<bt.owasp.dependency-check.cve.mirror>https://nvd.nist.gov/feeds/xml/cve</bt.owasp.dependency-check.cve.mirror>
 		<bt.owasp.dependency-check.cve.12.path>1.2</bt.owasp.dependency-check.cve.12.path>
