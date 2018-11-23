@@ -1,3 +1,0 @@
-test:
-  override:
-    - echo "No tests to run in POM projects"
