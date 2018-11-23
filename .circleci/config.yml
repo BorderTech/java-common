@@ -1,8 +1,0 @@
-version: 2
-jobs:
-  test:
-    steps:
-      - checkout
-      - run:
-        name: Test
-        command: echo "No tests to run in POM projects"
