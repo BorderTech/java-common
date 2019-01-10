@@ -70,8 +70,8 @@
 		Descendants outside the java-common project SHOULD override this section.
 	-->
 	<ciManagement>
-		<system>CircleCI</system>
-		<url>https://circleci.com/gh/bordertech/java-common/</url>
+		<system>Travis CI</system>
+		<url>https://travis-ci.com/BorderTech/java-common</url>
 	</ciManagement>
 
 	<!-- developers is a required section for Maven Central -->
