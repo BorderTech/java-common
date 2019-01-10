@@ -14,17 +14,14 @@
 
 	<properties>
 
-		<!--
-		<javadoc.excluded.packages />
-		<checkstyle.excludes />
-		-->
+		<surefireArgLine />
 
 		<!-- SKIP QA -->
-		<bt.qa.skip>true</bt.qa.skip><!-- Basically a backwards compatible alias for wc.qa.skip -->
-		<wc.qa.skip>${bt.qa.skip}</wc.qa.skip>
-		<checkstyle.skip>${wc.qa.skip}</checkstyle.skip>
-		<pmd.skip>${wc.qa.skip}</pmd.skip>
-		<spotbugs.skip>${wc.qa.skip}</spotbugs.skip>
+		<bt.qa.skip>true</bt.qa.skip>
+		<checkstyle.skip>${bt.qa.skip}</checkstyle.skip>
+		<pmd.skip>${bt.qa.skip}</pmd.skip>
+		<cpd.skip>${bt.qa.skip}</cpd.skip>
+		<spotbugs.skip>${bt.qa.skip}</spotbugs.skip>
 
 		<!-- Checkstyle -->
 		<bt.checkstyle.config.file>bordertech/bt-checkstyle.xml</bt.checkstyle.config.file>
@@ -55,6 +52,25 @@
 		configuration from bordertech-parent.
 	</description>
 
+	<dependencyManagement>
+		<dependencies>
+			<!-- Junit 5 -->
+			<dependency>
+				<groupId>org.junit.jupiter</groupId>
+				<artifactId>junit-jupiter-engine</artifactId>
+				<version>5.3.2</version>
+				<scope>test</scope>
+			</dependency>
+			<!-- Junit 5 support for Junit 4 -->
+			<dependency>
+				<groupId>org.junit.vintage</groupId>
+				<artifactId>junit-vintage-engine</artifactId>
+				<scope>test</scope>
+				<version>5.3.2</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
 	<build>
 
 		<plugins>
@@ -76,6 +92,17 @@
 						</configuration>
 					</execution>
 				</executions>
+			</plugin>
+
+			<!-- Surefire -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.22.1</version>
+				<configuration>
+					<!-- Arg set by jacoco. -->
+					<argLine>${surefireArgLine}</argLine>
+				</configuration>
 			</plugin>
 
 			<!-- Verify: Check the code style. -->
@@ -121,7 +148,6 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-pmd-plugin</artifactId>
 				<version>3.11.0</version>
-				<!-- Common CONFIG for PMD and CPD -->
 				<configuration>
 					<failurePriority>${bt.pmd.failure.priority}</failurePriority>
 					<minimumPriority>${bt.pmd.min.priority}</minimumPriority>
