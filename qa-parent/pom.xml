@@ -13,20 +13,37 @@
 	<packaging>pom</packaging>
 
 	<properties>
-		<bt.qa.skip>true</bt.qa.skip><!-- Basically a backwards compatible alias for wc.qa.skip -->
-		<wc.qa.skip>${bt.qa.skip}</wc.qa.skip>
-		<checkstyle.skip>${wc.qa.skip}</checkstyle.skip>
-		<findbugs.skip>${wc.qa.skip}</findbugs.skip>
-		<pmd.skip>${wc.qa.skip}</pmd.skip>
 
-		<javadoc.excluded.packages />
-		<checkstyle.excludes />
+		<surefireArgLine />
 
-		<!--
-			OWASP dependency vulnerability scanner.
-		-->
+		<!-- SKIP QA -->
+		<bt.qa.skip>true</bt.qa.skip>
+		<checkstyle.skip>${bt.qa.skip}</checkstyle.skip>
+		<pmd.skip>${bt.qa.skip}</pmd.skip>
+		<cpd.skip>${bt.qa.skip}</cpd.skip>
+		<spotbugs.skip>${bt.qa.skip}</spotbugs.skip>
+
+		<!-- Checkstyle -->
+		<bt.checkstyle.config.file>bordertech/bt-checkstyle.xml</bt.checkstyle.config.file>
+
+		<!-- PMD, CPD -->
+		<bt.pmd.rules.file>bordertech/bt-pmd-rules.xml</bt.pmd.rules.file>
+		<!-- Priority: 1 (High) - 5 (Low) -->
+		<bt.pmd.failure.priority>2</bt.pmd.failure.priority>
+		<bt.pmd.min.priority>3</bt.pmd.min.priority>
+
+		<!-- Spotbugs  -->
+		<bt.spotbugs.exclude.file>bordertech/bt-spotbugs-exclude-filter.xml</bt.spotbugs.exclude.file>
+		<bt.spotbugs.exclude.files>${bt.spotbugs.exclude.file}</bt.spotbugs.exclude.files>
+		<!-- Rank: Scariest (1-4), Scary (5-9), Troubling (10-14), Of concern (15-20) -->
+		<bt.spotbugs.rank>14</bt.spotbugs.rank>
+		<!-- Threshold Confidence: High, Medium, Low -->
+		<bt.spotbugs.threshold>Medium</bt.spotbugs.threshold>
+
+		<!-- OWASP dependency vulnerability scanner -->
 		<!-- allow for proxy settings -->
 		<bt.owasp.dependency-check.proxy />
+		<bt.owasp.skip>false</bt.owasp.skip>
 	</properties>
 
 	<description>
@@ -35,112 +52,30 @@
 		configuration from bordertech-parent.
 	</description>
 
+	<dependencyManagement>
+		<dependencies>
+			<!-- Junit 5 -->
+			<dependency>
+				<groupId>org.junit.jupiter</groupId>
+				<artifactId>junit-jupiter-engine</artifactId>
+				<version>5.3.2</version>
+				<scope>test</scope>
+			</dependency>
+			<!-- Junit 5 support for Junit 4 -->
+			<dependency>
+				<groupId>org.junit.vintage</groupId>
+				<artifactId>junit-vintage-engine</artifactId>
+				<scope>test</scope>
+				<version>5.3.2</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
 	<build>
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<groupId>org.owasp</groupId>
-					<artifactId>dependency-check-maven</artifactId>
-					<version>4.0.1</version>
-					<configuration>
-						<failBuildOnAnyVulnerability>true</failBuildOnAnyVulnerability>
-						<mavenSettingsProxyId>${bt.owasp.dependency-check.proxy}</mavenSettingsProxyId>
-						<retireJsAnalyzerEnabled>false</retireJsAnalyzerEnabled><!-- see https://github.com/jeremylong/DependencyCheck/issues/1467 before turning this on -->
-						<nspAnalyzerEnabled>false</nspAnalyzerEnabled>
-						<nuspecAnalyzerEnabled>false</nuspecAnalyzerEnabled>
-						<swiftPackageManagerAnalyzerEnabled>false</swiftPackageManagerAnalyzerEnabled>
-						<assemblyAnalyzerEnabled>false</assemblyAnalyzerEnabled>
-					</configuration>
-				</plugin>
-			</plugins>
-		</pluginManagement>
+
 		<plugins>
-			<!-- Check the code style. -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-checkstyle-plugin</artifactId>
-				<version>3.0.0</version>
-				<configuration>
-					<configLocation>bordertech/checkstyle.xml</configLocation>
-					<consoleOutput>true</consoleOutput>
-					<failsOnError>true</failsOnError>
-					<failOnViolation>true</failOnViolation>
-					<linkXRef>false</linkXRef>
-					<includeTestSourceDirectory>false</includeTestSourceDirectory>
-				</configuration>
-				<dependencies>
-					<dependency>
-						<groupId>com.github.bordertech.common</groupId>
-						<artifactId>build-tools</artifactId>
-						<version>1.0.8-SNAPSHOT</version>
-					</dependency>
-				</dependencies>
-				<executions>
-					<execution>
-						<id>checkStyle</id>
-						<phase>verify</phase>
-						<goals>
-							<goal>check</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-
-			<!-- PMD Check. -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-pmd-plugin</artifactId>
-				<version>3.5</version>
-				<configuration>
-					<failurePriority>2</failurePriority>
-					<printFailingErrors>true</printFailingErrors>
-					<includeTests>false</includeTests>
-					<format>xml</format>
-				</configuration>
-				<executions>
-					<execution>
-						<id>checkPmd</id>
-						<phase>verify</phase>
-						<goals>
-							<goal>check</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-
-			<!-- Findbugs check. -->
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>findbugs-maven-plugin</artifactId>
-				<version>3.0.5</version>
-				<configuration>
-					<failOnError>true</failOnError>
-					<effort>Max</effort>
-					<includeTests>false</includeTests>
-					<threshold>Medium</threshold>
-					<excludeFilterFile>bordertech/findbugs-exclude-filter.xml</excludeFilterFile>
-				</configuration>
-				<dependencies>
-					<dependency>
-						<groupId>com.github.bordertech.common</groupId>
-						<artifactId>build-tools</artifactId>
-						<version>1.0.8-SNAPSHOT</version>
-					</dependency>
-				</dependencies>
-				<executions>
-					<execution>
-						<id>checkFindbugs</id>
-						<phase>verify</phase>
-						<goals>
-							<goal>check</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
 
 			<!-- Code coverage. -->
-			<!-- Run twice for the report. -->
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
@@ -159,9 +94,192 @@
 				</executions>
 			</plugin>
 
+			<!-- Surefire -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.22.1</version>
+				<configuration>
+					<!-- Arg set by jacoco. -->
+					<argLine>${surefireArgLine}</argLine>
+				</configuration>
+			</plugin>
+
+			<!-- Verify: Check the code style. -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+				<version>3.0.0</version>
+				<configuration>
+					<configLocation>${bt.checkstyle.config.file}</configLocation>
+					<consoleOutput>true</consoleOutput>
+					<failsOnError>true</failsOnError>
+					<failOnViolation>true</failOnViolation>
+					<linkXRef>false</linkXRef>
+					<includeTestSourceDirectory>false</includeTestSourceDirectory>
+				</configuration>
+				<dependencies>
+					<!-- Latest checkstyle version -->
+					<dependency>
+						<groupId>com.puppycrawl.tools</groupId>
+						<artifactId>checkstyle</artifactId>
+						<version>8.16</version>
+					</dependency>
+					<!-- Bordertech config -->
+					<dependency>
+						<groupId>com.github.bordertech.common</groupId>
+						<artifactId>build-tools</artifactId>
+						<version>1.0.8-SNAPSHOT</version>
+					</dependency>
+				</dependencies>
+				<executions>
+					<execution>
+						<id>checkStyle</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>check</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- Verify: PMD and CPD Check. -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-pmd-plugin</artifactId>
+				<version>3.11.0</version>
+				<configuration>
+					<failurePriority>${bt.pmd.failure.priority}</failurePriority>
+					<minimumPriority>${bt.pmd.min.priority}</minimumPriority>
+					<printFailingErrors>true</printFailingErrors>
+					<includeTests>false</includeTests>
+					<format>xml</format>
+					<linkXRef>false</linkXRef>
+					<rulesets>
+						<ruleset>${bt.pmd.rules.file}</ruleset>
+					</rulesets>
+					<!-- Verbose allows warnings to be printed in the log -->
+					<verbose>true</verbose>
+				</configuration>
+				<dependencies>
+					<!-- Latest pmd version -->
+					<dependency>
+						<groupId>net.sourceforge.pmd</groupId>
+						<artifactId>pmd-core</artifactId>
+						<version>6.10.0</version>
+					</dependency>
+					<dependency>
+						<groupId>net.sourceforge.pmd</groupId>
+						<artifactId>pmd-java</artifactId>
+						<version>6.10.0</version>
+					</dependency>
+					<dependency>
+						<groupId>net.sourceforge.pmd</groupId>
+						<artifactId>pmd-javascript</artifactId>
+						<version>6.10.0</version>
+					</dependency>
+					<dependency>
+						<groupId>net.sourceforge.pmd</groupId>
+						<artifactId>pmd-jsp</artifactId>
+						<version>6.10.0</version>
+					</dependency>
+					<!-- Bordertech config -->
+					<dependency>
+						<groupId>com.github.bordertech.common</groupId>
+						<artifactId>build-tools</artifactId>
+						<version>1.0.8-SNAPSHOT</version>
+					</dependency>
+				</dependencies>
+				<executions>
+					<!-- PMD -->
+					<execution>
+						<id>checkPmd</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>check</goal>
+						</goals>
+					</execution>
+					<!-- CPD (Warning only) -->
+					<execution>
+						<id>checkCpd</id>
+						<phase>verify</phase>
+						<configuration>
+							<failOnViolation>false</failOnViolation>
+						</configuration>
+						<goals>
+							<goal>cpd-check</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- Verify: Spotbugs check (new findbugs). -->
+			<plugin>
+				<groupId>com.github.spotbugs</groupId>
+				<artifactId>spotbugs-maven-plugin</artifactId>
+				<version>3.1.10</version>
+				<configuration>
+					<effort>Max</effort>
+					<failOnError>true</failOnError>
+					<includeTests>false</includeTests>
+					<threshold>${bt.spotbugs.threshold}</threshold>
+					<maxRank>${bt.spotbugs.rank}</maxRank>
+					<excludeFilterFile>${bt.spotbugs.exclude.files}</excludeFilterFile>
+					<plugins>
+						<!-- Auxilary plugin -->
+						<plugin>
+							<groupId>com.mebigfatguy.fb-contrib</groupId>
+							<artifactId>fb-contrib</artifactId>
+							<version>7.4.3</version>
+						</plugin>
+						<!-- Security plugin -->
+						<plugin>
+							<groupId>com.h3xstream.findsecbugs</groupId>
+							<artifactId>findsecbugs-plugin</artifactId>
+							<version>1.8.0</version>
+						</plugin>
+					</plugins>
+				</configuration>
+				<executions>
+					<execution>
+						<id>checkSpotBugs</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>check</goal>
+						</goals>
+					</execution>
+				</executions>
+				<dependencies>
+					<!-- Latest spotbugs version -->
+					<dependency>
+						<groupId>com.github.spotbugs</groupId>
+						<artifactId>spotbugs</artifactId>
+						<version>3.1.10</version>
+					</dependency>
+					<!-- Bordertech config. -->
+					<dependency>
+						<groupId>com.github.bordertech.common</groupId>
+						<artifactId>build-tools</artifactId>
+						<version>1.0.8-SNAPSHOT</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+
+			<!-- Verify: OWASP dependency vulnerability scanner. -->
 			<plugin>
 				<groupId>org.owasp</groupId>
 				<artifactId>dependency-check-maven</artifactId>
+				<version>4.0.2</version>
+				<configuration>
+					<failBuildOnAnyVulnerability>true</failBuildOnAnyVulnerability>
+					<mavenSettingsProxyId>${bt.owasp.dependency-check.proxy}</mavenSettingsProxyId>
+					<retireJsAnalyzerEnabled>false</retireJsAnalyzerEnabled><!-- see https://github.com/jeremylong/DependencyCheck/issues/1467 before turning this on -->
+					<nspAnalyzerEnabled>false</nspAnalyzerEnabled>
+					<nuspecAnalyzerEnabled>false</nuspecAnalyzerEnabled>
+					<swiftPackageManagerAnalyzerEnabled>false</swiftPackageManagerAnalyzerEnabled>
+					<assemblyAnalyzerEnabled>false</assemblyAnalyzerEnabled>
+					<skip>${bt.owasp.skip}</skip>
+				</configuration>
 				<executions>
 					<execution>
 						<id>checkDependencies</id>
@@ -172,7 +290,6 @@
 					</execution>
 				</executions>
 			</plugin>
-
 		</plugins>
 	</build>
 

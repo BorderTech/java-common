@@ -15,11 +15,11 @@ By default qa checks do not run, you must enable them on a per-module basis in t
 ```xml
 <properties>
 	<!--
-		Set qa.skip to false to run QA checks.
+		Set bt.qa.skip to false to run QA checks.
 
 		Note: it's called wc.qa.skip because this functionality originated in the WComponents project.
 	-->
-	<wc.qa.skip>false</wc.qa.skip>
+	<bt.qa.skip>false</bt.qa.skip>
 </properties>
 ``` 
 

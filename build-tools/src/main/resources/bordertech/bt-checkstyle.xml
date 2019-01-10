@@ -3,6 +3,8 @@
 		"-//Puppy Crawl//DTD Check Configuration 1.3//EN"
 		"http://www.puppycrawl.com/dtds/configuration_1_3.dtd">
 
+<!-- Based on sun_checks.xml -->
+
 <!--
 
   Checkstyle configuration that checks the sun coding conventions from:
@@ -38,13 +40,13 @@
 
 		<property name="basedir" value="${basedir}"/>
 	-->
-	
+
 	<!-- BorderTech Filter out Checkstyle warnings that have been suppressed with the @SuppressWarnings annotation -->
 	<module name="SuppressWarningsFilter" />
 
-<!-- BorderTech
-	<property name="fileExtensions" value="java, properties, xml"/>
--->
+	<!-- BorderTech
+		<property name="fileExtensions" value="java, properties, xml"/>
+	-->
 	<property name="fileExtensions" value="java"/>
 
 	<!-- Checks that a package-info.java file exists for each package.     -->
@@ -78,9 +80,9 @@
 	<module name="FileTabCharacter"/>
 	-->
 	<module name="RegexpSingleline">
-			<property name="format" value="^(\t*( +\t*(?! \*|\S))|(  ))"/>
-			<property name="message" value="Indentation should be tabs."/>
-			<property name="maximum" value="10"/>
+		<property name="format" value="^(\t*( +\t*(?! \*|\S))|(  ))"/>
+		<property name="message" value="Indentation should be tabs."/>
+		<property name="maximum" value="10"/>
 	</module>
 
 	<!-- Miscellaneous other checks.                   -->
@@ -101,7 +103,7 @@
 	<module name="TreeWalker">
 		<!-- BorderTech -->
 		<property name="tabWidth" value="4"/>
-		
+
 		<!-- BorderTech Make the @SuppressWarnings annotations available to Checkstyle -->
 		<module name="SuppressWarningsHolder" />
 
@@ -173,7 +175,9 @@
 		<!-- Modifier Checks                                    -->
 		<!-- See http://checkstyle.sf.net/config_modifiers.html -->
 		<module name="ModifierOrder"/>
-		<module name="RedundantModifier"/>
+		<module name="RedundantModifier">
+			<property name="severity" value="warning" />
+		</module>
 
 		<!-- Checks for blocks. You know, those {}'s         -->
 		<!-- See http://checkstyle.sf.net/config_blocks.html -->
@@ -224,9 +228,9 @@
 
 		<!-- Miscellaneous other checks.                   -->
 		<!-- See http://checkstyle.sf.net/config_misc.html -->
-		<!-- 
-		<module name="ArrayTypeStyle"/>
-		 -->
+		<!--
+	   <module name="ArrayTypeStyle"/>
+		-->
 		<module name="FinalParameters"/>
 		<module name="TodoComment">
 			<property name="severity" value="warning" />
