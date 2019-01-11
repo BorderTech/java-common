@@ -2,8 +2,8 @@
 Reusable build configuration for for BorderTech open source projects.
 
 ## Status
-
-[![CircleCI](https://circleci.com/gh/BorderTech/java-common.svg?style=svg)](https://circleci.com/gh/BorderTech/java-common)
+[![Build Status](https://travis-ci.com/BorderTech/java-common.svg?branch=master)](https://travis-ci.com/BorderTech/java-common)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/f3d12ebe19824e29afbc79cb84cf10ca)](https://www.codacy.com/app/BorderTech/java-common?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=BorderTech/java-common&amp;utm_campaign=Badge_Grade)
 
 ## qa-parent
 BorderTech java projects should generally use this as their parent POM.
