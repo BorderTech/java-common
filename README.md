@@ -3,6 +3,7 @@ Reusable build configuration for for BorderTech open source projects.
 
 ## Status
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/c7a2226acd574943af9ae966c54b05e6)](https://app.codacy.com/app/BorderTech/java-common?utm_source=github.com&utm_medium=referral&utm_content=BorderTech/java-common&utm_campaign=Badge_Grade_Dashboard)
 [![CircleCI](https://circleci.com/gh/BorderTech/java-common.svg?style=svg)](https://circleci.com/gh/BorderTech/java-common)
 
 ## qa-parent
