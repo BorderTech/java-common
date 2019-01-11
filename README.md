@@ -3,6 +3,7 @@ Reusable build configuration for for BorderTech open source projects.
 
 ## Status
 [![Build Status](https://travis-ci.com/BorderTech/java-common.svg?branch=master)](https://travis-ci.com/BorderTech/java-common)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/c7a2226acd574943af9ae966c54b05e6)](https://app.codacy.com/app/BorderTech/java-common?utm_source=github.com&utm_medium=referral&utm_content=BorderTech/java-common&utm_campaign=Badge_Grade_Dashboard)
 
 ## qa-parent
 BorderTech java projects should generally use this as their parent POM.
@@ -20,12 +21,12 @@ By default qa checks do not run, you must enable them on a per-module basis in t
 	-->
 	<bt.qa.skip>false</bt.qa.skip>
 </properties>
-``` 
+```
 
 The qa-parent inherits all of the release functionality from bordertech-parent, discussed below.
 
 ## bordertech-parent
-This is the top-level pom.xml file. 
+This is the top-level pom.xml file.
 It configures the maven release plugin for open source BorderTech projects to release to Maven Central.
 
 _Note that java projects should generally not consume this directly but instead should use qa-parent as a parent POM instead._
