@@ -7,6 +7,7 @@
 		<groupId>com.github.bordertech.common</groupId>
 		<artifactId>bordertech-parent</artifactId>
 		<version>1.0.11-SNAPSHOT</version>
+		<relativePath>../pom.xml</relativePath>
 	</parent>
 
 	<artifactId>build-tools</artifactId>
