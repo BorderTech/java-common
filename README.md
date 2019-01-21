@@ -45,9 +45,5 @@ The golden rule is ALWAYS do the release on a separate branch (it makes [backing
 
 Full documentation is available in the wiki under [Releasing](https://github.com/BorderTech/java-common/wiki/Releasing).
 
-It is recommended projects use [gitflow with pull requests](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow) model (ie feature, develop, release, master, hotfix branch paradigm).
-
-More details on the pull request pattern are available [here](https://blog.axosoft.com/pull-requests-gitflow/).
-
 ## build-tools
 This is primarily a shared resources module used by qa-parent and potentially other BorderTech maven modules.
