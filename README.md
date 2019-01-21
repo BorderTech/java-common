@@ -40,38 +40,14 @@ Projects using this must ensure the necessary POM sections are overriden - these
 
 Once you have configured your project and environment you can release to Maven Central. It may look a little something like the examples below.
 
-### Example Releasing
-The golden rule is ALWAYS do this on a separate branch (it makes [backing out](https://github.com/BorderTech/java-common/wiki/Releasing#dealing-with-failure) much easier when problems arise).
+### Releasing
+The golden rule is ALWAYS do the release on a separate branch (it makes [backing out](https://github.com/BorderTech/java-common/wiki/Releasing#dealing-with-failure) much easier when problems arise).
 
-```bash
-# make sure you are on the main/default branch
-git checkout master # or "git checkout bobbie" etc
+Full documentation is available in the wiki under [Releasing](https://github.com/BorderTech/java-common/wiki/Releasing).
 
-# fetch latest changes from main repository
-git fetch origin # or "git fetch upstream" if you are on a fork
+It is recommended projects use [gitflow with pull requests](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow) model (ie feature, develop, release, master, hotfix branch paradigm).
 
-# ensure local branch is up-to-date
-git merge origin/master # or "git merge upstream/master" or "git merge upstream/bobbie" etc
-
-# create a new release branch (you could skip this step if it already exists which it probably shouldn't)
-git branch release-xyz # "git branch release-123" etc
-
-# switch to release branch
-git checkout release-xyz # "git checkout !$" is easier :)
-
-# perform the release
-mvn release:clean release:prepare release:perform -Psonatype-oss-release
-```
-
-or to skip tests while releasing add `-Darguments="-DskipTests"`:
-
-```
-mvn release:clean release:prepare release:perform -Psonatype-oss-release -Darguments="-DskipTests"
-```
-
-
-Full documentation is available in the wiki under [Releasing](https://github.com/BorderTech/java-common/wiki/Releasing)
+More details on the pull request pattern are available [here](https://blog.axosoft.com/pull-requests-gitflow/).
 
 ## build-tools
 This is primarily a shared resources module used by qa-parent and potentially other BorderTech maven modules.
-
