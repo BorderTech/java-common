@@ -15,12 +15,11 @@ By default qa checks do not run, you must enable them on a per-module basis in t
 
 ```xml
 <properties>
-	<!--
-		Set bt.qa.skip to false to run QA checks.
-	-->
+	<!-- Set bt.qa.skip to false to run QA checks. -->
 	<bt.qa.skip>false</bt.qa.skip>
 </properties>
 ```
+Refer to qa-parent's [pom.xml](https://github.com/BorderTech/java-common/blob/master/qa-parent/pom.xml) for other project properties.
 
 The qa-parent inherits all of the release functionality from bordertech-parent, discussed below.
 
