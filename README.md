@@ -4,6 +4,7 @@ Reusable build configuration for for BorderTech open source projects.
 ## Status
 [![Build Status](https://travis-ci.com/BorderTech/java-common.svg?branch=master)](https://travis-ci.com/BorderTech/java-common)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/c7a2226acd574943af9ae966c54b05e6)](https://app.codacy.com/app/BorderTech/java-common?utm_source=github.com&utm_medium=referral&utm_content=BorderTech/java-common&utm_campaign=Badge_Grade_Dashboard)
+[![Maven Central](https://img.shields.io/maven-central/v/com.github.bordertech.common/bordertech-parent.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22com.github.bordertech.common%22%20AND%20a:%22bordertech-parent%22)
 
 ## qa-parent
 BorderTech java projects should generally use this as their parent POM.
@@ -14,12 +15,11 @@ By default qa checks do not run, you must enable them on a per-module basis in t
 
 ```xml
 <properties>
-	<!--
-		Set bt.qa.skip to false to run QA checks.
-	-->
+	<!-- Set bt.qa.skip to false to run QA checks. -->
 	<bt.qa.skip>false</bt.qa.skip>
 </properties>
 ```
+Refer to qa-parent's [pom.xml](https://github.com/BorderTech/java-common/blob/master/qa-parent/pom.xml) for other project properties.
 
 The qa-parent inherits all of the release functionality from bordertech-parent, discussed below.
 
