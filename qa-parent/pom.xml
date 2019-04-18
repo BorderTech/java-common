@@ -23,6 +23,7 @@
 		<spotbugs.skip>${bt.qa.skip}</spotbugs.skip>
 
 		<!-- Checkstyle -->
+		<!-- Default config location -->
 		<bt.checkstyle.config.file>bordertech/bt-checkstyle.xml</bt.checkstyle.config.file>
 
 		<!-- PMD, CPD -->
@@ -32,7 +33,9 @@
 		<bt.pmd.min.priority>3</bt.pmd.min.priority>
 
 		<!-- Spotbugs  -->
+		<!-- Default exclude -->
 		<bt.spotbugs.exclude.file>bordertech/bt-spotbugs-exclude-filter.xml</bt.spotbugs.exclude.file>
+		<!-- Default list of excludes -->
 		<bt.spotbugs.exclude.files>${bt.spotbugs.exclude.file}</bt.spotbugs.exclude.files>
 		<!-- Rank: Scariest (1-4), Scary (5-9), Troubling (10-14), Of concern (15-20) -->
 		<bt.spotbugs.rank>14</bt.spotbugs.rank>
@@ -114,11 +117,11 @@
 				<version>3.0.0</version>
 				<configuration>
 					<configLocation>${bt.checkstyle.config.file}</configLocation>
-					<consoleOutput>true</consoleOutput>
 					<failsOnError>true</failsOnError>
 					<failOnViolation>true</failOnViolation>
 					<linkXRef>false</linkXRef>
 					<includeTestSourceDirectory>false</includeTestSourceDirectory>
+					<consoleOutput>true</consoleOutput>
 				</configuration>
 				<dependencies>
 					<!-- Latest checkstyle version -->
@@ -289,6 +292,25 @@
 						<goals>
 							<goal>check</goal>
 						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- Enforcer - Dependency Convergence -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-enforcer-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>enforcer</id>
+						<goals>
+							<goal>enforce</goal>
+						</goals>
+						<configuration>
+							<rules>
+								<dependencyConvergence />
+							</rules>
+						</configuration>
 					</execution>
 				</executions>
 			</plugin>
