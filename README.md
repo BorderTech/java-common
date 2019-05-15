@@ -57,24 +57,9 @@ This is primarily a shared resources module used by qa-parent and potentially ot
 
 ## qa-parent overrides
 
-### Enforcer Plugin
-
-Refer to [enforcer plugin](https://maven.apache.org/enforcer/maven-enforcer-plugin/enforce-mojo.html) for all override details.
-
-#### Skip enforcer
-
-``` xml
-<property>
-	<!-- Report issues but dont fail -->
-	<enforcer.fail>false</enforcer.fail>
-	<!-- Skip -->
-	<enforcer.skip>true</enforcer.skip>
-</property>
-```
-
 ### Skip ALL Static Analysis
 
-The `bt.qa.skip` property can be used to skip all QA checks.
+The `bt.qa.skip` property can be used to skip all QA checks. By default qa checks do not run, you must enable them on a per-module basis.
 
 ``` xml
 <property>
@@ -100,7 +85,7 @@ To add or change a Checkstyle rule you are required to define your own [config.x
 
 ``` xml
 <property>
-	<checkstyle.config.location>your-checkstyle-config.xml</checkstyle.config.location>
+	<checkstyle.config.location>my-checkstyle-config.xml</checkstyle.config.location>
 </property>
 ```
 
@@ -134,20 +119,20 @@ Override bordertech default file property with your custom [rule set](https://pm
 
 ``` xml
 <property>
-	<bt.pmd.rules.file>your-rules.xml</bt.pmd.rules.file>
+	<bt.pmd.rules.file>my-rules.xml</bt.pmd.rules.file>
 </property>
 ```
 
 #### Add extra PMD Rule set
 
-An extra [rule set](https://pmd.github.io/latest/pmd_userdocs_making_rulesets.html) can be added via the plugin configuration.
+An extra [rule set](https://pmd.github.io/latest/pmd_userdocs_making_rulesets.html) can be added via the plugin `rulesets` configuration.
 
 ``` xml
 <plugin>
 	<configuration>
 		<rulesets>
 			<ruleset>${bt.pmd.rules.file}</ruleset>
-			<ruleset>your-rules.xml</ruleset>
+			<ruleset>my-rules.xml</ruleset>
 		</rulesets>
 	</configuration>
 </plugin>
@@ -155,11 +140,11 @@ An extra [rule set](https://pmd.github.io/latest/pmd_userdocs_making_rulesets.ht
 
 #### Ignore PMD Rule
 
-Create an [excludes XML](https://pmd.github.io/latest/pmd_userdocs_suppressing_warnings.html#xpath-and-regex-message-suppression) file that lists classes and rules to be excluded from failures.
+Create an [excludes XML](https://pmd.github.io/latest/pmd_userdocs_suppressing_warnings.html#xpath-and-regex-message-suppression) file that lists classes and rules to be excluded from failures and set the `pmd.excludeFromFailureFile` property.
 
 ``` xml
 <property>
-	<pmd.excludeFromFailureFile>my-excludes.properties</pmd.excludeFromFailureFile>
+	<pmd.excludeFromFailureFile>my-excludes.xml</pmd.excludeFromFailureFile>
 </property>
 ```
 
@@ -177,12 +162,12 @@ Refer to [spotbugs plugin](https://spotbugs.github.io/spotbugs-maven-plugin/spot
 
 #### Ignore Spotbugs Rule
 
-Create a [filter XML](https://spotbugs.readthedocs.io/en/latest/filter.html) file and add it to the bordertech defaults.
+Create a [filter XML](https://spotbugs.readthedocs.io/en/latest/filter.html) file and add it to the bordertech defaults file on the `excludeFilterFile` property.
 
 ``` xml
 <property>
 	<!-- List of exclude files -->
-	<excludeFilterFile>your-exclude-file.xml, ${bt.spotbugs.exclude.file}</excludeFilterFile>
+	<excludeFilterFile>my-exclude-file.xml, ${bt.spotbugs.exclude.file}</excludeFilterFile>
 </property>
 ```
 
@@ -200,10 +185,32 @@ Refer to [OWASP plugin](https://jeremylong.github.io/DependencyCheck/dependency-
 
 #### Ignore OWASP Rule
 
-Create a [suppression XML](https://jeremylong.github.io/DependencyCheck/general/suppression.html) file add set the following property:-
+Create a [suppression XML](https://jeremylong.github.io/DependencyCheck/general/suppression.html) file add set the `suppression.file` property.
 
 ``` xml
 <property>
 	<suppression.file>my-suppression.xml</suppression.file>
+</property>
+```
+
+### Enforcer Plugin
+
+Refer to [enforcer plugin](https://maven.apache.org/enforcer/maven-enforcer-plugin/enforce-mojo.html) for all override details.
+
+#### Skip enforcer
+
+``` xml
+<property>
+	<!-- Skip -->
+	<enforcer.skip>true</enforcer.skip>
+</property>
+```
+
+#### Report errors but dont fail
+
+``` xml
+<property>
+	<!-- Report issues but dont fail -->
+	<enforcer.fail>false</enforcer.fail>
 </property>
 ```
