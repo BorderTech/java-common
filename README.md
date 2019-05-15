@@ -55,13 +55,11 @@ Full documentation is available in the wiki under [Releasing](https://github.com
 
 This is primarily a shared resources module used by qa-parent and potentially other BorderTech maven modules.
 
-## QA Overrides
-
-The standard properties of the QA plugins can be set to override the bordertech defaults.
+## qa-parent overrides
 
 ### Enforcer Plugin
 
-Refer to [plugin](https://maven.apache.org/enforcer/maven-enforcer-plugin/enforce-mojo.html) for all override details.
+Refer to [enforcer plugin](https://maven.apache.org/enforcer/maven-enforcer-plugin/enforce-mojo.html) for all override details.
 
 #### Skip enforcer
 
@@ -76,18 +74,17 @@ Refer to [plugin](https://maven.apache.org/enforcer/maven-enforcer-plugin/enforc
 
 ### Skip ALL Static Analysis
 
-Set the following property to skip ALL analysis tools:-
+The `bt.qa.skip` property can be used to skip all QA checks.
+
 ``` xml
 <property>
-	<bt.qa.skip>false</bt.qa.skip>
+	<bt.qa.skip>true</bt.qa.skip>
 </property>
 ```
 
-`bt.qa.skip` property sets the individual skip properties for all analysis tools.
-
 ### Checkstyle
 
-Refer to [plugin](https://maven.apache.org/plugins/maven-checkstyle-plugin/checkstyle-mojo.html) for all override details.
+Refer to [Checkstyle plugin](https://maven.apache.org/plugins/maven-checkstyle-plugin/checkstyle-mojo.html) for all override details.
 
 #### Skip Checkstyle
 
@@ -99,11 +96,11 @@ Refer to [plugin](https://maven.apache.org/plugins/maven-checkstyle-plugin/check
 
 #### Change or Add Checkstyle Rules
 
-To add or change a Checkstyle rule you are required to define your own config.xml file.
+To add or change a Checkstyle rule you are required to define your own [config.xml](http://checkstyle.sourceforge.net/config.html) file.
 
 ``` xml
 <property>
-	<checkstyle.config.location>your-checkstyle.xml</checkstyle.config.location>
+	<checkstyle.config.location>your-checkstyle-config.xml</checkstyle.config.location>
 </property>
 ```
 
@@ -120,7 +117,7 @@ Define a comma-separated list, each value being either a rule name, a rule categ
 
 ### PMD and CPD
 
-Refer to [plugin](https://maven.apache.org/plugins/maven-pmd-plugin/) for all override details.
+Refer to [PMD plugin](https://maven.apache.org/plugins/maven-pmd-plugin/) for all override details.
 
 #### Skip PMD and CPD
 
@@ -133,7 +130,7 @@ Refer to [plugin](https://maven.apache.org/plugins/maven-pmd-plugin/) for all ov
 
 #### Change PMD Rule set
 
-Override bordertech default file with your custom config rule set.
+Override bordertech default file property with your custom [rule set](https://pmd.github.io/latest/pmd_userdocs_making_rulesets.html).
 
 ``` xml
 <property>
@@ -158,7 +155,7 @@ An extra ruleset can be added via the plugin configuration.
 
 #### Ignore PMD Rule
 
-Create a properties file that lists classes and rules to be excluded from failures.
+Create an [excludes XML](https://pmd.github.io/latest/pmd_userdocs_suppressing_warnings.html#xpath-and-regex-message-suppression) file that lists classes and rules to be excluded from failures.
 
 ``` xml
 <property>
@@ -168,7 +165,7 @@ Create a properties file that lists classes and rules to be excluded from failur
 
 ### Spotbugs
 
-Refer to [plugin](https://spotbugs.github.io/spotbugs-maven-plugin/spotbugs-mojo.html) for all override details.
+Refer to [spotbugs plugin](https://spotbugs.github.io/spotbugs-maven-plugin/spotbugs-mojo.html) for all override details or [doco](https://spotbugs.readthedocs.io/en/latest/index.html).
 
 #### Skip spotbugs
 
@@ -180,7 +177,7 @@ Refer to [plugin](https://spotbugs.github.io/spotbugs-maven-plugin/spotbugs-mojo
 
 #### Ignore Spotbugs Rule
 
-Create an excludes XML file and add it to the bordertech defaults.
+Create a [filter XML](https://spotbugs.readthedocs.io/en/latest/filter.html) file and add it to the bordertech defaults.
 
 ``` xml
 <property>
@@ -191,7 +188,7 @@ Create an excludes XML file and add it to the bordertech defaults.
 
 ### OWASP
 
-Refer to [plugin](https://jeremylong.github.io/DependencyCheck/dependency-check-maven/index.html) for all override details.
+Refer to [OWASP plugin](https://jeremylong.github.io/DependencyCheck/dependency-check-maven/index.html) for all override details.
 
 #### Skip OWASP
 
@@ -203,7 +200,7 @@ Refer to [plugin](https://jeremylong.github.io/DependencyCheck/dependency-check-
 
 #### Ignore OWASP Rule
 
-Create a suppression XML file add set the following property:-
+Create a [suppression XML](https://jeremylong.github.io/DependencyCheck/general/suppression.html) file add set the following property:-
 
 ``` xml
 <property>
