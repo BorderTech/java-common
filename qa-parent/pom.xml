@@ -276,9 +276,7 @@
 				<artifactId>dependency-check-maven</artifactId>
 				<version>${bt.owasp.plugin.version}</version>
 				<configuration>
-					<!-- If true, override min cvss and fail on any vulnerability. -->
 					<retireJsAnalyzerEnabled>false</retireJsAnalyzerEnabled>
-					<!-- see https://github.com/jeremylong/DependencyCheck/issues/1467 before turning this on -->
 					<nuspecAnalyzerEnabled>false</nuspecAnalyzerEnabled>
 					<swiftPackageManagerAnalyzerEnabled>false</swiftPackageManagerAnalyzerEnabled>
 					<assemblyAnalyzerEnabled>false</assemblyAnalyzerEnabled>

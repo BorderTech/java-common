@@ -63,7 +63,7 @@ By default qa checks do not run, you must enable them on a per-module basis.
 
 ``` xml
 <property>
-	<bt.qa.skip>true</bt.qa.skip>
+	<bt.qa.skip>false</bt.qa.skip>
 </property>
 ```
 
@@ -93,7 +93,7 @@ To add or change a checkstyle rule you are required to create your own [config.x
 
 #### Ignore Checkstyle Rule
 
-Create a [suppression XML](http://checkstyle.sourceforge.net/config_filters.html) file add set the `checkstyle.suppressions.location` property.
+Create a [suppression](http://checkstyle.sourceforge.net/config_filters.html) file add set the `checkstyle.suppressions.location` property.
 
 ``` xml
 <property>
@@ -170,7 +170,7 @@ com.my.example.MyClass=LoggerIsNotStaticFinal
 
 ### Spotbugs
 
-Refer to [spotbugs plugin](https://spotbugs.github.io/spotbugs-maven-plugin/spotbugs-mojo.html) for all override details or [doco](https://spotbugs.readthedocs.io/en/latest/index.html).
+Refer to [spotbugs plugin](https://spotbugs.github.io/spotbugs-maven-plugin/spotbugs-mojo.html) or [doco](https://spotbugs.readthedocs.io/en/latest/index.html) for all override details.
 
 #### Skip spotbugs
 
@@ -215,7 +215,7 @@ Refer to [OWASP plugin](https://jeremylong.github.io/DependencyCheck/dependency-
 
 #### Ignore OWASP Rule
 
-Create a [suppression XML](https://jeremylong.github.io/DependencyCheck/general/suppression.html) file add set the `suppression.file` property.
+Create a [suppression](https://jeremylong.github.io/DependencyCheck/general/suppression.html) file add set the `suppression.file` property.
 
 ``` xml
 <property>
