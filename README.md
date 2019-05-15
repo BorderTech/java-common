@@ -57,9 +57,9 @@ This is primarily a shared resources module used by qa-parent and potentially ot
 
 ## qa-parent overrides
 
-### Skip ALL Static Analysis
+### Enable Static Analysis
 
-The `bt.qa.skip` property can be used to skip all QA checks. By default qa checks do not run, you must enable them on a per-module basis.
+By default qa checks do not run, you must enable them on a per-module basis.
 
 ``` xml
 <property>
