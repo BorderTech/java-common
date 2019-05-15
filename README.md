@@ -164,7 +164,8 @@ Create an [excludes](https://pmd.github.io/latest/pmd_userdocs_suppressing_warni
 ```
 
 Example properties file:
-```
+
+``` java
 com.my.example.MyClass=LoggerIsNotStaticFinal
 ```
 
