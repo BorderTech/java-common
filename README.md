@@ -57,10 +57,15 @@ This is primarily a shared resources module used by qa-parent and potentially ot
 
 ## QA Overrides
 
-### Enforcer Plugin - [info](https://maven.apache.org/enforcer/maven-enforcer-plugin/enforce-mojo.html)
+The standard properties of the QA plugins can be set to override the bordertech defaults.
 
-How to skip enforcer:-
-```
+### Enforcer Plugin
+
+Refer to [plugin](https://maven.apache.org/enforcer/maven-enforcer-plugin/enforce-mojo.html) for all override details.
+
+#### Skip enforcer
+
+``` xml
 <property>
 	<!-- Report issues but dont fail -->
 	<enforcer.fail>false</enforcer.fail>
@@ -71,8 +76,8 @@ How to skip enforcer:-
 
 ### Skip ALL Static Analysis
 
-How to skip ALL analysis tools:-
-```
+Set the following property to skip ALL analysis tools:-
+``` xml
 <property>
 	<bt.qa.skip>false</bt.qa.skip>
 </property>
@@ -80,127 +85,128 @@ How to skip ALL analysis tools:-
 
 `bt.qa.skip` property sets the individual skip properties for all analysis tools.
 
-### Checkstyle - [info](https://maven.apache.org/plugins/maven-checkstyle-plugin/checkstyle-mojo.html)
+### Checkstyle
 
-How to skip Checkstyle:-
-```
+Refer to [plugin](https://maven.apache.org/plugins/maven-checkstyle-plugin/checkstyle-mojo.html) for all override details.
+
+#### Skip Checkstyle
+
+``` xml
 <property>
 	<checkstyle.skip>true</checkstyle.skip>
 </property>
 ```
 
-How to override QA Checkstyle defaults:-
+#### Change or Add Checkstyle Rules
 
-```
+To add or change a Checkstyle rule you are required to define your own config.xml file.
+
+``` xml
 <property>
-	<checkstyle.consoleOutput>true</checkstyle.consoleOutput>
-	<checkstyle.failOnViolation>true</checkstyle.failOnViolation>
-	<checkstyle.linkXRef>false</checkstyle.linkXRef>
-	<checkstyle.includeTestSourceDirectory>false</checkstyle.includeTestSourceDirectory>
+	<checkstyle.config.location>your-checkstyle.xml</checkstyle.config.location>
 </property>
 ```
 
-#### Add Checkstyle Rule
-```
+#### Ignore Checkstyle Rule
+
+Define a comma-separated list, each value being either a rule name, a rule category or a java package name of rule class.
+
+``` xml
 <property>
-	<!-- Default config location -->
-	<bt.checkstyle.config.file>bordertech/bt-checkstyle.xml</bt.checkstyle.config.file>
+	<!-- List of rules to ignore -->
+	<checkstyle.violation.ignore></checkstyle.violation.ignore>
 </property>
 ```
 
-#### Remove Checkstyle Rule
+### PMD and CPD
 
-### PMD and CPD - [info](https://maven.apache.org/plugins/maven-pmd-plugin/)
+Refer to [plugin](https://maven.apache.org/plugins/maven-pmd-plugin/) for all override details.
 
-How to skip PMD and CPD:-
-```
+#### Skip PMD and CPD
+
+``` xml
 <property>
 	<pmd.skip>true</pmd.skip>
 	<cpd.skip>true</cpd.skip>
 </property>
 ```
 
-How to override QA PMD and CPD defaults:-
+#### Change PMD Rule set
 
-```
+Override bordertech default file with your custom config rule set.
+
+``` xml
 <property>
-	<!-- Priority: 1 (High) - 5 (Low) -->
-	<bt.pmd.failure.priority>2</bt.pmd.failure.priority>
-	<bt.pmd.min.priority>3</bt.pmd.min.priority>
+	<bt.pmd.rules.file>your-rules.xml</bt.pmd.rules.file>
 </property>
 ```
 
-NOTE - The standard properties of the plugin can be set instead of the bordertech defaults.
+#### Add extra PMD Rule set
 
-#### Add PMD Rule
+An extra ruleset can be added via the plugin configuration.
+
+``` xml
+<plugin>
+	<configuration>
+		<rulesets>
+			<ruleset>${bt.pmd.rules.file}</ruleset>
+			<ruleset>your-rules.xml</ruleset>
+		</rulesets>
+	</configuration>
+</plugin>
 ```
+
+#### Ignore PMD Rule
+
+Create a properties file that lists classes and rules to be excluded from failures.
+
+``` xml
 <property>
-	<bt.pmd.rules.file>bordertech/bt-pmd-rules.xml</bt.pmd.rules.file>
+	<pmd.excludeFromFailureFile>my-excludes.properties</pmd.excludeFromFailureFile>
 </property>
 ```
 
-#### Remove PMD Rule
+### Spotbugs
 
+Refer to [plugin](https://spotbugs.github.io/spotbugs-maven-plugin/spotbugs-mojo.html) for all override details.
 
-### Spotbugs - [info]()
+#### Skip spotbugs
 
-How to skip:-
-```
+``` xml
 <property>
 	<spotbugs.skip>true</spotbugs.skip>
 </property>
 ```
 
-How to override QA Spotbug defaults:-
+#### Ignore Spotbugs Rule
 
-```
+Create an excludes XML file and add it to the bordertech defaults.
+
+``` xml
 <property>
-	<!-- Rank: Scariest (1-4), Scary (5-9), Troubling (10-14), Of concern (15-20) -->
-	<bt.spotbugs.rank>14</bt.spotbugs.rank>
-	<!-- Threshold Confidence: High, Medium, Low -->
-	<bt.spotbugs.threshold>Medium</bt.spotbugs.threshold>
+	<!-- List of exclude files -->
+	<excludeFilterFile>your-exclude-file.xml, ${bt.spotbugs.exclude.file}</excludeFilterFile>
 </property>
 ```
 
-NOTE - The standard properties of the plugin can be set instead of the bordertech defaults.
+### OWASP
 
-#### Add Spotbugs Rule
+Refer to [plugin](https://jeremylong.github.io/DependencyCheck/dependency-check-maven/index.html) for all override details.
 
-```
+#### Skip OWASP
+
+``` xml
 <property>
-	<bt.spotbugs.exclude.file>bordertech/bt-spotbugs-exclude-filter.xml</bt.spotbugs.exclude.file>
-	<bt.spotbugs.exclude.files>${bt.spotbugs.exclude.file}</bt.spotbugs.exclude.files>
+	<dependency-check.skip>true</dependency-check.skip>
 </property>
 ```
 
+#### Ignore OWASP Rule
 
-#### Remove Spotbugs Rule
+Create a suppression XML file add set the following property:-
 
-
-### OWASP - [info](https://jeremylong.github.io/DependencyCheck/dependency-check-maven/configuration.html)
-
-How to skip OWASP:-
-```
+``` xml
 <property>
-	<bt.owasp.skip>false</bt.owasp.skip>
+	<suppression.file>my-suppression.xml</suppression.file>
 </property>
 ```
-
-How to override OWASP defaults:-
-
-```
-<property>
-	<!-- Min cvss score to fail on. Range 0-10 : LOW: 0-3.9, MEDIUM: 4-6.9, HIGH: 7.0-8.9, Critical: 9.0-10.0 -->
-	<bt.owasp.fail.cvss.min>0</bt.owasp.fail.cvss.min>
-	<!-- If true, override min cvss and fail on any vulnerability. -->
-	<bt.owasp.fail.any>false</bt.owasp.fail.any>
-	<!-- If set, owasp uses the proxy id in maven settings to download its db. -->
-	<bt.owasp.proxy.id />
-</property>
-```
-
-NOTE - The standard properties of the plugin can be set instead of the bordertech defaults.
-
-#### Add OWASP Rule
-
-#### Remove OWASP Rule

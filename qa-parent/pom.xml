@@ -17,39 +17,24 @@
 
 		<!-- SKIP QA -->
 		<bt.qa.skip>true</bt.qa.skip>
-		<checkstyle.skip>${bt.qa.skip}</checkstyle.skip>
-		<pmd.skip>${bt.qa.skip}</pmd.skip>
-		<cpd.skip>${bt.qa.skip}</cpd.skip>
-		<spotbugs.skip>${bt.qa.skip}</spotbugs.skip>
-
-		<!-- Checkstyle -->
-		<!-- Default config location -->
-		<bt.checkstyle.config.file>bordertech/bt-checkstyle.xml</bt.checkstyle.config.file>
-
-		<!-- PMD, CPD -->
+		<!-- PMD default rules file -->
 		<bt.pmd.rules.file>bordertech/bt-pmd-rules.xml</bt.pmd.rules.file>
-		<!-- Priority: 1 (High) - 5 (Low) -->
-		<bt.pmd.failure.priority>2</bt.pmd.failure.priority>
-		<bt.pmd.min.priority>3</bt.pmd.min.priority>
-
-		<!-- Spotbugs  -->
-		<!-- Default exclude -->
+		<!-- Spotbugs default exclude file -->
 		<bt.spotbugs.exclude.file>bordertech/bt-spotbugs-exclude-filter.xml</bt.spotbugs.exclude.file>
-		<!-- Default list of excludes -->
-		<bt.spotbugs.exclude.files>${bt.spotbugs.exclude.file}</bt.spotbugs.exclude.files>
-		<!-- Rank: Scariest (1-4), Scary (5-9), Troubling (10-14), Of concern (15-20) -->
-		<bt.spotbugs.rank>14</bt.spotbugs.rank>
-		<!-- Threshold Confidence: High, Medium, Low -->
-		<bt.spotbugs.threshold>Medium</bt.spotbugs.threshold>
 
-		<!-- OWASP dependency vulnerability scanner -->
-		<bt.owasp.skip>false</bt.owasp.skip>
-		<!-- Min cvss score to fail on. Range 0-10 : LOW: 0-3.9, MEDIUM: 4-6.9, HIGH: 7.0-8.9, Critical: 9.0-10.0 -->
-		<bt.owasp.fail.cvss.min>0</bt.owasp.fail.cvss.min>
-		<!-- If true, override min cvss and fail on any vulnerability. -->
-		<bt.owasp.fail.any>false</bt.owasp.fail.any>
-		<!-- If set, owasp uses the proxy id in maven settings to download its db. -->
-		<bt.owasp.proxy.id />
+		<!-- Versions -->
+		<bt.junit.version>5.4.2</bt.junit.version>
+		<bt.jacoco.plugin.version>0.8.3</bt.jacoco.plugin.version>
+		<bt.surefire.plugin.version>2.22.2</bt.surefire.plugin.version>
+		<bt.checkstyle.plugin.version>3.0.0</bt.checkstyle.plugin.version>
+		<bt.checkstyle.version>8.20</bt.checkstyle.version>
+		<bt.pmd.plugin.version>3.12.0</bt.pmd.plugin.version>
+		<bt.pmd.version>6.14.0</bt.pmd.version>
+		<bt.spotbugs.plugin.version>3.1.11</bt.spotbugs.plugin.version>
+		<bt.spotbugs.version>3.1.12</bt.spotbugs.version>
+		<bt.findsecbugs.plugin.version>1.9.0</bt.findsecbugs.plugin.version>
+		<bt.owasp.plugin.version>5.0.0-M2</bt.owasp.plugin.version>
+
 	</properties>
 
 	<description>
@@ -64,7 +49,7 @@
 			<dependency>
 				<groupId>org.junit.jupiter</groupId>
 				<artifactId>junit-jupiter-engine</artifactId>
-				<version>5.4.0</version>
+				<version>${bt.junit.version}</version>
 				<scope>test</scope>
 			</dependency>
 			<!-- Junit 5 support for Junit 4 -->
@@ -72,7 +57,7 @@
 				<groupId>org.junit.vintage</groupId>
 				<artifactId>junit-vintage-engine</artifactId>
 				<scope>test</scope>
-				<version>5.4.0</version>
+				<version>${bt.junit.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
@@ -83,7 +68,7 @@
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>0.8.3</version>
+				<version>${bt.jacoco.plugin.version}</version>
 				<executions>
 					<!-- Prepare Jacoco agent. -->
 					<execution>
@@ -107,16 +92,18 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.22.1</version>
+				<version>${bt.surefire.plugin.version}</version>
 			</plugin>
 
 			<!-- Verify: Check the code style. -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-checkstyle-plugin</artifactId>
-				<version>3.0.0</version>
+				<version>${bt.checkstyle.plugin.version}</version>
 				<configuration>
-					<configLocation>${bt.checkstyle.config.file}</configLocation>
+					<skip>${bt.qa.skip}</skip>
+					<!-- Bordertech default config file -->
+					<configLocation>bordertech/bt-checkstyle.xml</configLocation>
 					<failsOnError>true</failsOnError>
 					<failOnViolation>true</failOnViolation>
 					<linkXRef>false</linkXRef>
@@ -128,7 +115,7 @@
 					<dependency>
 						<groupId>com.puppycrawl.tools</groupId>
 						<artifactId>checkstyle</artifactId>
-						<version>8.18</version>
+						<version>${bt.checkstyle.version}</version>
 					</dependency>
 					<!-- Bordertech config -->
 					<dependency>
@@ -152,10 +139,13 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-pmd-plugin</artifactId>
-				<version>3.11.0</version>
+				<version>${bt.pmd.plugin.version}</version>
 				<configuration>
-					<failurePriority>${bt.pmd.failure.priority}</failurePriority>
-					<minimumPriority>${bt.pmd.min.priority}</minimumPriority>
+					<skip>${bt.qa.skip}</skip>
+					<!-- Priority: 1 (High) - 5 (Low) -->
+					<failurePriority>2</failurePriority>
+					<!-- Priority: 1 (High) - 5 (Low) -->
+					<minimumPriority>3</minimumPriority>
 					<printFailingErrors>true</printFailingErrors>
 					<includeTests>false</includeTests>
 					<format>xml</format>
@@ -171,22 +161,22 @@
 					<dependency>
 						<groupId>net.sourceforge.pmd</groupId>
 						<artifactId>pmd-core</artifactId>
-						<version>6.12.0</version>
+						<version>${bt.pmd.version}</version>
 					</dependency>
 					<dependency>
 						<groupId>net.sourceforge.pmd</groupId>
 						<artifactId>pmd-java</artifactId>
-						<version>6.12.0</version>
+						<version>${bt.pmd.version}</version>
 					</dependency>
 					<dependency>
 						<groupId>net.sourceforge.pmd</groupId>
 						<artifactId>pmd-javascript</artifactId>
-						<version>6.12.0</version>
+						<version>${bt.pmd.version}</version>
 					</dependency>
 					<dependency>
 						<groupId>net.sourceforge.pmd</groupId>
 						<artifactId>pmd-jsp</artifactId>
-						<version>6.12.0</version>
+						<version>${bt.pmd.version}</version>
 					</dependency>
 					<!-- Bordertech config -->
 					<dependency>
@@ -222,26 +212,30 @@
 			<plugin>
 				<groupId>com.github.spotbugs</groupId>
 				<artifactId>spotbugs-maven-plugin</artifactId>
-				<version>3.1.11</version>
+				<version>${bt.spotbugs.plugin.version}</version>
 				<configuration>
+					<skip>${bt.qa.skip}</skip>
 					<effort>Max</effort>
 					<failOnError>true</failOnError>
 					<includeTests>false</includeTests>
-					<threshold>${bt.spotbugs.threshold}</threshold>
-					<maxRank>${bt.spotbugs.rank}</maxRank>
-					<excludeFilterFile>${bt.spotbugs.exclude.files}</excludeFilterFile>
+					<!-- Threshold Confidence: High, Medium, Low -->
+					<threshold>Medium</threshold>
+					<!-- Rank: Scariest (1-4), Scary (5-9), Troubling (10-14), Of concern (15-20) -->
+					<maxRank>14</maxRank>
+					<!-- Exclude filter -->
+					<excludeFilterFile>${bt.spotbugs.exclude.file}</excludeFilterFile>
 					<plugins>
 						<!-- Auxilary plugin -->
 						<plugin>
 							<groupId>com.mebigfatguy.fb-contrib</groupId>
 							<artifactId>fb-contrib</artifactId>
-							<version>7.4.3</version>
+							<version>7.4.5</version>
 						</plugin>
 						<!-- Security plugin -->
 						<plugin>
 							<groupId>com.h3xstream.findsecbugs</groupId>
 							<artifactId>findsecbugs-plugin</artifactId>
-							<version>1.8.0</version>
+							<version>${bt.findsecbugs.plugin.version}</version>
 						</plugin>
 					</plugins>
 				</configuration>
@@ -259,7 +253,7 @@
 					<dependency>
 						<groupId>com.github.spotbugs</groupId>
 						<artifactId>spotbugs</artifactId>
-						<version>3.1.11</version>
+						<version>${bt.spotbugs.version}</version>
 					</dependency>
 					<!-- Bordertech config. -->
 					<dependency>
@@ -274,16 +268,21 @@
 			<plugin>
 				<groupId>org.owasp</groupId>
 				<artifactId>dependency-check-maven</artifactId>
-				<version>5.0.0-M1</version>
+				<version>${bt.owasp.plugin.version}</version>
 				<configuration>
-					<failBuildOnCVSS>${bt.owasp.fail.cvss.min}</failBuildOnCVSS>
-					<failBuildOnAnyVulnerability>${bt.owasp.fail.any}</failBuildOnAnyVulnerability>
-					<mavenSettingsProxyId>${bt.owasp.proxy.id}</mavenSettingsProxyId>
-					<retireJsAnalyzerEnabled>false</retireJsAnalyzerEnabled><!-- see https://github.com/jeremylong/DependencyCheck/issues/1467 before turning this on -->
+					<!-- Check every 12 hours default is 4) -->
+					<cveValidForHours>12</cveValidForHours>
+					<!-- Min cvss score to fail on. Range 0-10 : LOW: 0-3.9, MEDIUM: 4-6.9, HIGH: 7.0-8.9, Critical: 9.0-10.0 -->
+					<failBuildOnCVSS>0</failBuildOnCVSS>
+					<!-- If true, override min cvss and fail on any vulnerability. -->
+					<failBuildOnAnyVulnerability>false</failBuildOnAnyVulnerability>
+					<retireJsAnalyzerEnabled>false</retireJsAnalyzerEnabled>
+					<!-- see https://github.com/jeremylong/DependencyCheck/issues/1467 before turning this on -->
 					<nuspecAnalyzerEnabled>false</nuspecAnalyzerEnabled>
 					<swiftPackageManagerAnalyzerEnabled>false</swiftPackageManagerAnalyzerEnabled>
 					<assemblyAnalyzerEnabled>false</assemblyAnalyzerEnabled>
-					<skip>${bt.owasp.skip}</skip>
+					<!-- If set, owasp uses the proxy id in maven settings to download its db. -->
+					<mavenSettingsProxyId />
 				</configuration>
 				<executions>
 					<execution>
