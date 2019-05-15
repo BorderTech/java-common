@@ -17,14 +17,43 @@
 
 		<!-- SKIP QA -->
 		<bt.qa.skip>true</bt.qa.skip>
-		<!-- PMD default rules file -->
+		<checkstyle.skip>${bt.qa.skip}</checkstyle.skip>
+		<pmd.skip>${bt.qa.skip}</pmd.skip>
+		<cpd.skip>${bt.qa.skip}</cpd.skip>
+		<spotbugs.skip>${bt.qa.skip}</spotbugs.skip>
+
+		<!--
+		These plugin settings are set as properties instead of being included in the default configuration to make it easier for projects to override.
+		Property values are ignored if a default value is set in a configuation.
+		-->
+		<!-- Checkstyle -->
+		<!-- Config file -->
+		<checkstyle.config.location>bordertech/bt-checkstyle.xml</checkstyle.config.location>
+		<!-- PMD -->
+		<!-- Priority: 1 (High) - 5 (Low) -->
+		<pmd.failurePriority>2</pmd.failurePriority>
+		<!-- Rules file -->
 		<bt.pmd.rules.file>bordertech/bt-pmd-rules.xml</bt.pmd.rules.file>
-		<!-- Spotbugs default exclude file -->
-		<bt.spotbugs.exclude.file>bordertech/bt-spotbugs-exclude-filter.xml</bt.spotbugs.exclude.file>
+
+		<!-- Spotbugs -->
+		<!-- Effort -->
+		<spotbugs.effort>Max</spotbugs.effort>
+		<!-- Threshold Confidence: High, Medium, Low -->
+		<spotbugs.threshold>Medium</spotbugs.threshold>
+		<!-- Rank: Scariest (1-4), Scary (5-9), Troubling (10-14), Of concern (15-20) -->
+		<spotbugs.maxRank>14</spotbugs.maxRank>
+
+		<!-- OWASP -->
+		<!-- Check every 12 hours (default is 4) -->
+		<cveValidForHours>12</cveValidForHours>
+		<!-- Min cvss score to fail on. Range 0-10 : LOW: 0-3.9, MEDIUM: 4-6.9, HIGH: 7.0-8.9, Critical: 9.0-10.0 (Default is 11 which means it never fails) -->
+		<failBuildOnCVSS>4</failBuildOnCVSS>
+		<!-- If set, owasp uses the proxy id in maven settings to download its db. -->
+		<mavenSettingsProxyId />
 
 		<!-- Versions -->
 		<bt.junit.version>5.4.2</bt.junit.version>
-		<bt.jacoco.plugin.version>0.8.3</bt.jacoco.plugin.version>
+		<bt.jacoco.plugin.version>0.8.4</bt.jacoco.plugin.version>
 		<bt.surefire.plugin.version>2.22.2</bt.surefire.plugin.version>
 		<bt.checkstyle.plugin.version>3.0.0</bt.checkstyle.plugin.version>
 		<bt.checkstyle.version>8.20</bt.checkstyle.version>
@@ -33,7 +62,7 @@
 		<bt.spotbugs.plugin.version>3.1.11</bt.spotbugs.plugin.version>
 		<bt.spotbugs.version>3.1.12</bt.spotbugs.version>
 		<bt.findsecbugs.plugin.version>1.9.0</bt.findsecbugs.plugin.version>
-		<bt.owasp.plugin.version>5.0.0-M2</bt.owasp.plugin.version>
+		<bt.owasp.plugin.version>5.0.0-M3</bt.owasp.plugin.version>
 
 	</properties>
 
@@ -101,13 +130,8 @@
 				<artifactId>maven-checkstyle-plugin</artifactId>
 				<version>${bt.checkstyle.plugin.version}</version>
 				<configuration>
-					<skip>${bt.qa.skip}</skip>
-					<!-- Bordertech default config file -->
-					<configLocation>bordertech/bt-checkstyle.xml</configLocation>
 					<failsOnError>true</failsOnError>
-					<failOnViolation>true</failOnViolation>
 					<linkXRef>false</linkXRef>
-					<includeTestSourceDirectory>false</includeTestSourceDirectory>
 					<consoleOutput>true</consoleOutput>
 				</configuration>
 				<dependencies>
@@ -141,19 +165,11 @@
 				<artifactId>maven-pmd-plugin</artifactId>
 				<version>${bt.pmd.plugin.version}</version>
 				<configuration>
-					<skip>${bt.qa.skip}</skip>
-					<!-- Priority: 1 (High) - 5 (Low) -->
-					<failurePriority>2</failurePriority>
-					<!-- Priority: 1 (High) - 5 (Low) -->
-					<minimumPriority>3</minimumPriority>
-					<printFailingErrors>true</printFailingErrors>
-					<includeTests>false</includeTests>
-					<format>xml</format>
-					<linkXRef>false</linkXRef>
 					<rulesets>
 						<ruleset>${bt.pmd.rules.file}</ruleset>
 					</rulesets>
-					<!-- Verbose allows warnings to be printed in the log -->
+					<printFailingErrors>true</printFailingErrors>
+					<linkXRef>false</linkXRef>
 					<verbose>true</verbose>
 				</configuration>
 				<dependencies>
@@ -214,16 +230,6 @@
 				<artifactId>spotbugs-maven-plugin</artifactId>
 				<version>${bt.spotbugs.plugin.version}</version>
 				<configuration>
-					<skip>${bt.qa.skip}</skip>
-					<effort>Max</effort>
-					<failOnError>true</failOnError>
-					<includeTests>false</includeTests>
-					<!-- Threshold Confidence: High, Medium, Low -->
-					<threshold>Medium</threshold>
-					<!-- Rank: Scariest (1-4), Scary (5-9), Troubling (10-14), Of concern (15-20) -->
-					<maxRank>14</maxRank>
-					<!-- Exclude filter -->
-					<excludeFilterFile>${bt.spotbugs.exclude.file}</excludeFilterFile>
 					<plugins>
 						<!-- Auxilary plugin -->
 						<plugin>
@@ -270,19 +276,12 @@
 				<artifactId>dependency-check-maven</artifactId>
 				<version>${bt.owasp.plugin.version}</version>
 				<configuration>
-					<!-- Check every 12 hours default is 4) -->
-					<cveValidForHours>12</cveValidForHours>
-					<!-- Min cvss score to fail on. Range 0-10 : LOW: 0-3.9, MEDIUM: 4-6.9, HIGH: 7.0-8.9, Critical: 9.0-10.0 -->
-					<failBuildOnCVSS>0</failBuildOnCVSS>
 					<!-- If true, override min cvss and fail on any vulnerability. -->
-					<failBuildOnAnyVulnerability>false</failBuildOnAnyVulnerability>
 					<retireJsAnalyzerEnabled>false</retireJsAnalyzerEnabled>
 					<!-- see https://github.com/jeremylong/DependencyCheck/issues/1467 before turning this on -->
 					<nuspecAnalyzerEnabled>false</nuspecAnalyzerEnabled>
 					<swiftPackageManagerAnalyzerEnabled>false</swiftPackageManagerAnalyzerEnabled>
 					<assemblyAnalyzerEnabled>false</assemblyAnalyzerEnabled>
-					<!-- If set, owasp uses the proxy id in maven settings to download its db. -->
-					<mavenSettingsProxyId />
 				</configuration>
 				<executions>
 					<execution>
@@ -313,6 +312,26 @@
 					</execution>
 				</executions>
 			</plugin>
+
+			<!-- Display dependency versions -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>versions-maven-plugin</artifactId>
+				<version>2.7</version>
+				<executions>
+					<execution>
+						<id>display-version-updates</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>display-dependency-updates</goal>
+							<goal>display-parent-updates</goal>
+							<goal>display-plugin-updates</goal>
+							<goal>display-property-updates</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
 		</plugins>
 	</build>
 

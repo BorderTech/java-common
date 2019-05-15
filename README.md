@@ -81,23 +81,34 @@ Refer to [Checkstyle plugin](https://maven.apache.org/plugins/maven-checkstyle-p
 
 #### Change or Add Checkstyle Rules
 
-To add or change a Checkstyle rule you are required to define your own [config.xml](http://checkstyle.sourceforge.net/config.html) file.
+The checkstyle config defaults to `bordertech/bt-checkstyle.xml`. This config is based on `sun-checks.xml` provided by checkstyle.
+
+To add or change a checkstyle rule you are required to create your own [config.xml](http://checkstyle.sourceforge.net/config.html) file and set the `checkstyle.config.location` property.
 
 ``` xml
 <property>
-	<checkstyle.config.location>my-checkstyle-config.xml</checkstyle.config.location>
+	<checkstyle.config.location>${basedir}/my-checkstyle-config.xml</checkstyle.config.location>
 </property>
 ```
 
 #### Ignore Checkstyle Rule
 
-Define a comma-separated list, each value being either a rule name, a rule category or a java package name of rule class.
+Create a [suppression XML](http://checkstyle.sourceforge.net/config_filters.html) file add set the `checkstyle.suppressions.location` property.
 
 ``` xml
 <property>
-	<!-- List of rules to ignore -->
-	<checkstyle.violation.ignore></checkstyle.violation.ignore>
+	<checkstyle.suppressions.location>${basedir}/my-suppression.xml</checkstyle.suppressions.location>
 </property>
+```
+
+Example suppression file:-
+``` xml
+<?xml version="1.0"?>
+<!DOCTYPE suppressions PUBLIC "-//Puppy Crawl//DTD Suppressions 1.0//EN" "http://www.puppycrawl.com/dtds/suppressions_1_0.dtd">
+<suppressions>
+	<!-- Ignores for all files -->
+	<suppress checks="NPathComplexity" files="."/>
+</suppressions>
 ```
 
 ### PMD and CPD
@@ -113,13 +124,15 @@ Refer to [PMD plugin](https://maven.apache.org/plugins/maven-pmd-plugin/) for al
 </property>
 ```
 
-#### Change PMD Rule set
+#### Change PMD Rule Set
 
-Override bordertech default file property with your custom [rule set](https://pmd.github.io/latest/pmd_userdocs_making_rulesets.html).
+The default rule set is `bordertech/bt-pmd-rules.xml`.
+
+You can override the default by creating your own custom [rule set](https://pmd.github.io/latest/pmd_userdocs_making_rulesets.html) and set the `bt.pmd.rules.file` property.
 
 ``` xml
 <property>
-	<bt.pmd.rules.file>my-rules.xml</bt.pmd.rules.file>
+	<bt.pmd.rules.file>${basedir}/my-rules.xml</bt.pmd.rules.file>
 </property>
 ```
 
@@ -129,23 +142,30 @@ An extra [rule set](https://pmd.github.io/latest/pmd_userdocs_making_rulesets.ht
 
 ``` xml
 <plugin>
+	...
 	<configuration>
 		<rulesets>
 			<ruleset>${bt.pmd.rules.file}</ruleset>
-			<ruleset>my-rules.xml</ruleset>
+			<ruleset>${basedir}/my-rules.xml</ruleset>
 		</rulesets>
 	</configuration>
+	...
 </plugin>
 ```
 
 #### Ignore PMD Rule
 
-Create an [excludes XML](https://pmd.github.io/latest/pmd_userdocs_suppressing_warnings.html#xpath-and-regex-message-suppression) file that lists classes and rules to be excluded from failures and set the `pmd.excludeFromFailureFile` property.
+Create an [excludes](https://pmd.github.io/latest/pmd_userdocs_suppressing_warnings.html#xpath-and-regex-message-suppression) file that lists classes and rules to be excluded from failures and set the `pmd.excludeFromFailureFile` property.
 
 ``` xml
 <property>
-	<pmd.excludeFromFailureFile>my-excludes.xml</pmd.excludeFromFailureFile>
+	<pmd.excludeFromFailureFile>${basedir}/my-pmd-excludes.properties</pmd.excludeFromFailureFile>
 </property>
+```
+
+Example properties file:
+```
+com.my.example.MyClass=LoggerIsNotStaticFinal
 ```
 
 ### Spotbugs
@@ -158,17 +178,27 @@ Refer to [spotbugs plugin](https://spotbugs.github.io/spotbugs-maven-plugin/spot
 <property>
 	<spotbugs.skip>true</spotbugs.skip>
 </property>
-```
 
 #### Ignore Spotbugs Rule
 
-Create a [filter XML](https://spotbugs.readthedocs.io/en/latest/filter.html) file and add it to the bordertech defaults file on the `excludeFilterFile` property.
+Create a [filter XML](https://spotbugs.readthedocs.io/en/latest/filter.html) file and set `spotbugs.excludeFilterFile` property.
 
 ``` xml
 <property>
-	<!-- List of exclude files -->
-	<excludeFilterFile>my-exclude-file.xml, ${bt.spotbugs.exclude.file}</excludeFilterFile>
+	<!-- List of exclude filter files files -->
+	<spotbugs.excludeFilterFile>${basedir}/my-spotbugs-exclude-file.xml</spotbugs.excludeFilterFile>
 </property>
+```
+
+Example filter file:-
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<FindBugsFilter>
+	<!-- False Positive on Loading Property Filenames -->
+	<Match>
+		<Bug pattern="PATH_TRAVERSAL_IN" />
+	</Match>
+</FindBugsFilter>
 ```
 
 ### OWASP
@@ -189,7 +219,7 @@ Create a [suppression XML](https://jeremylong.github.io/DependencyCheck/general/
 
 ``` xml
 <property>
-	<suppression.file>my-suppression.xml</suppression.file>
+	<suppression.file>${basedir}/my-owasp-suppressions.xml</suppression.file>
 </property>
 ```
 
@@ -201,16 +231,14 @@ Refer to [enforcer plugin](https://maven.apache.org/enforcer/maven-enforcer-plug
 
 ``` xml
 <property>
-	<!-- Skip -->
 	<enforcer.skip>true</enforcer.skip>
 </property>
 ```
 
-#### Report errors but dont fail
+#### Report issues but dont fail
 
 ``` xml
 <property>
-	<!-- Report issues but dont fail -->
 	<enforcer.fail>false</enforcer.fail>
 </property>
 ```
