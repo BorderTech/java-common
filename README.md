@@ -140,7 +140,7 @@ Override bordertech default file property with your custom [rule set](https://pm
 
 #### Add extra PMD Rule set
 
-An extra ruleset can be added via the plugin configuration.
+An extra [rule set](https://pmd.github.io/latest/pmd_userdocs_making_rulesets.html) can be added via the plugin configuration.
 
 ``` xml
 <plugin>
