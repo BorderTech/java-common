@@ -165,7 +165,8 @@ Create an [excludes](https://pmd.github.io/latest/pmd_userdocs_suppressing_warni
 ```
 
 Example properties file:
-```
+
+``` java
 com.my.example.MyClass=LoggerIsNotStaticFinal
 ```
 
@@ -179,6 +180,7 @@ Refer to [spotbugs plugin](https://spotbugs.github.io/spotbugs-maven-plugin/spot
 <property>
 	<spotbugs.skip>true</spotbugs.skip>
 </property>
+```
 
 #### Ignore Spotbugs Rule
 
@@ -192,7 +194,8 @@ Create a [filter XML](https://spotbugs.readthedocs.io/en/latest/filter.html) fil
 ```
 
 Example filter file:-
-```
+
+``` xml
 <?xml version="1.0" encoding="UTF-8"?>
 <FindBugsFilter>
 	<!-- False Positive on Loading Property Filenames -->
