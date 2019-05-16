@@ -1,11 +1,23 @@
+dist: trusty
+
+cache:
+  directories:
+  - $HOME/.m2
+
+addons:
+  sonarcloud:
+    organization: "bordertech-github"
+    token:
+        secure: $SONAR_TOKEN
+
 before_install:
 - echo "MAVEN_OPTS='-Xmx512m -XX:MaxPermSize=128m'" > ~/.mavenrc
 - mvn clean
 
 language: Java
 jdk:
-  - oraclejdk8
+ - oraclejdk8
 
 ## Travis installs the project with the following maven command:- "mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V"
 script:
- - mvn test
+ - mvn package sonar:sonar -Dsonar.projectKey="bordertech-java-common"

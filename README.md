@@ -3,8 +3,9 @@
 Reusable build configuration for for BorderTech open source projects.
 
 ## Status
-
 [![Build Status](https://travis-ci.com/BorderTech/java-common.svg?branch=master)](https://travis-ci.com/BorderTech/java-common)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=bordertech-java-common&metric=alert_status)](https://sonarcloud.io/dashboard?id=bordertech-java-common)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=bordertech-java-common&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=bordertech-java-common)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/c7a2226acd574943af9ae966c54b05e6)](https://app.codacy.com/app/BorderTech/java-common?utm_source=github.com&utm_medium=referral&utm_content=BorderTech/java-common&utm_campaign=Badge_Grade_Dashboard)
 [![Maven Central](https://img.shields.io/maven-central/v/com.github.bordertech.common/bordertech-parent.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22com.github.bordertech.common%22%20AND%20a:%22bordertech-parent%22)
 
