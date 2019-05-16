@@ -184,11 +184,11 @@ Refer to [spotbugs plugin](https://spotbugs.github.io/spotbugs-maven-plugin/spot
 
 #### Ignore Spotbugs Rule
 
-Create a [filter XML](https://spotbugs.readthedocs.io/en/latest/filter.html) file and set `spotbugs.excludeFilterFile` property.
+Create a [filter](https://spotbugs.readthedocs.io/en/latest/filter.html) file and set `spotbugs.excludeFilterFile` property.
 
 ``` xml
 <property>
-	<!-- List of exclude filter files files -->
+	<!-- List of exclude filter files -->
 	<spotbugs.excludeFilterFile>${basedir}/my-spotbugs-exclude-file.xml</spotbugs.excludeFilterFile>
 </property>
 ```
