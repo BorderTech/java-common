@@ -18,7 +18,6 @@
 		<stagingUrl>${stagingBaseUrl}service/local/staging/deploy/maven2/</stagingUrl>
 		<snapshotUrl>${stagingBaseUrl}content/repositories/snapshots</snapshotUrl>
 		<stagingId>ossrh</stagingId>
-		<bt.fail.enforcer>true</bt.fail.enforcer>
 	</properties>
 
 	<!--
@@ -109,6 +108,7 @@
 					</configuration>
 					<executions>
 						<execution>
+							<id>test-jar</id>
 							<goals>
 								<goal>test-jar</goal>
 							</goals>
@@ -150,14 +150,14 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.8.0</version>
+				<version>3.8.1</version>
 			</plugin>
 
 			<!-- Javadoc -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>3.0.1</version>
+				<version>3.1.0</version>
 				<configuration>
 					<archive>
 						<manifestEntries>
@@ -189,7 +189,7 @@
 				<version>3.0.0-M2</version>
 				<executions>
 					<execution>
-						<id>enforce-require-property-diverges</id>
+						<id>enforcer</id>
 						<goals>
 							<goal>enforce</goal>
 						</goals>
@@ -204,9 +204,7 @@
 								<requirePropertyDiverges>
 									<property>project.description</property>
 								</requirePropertyDiverges>
-								<dependencyConvergence />
 							</rules>
-							<fail>${bt.fail.enforcer}</fail>
 						</configuration>
 					</execution>
 				</executions>
@@ -214,7 +212,7 @@
 					<dependency>
 						<groupId>org.codehaus.mojo</groupId>
 						<artifactId>extra-enforcer-rules</artifactId>
-						<version>1.1</version>
+						<version>1.2</version>
 					</dependency>
 				</dependencies>
 			</plugin>
