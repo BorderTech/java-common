@@ -227,6 +227,18 @@ Create a [suppression](https://jeremylong.github.io/DependencyCheck/general/supp
 </property>
 ```
 
+#### Using OWASP behind a Proxy
+
+If you are behind a Proxy then the OWASP plugin needs to be told which proxy to use. You can set the `mavenSettingsProxyId` property in your settings.xml to the appropriate PROXY-ID (which is usually defined in the same settings.xml).
+
+``` XML
+<properties>
+  <mavenSettingsProxyId>MY-PROXY-ID</mavenSettingsProxyId>
+</properties>
+```
+
+Updating the OWASP vulnerability database can also be blocked by the PROXY blocking HTTP HEAD requests. To work around this you will need a command line option: `-Ddownloader.quick.query.timestamp=false`
+
 ### Enforcer Plugin
 
 Refer to [enforcer plugin](https://maven.apache.org/enforcer/maven-enforcer-plugin/enforce-mojo.html) for all override details.
