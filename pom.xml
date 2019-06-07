@@ -6,7 +6,7 @@
 
 	<groupId>com.github.bordertech.common</groupId>
 	<artifactId>bordertech-parent</artifactId>
-	<version>1.0.14-SNAPSHOT</version>
+	<version>1.0.14</version>
 
 	<packaging>pom</packaging>
 
@@ -55,7 +55,7 @@
 		<url>https://github.com/bordertech/java-common</url>
 		<connection>scm:git:https://github.com/bordertech/java-common.git</connection>
 		<developerConnection>scm:git:https://github.com/bordertech/java-common.git</developerConnection>
-		<tag>java-common-1.0.0</tag>
+		<tag>bordertech-parent-1.0.14</tag>
 	</scm>
 
 	<!--
