@@ -1,6 +1,6 @@
 # java-common
 
-Reusable build configuration for for BorderTech open source projects.
+Reusable build configuration for BorderTech open source projects.
 
 ## Status
 [![Build Status](https://travis-ci.com/BorderTech/java-common.svg?branch=master)](https://travis-ci.com/BorderTech/java-common)
@@ -13,18 +13,34 @@ Reusable build configuration for for BorderTech open source projects.
 
 BorderTech java projects should generally use this as their parent POM.
 
-It runs quality assurance checks on your java code using tools such as checkstyle, pmd and findbugs.
+``` xml
+<project>
+	....
+	<parent>
+		<groupId>com.github.bordertech.common</groupId>
+		<artifactId>qa-parent</artifactId>
+		<version>1.0.14</version>
+	</parent>
+	....
+</project>
+```
 
-By default qa checks do not run, you must enable them on a per-module basis in the pom.xml like so:
+It runs quality assurance checks on your java code using tools such as checkstyle, pmd, spotbugs.
+
+By default qa checks do not run, you must enable them on a per-module basis or parent pom like so:
 
 ``` xml
 <properties>
-  <!-- Set bt.qa.skip to false to run QA checks. -->
-  <bt.qa.skip>false</bt.qa.skip>
+	<!-- Set bt.qa.skip to false to run QA checks. -->
+	<bt.qa.skip>false</bt.qa.skip>
 </properties>
 ```
-
 Refer to qa-parent's [pom.xml](https://github.com/BorderTech/java-common/blob/master/qa-parent/pom.xml) for other project properties.
+
+The qa-parent also runs:
+- [OWASP plugin](https://jeremylong.github.io/DependencyCheck/dependency-check-maven/index.html) to check security vulnerabilities
+- [Enforcer plugin](https://maven.apache.org/enforcer/maven-enforcer-plugin/) to check dependency convergence
+- [Version checker plugin](https://www.mojohaus.org/versions-maven-plugin/) to report project dependencies that have new versions available
 
 The qa-parent inherits all of the release functionality from bordertech-parent, discussed below.
 
@@ -60,7 +76,7 @@ This is primarily a shared resources module used by qa-parent and potentially ot
 
 ### Enable Static Analysis
 
-By default qa checks do not run, you must enable them on a per-module basis.
+By default qa checks do not run, you must enable them on a per-module basis or parent pom.
 
 ``` xml
 <property>
@@ -258,3 +274,24 @@ Refer to [enforcer plugin](https://maven.apache.org/enforcer/maven-enforcer-plug
 	<enforcer.fail>false</enforcer.fail>
 </property>
 ```
+
+### Build tools module for override artefacts
+
+If your project has multiple modules and you want to provide the same override/exclude files for all the submodules, then a good solution is to use a `build-tools` module similar to [java-common/build-tools](https://github.com/BorderTech/java-common/tree/master/build-tools). Define a `build-tools` submodule that holds the override/exclude files and then define the plugins you want to override in the project parent pom with the custom build-tools module as a dependency.
+
+``` xml
+<!-- Example of adding a custom build-tools module to spotbugs -->
+<plugin>
+	<groupId>com.github.spotbugs</groupId>
+	<artifactId>spotbugs-maven-plugin</artifactId>
+	<dependencies>
+		<!-- My project build-tools module. -->
+		<dependency>
+			<groupId>com.my.project</groupId>
+			<artifactId>build-tools</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
+</plugin>
+```			
+
