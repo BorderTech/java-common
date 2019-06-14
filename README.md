@@ -25,7 +25,7 @@ BorderTech java projects should generally use this as their parent POM.
 </project>
 ```
 
-It runs quality assurance checks on your java code using tools such as checkstyle, pmd, spotbugs.
+It runs quality assurance checks on your java code using tools such as checkstyle, pmd and spotbugs.
 
 By default qa checks do not run, you must enable them on a per-module basis or parent pom like so:
 
@@ -42,7 +42,7 @@ The qa-parent also runs:
 
 - the [OWASP plugin](https://jeremylong.github.io/DependencyCheck/dependency-check-maven/index.html) to check security vulnerabilities
 - the [Enforcer plugin](https://maven.apache.org/enforcer/maven-enforcer-plugin/) to check dependency convergence
-- the [Version checker plugin](https://www.mojohaus.org/versions-maven-plugin/) to report project dependencies that have new versions 
+- the [Version checker plugin](https://www.mojohaus.org/versions-maven-plugin/) to report project dependencies that have new versions
 
 The qa-parent inherits all of the release functionality from bordertech-parent, discussed below.
 
