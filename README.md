@@ -15,38 +15,41 @@ BorderTech java projects should generally use this as their parent POM.
 
 ``` xml
 <project>
-	....
-	<parent>
-		<groupId>com.github.bordertech.common</groupId>
-		<artifactId>qa-parent</artifactId>
-		<version>1.0.14</version>
-	</parent>
-	....
+  ....
+  <parent>
+    <groupId>com.github.bordertech.common</groupId>
+    <artifactId>qa-parent</artifactId>
+    <version>1.0.14</version>
+  </parent>
+  ....
 </project>
 ```
 
-It runs quality assurance checks on your java code using tools such as checkstyle, pmd, spotbugs.
+It runs quality assurance checks on your java code using tools such as checkstyle, pmd and spotbugs.
 
 By default qa checks do not run, you must enable them on a per-module basis or parent pom like so:
 
 ``` xml
 <properties>
-	<!-- Set bt.qa.skip to false to run QA checks. -->
-	<bt.qa.skip>false</bt.qa.skip>
+  <!-- Set bt.qa.skip to false to run QA checks. -->
+  <bt.qa.skip>false</bt.qa.skip>
 </properties>
 ```
+
 Refer to qa-parent's [pom.xml](https://github.com/BorderTech/java-common/blob/master/qa-parent/pom.xml) for other project properties.
 
 The qa-parent also runs:
-* the [OWASP plugin](https://jeremylong.github.io/DependencyCheck/dependency-check-maven/index.html) to check security vulnerabilities
-* the [Enforcer plugin](https://maven.apache.org/enforcer/maven-enforcer-plugin/) to check dependency convergence
-* the [Version checker plugin](https://www.mojohaus.org/versions-maven-plugin/) to report project dependencies that have new versions 
+
+- the [OWASP plugin](https://jeremylong.github.io/DependencyCheck/dependency-check-maven/index.html) to check security vulnerabilities
+- the [Enforcer plugin](https://maven.apache.org/enforcer/maven-enforcer-plugin/) to check dependency convergence
+- the [Version checker plugin](https://www.mojohaus.org/versions-maven-plugin/) to report project dependencies that have new versions
 
 The qa-parent inherits all of the release functionality from bordertech-parent, discussed below.
 
 ## bordertech-parent
 
 This is the top-level pom.xml file.
+
 It configures the maven release plugin for open source BorderTech projects to release to Maven Central.
 
 _Note that java projects should generally not consume this directly but instead should use qa-parent as a parent POM instead._
@@ -80,7 +83,7 @@ By default qa checks do not run, you must enable them on a per-module basis or p
 
 ``` xml
 <property>
-	<bt.qa.skip>false</bt.qa.skip>
+  <bt.qa.skip>false</bt.qa.skip>
 </property>
 ```
 
@@ -92,7 +95,7 @@ Refer to [Checkstyle plugin](https://maven.apache.org/plugins/maven-checkstyle-p
 
 ``` xml
 <property>
-	<checkstyle.skip>true</checkstyle.skip>
+  <checkstyle.skip>true</checkstyle.skip>
 </property>
 ```
 
@@ -104,7 +107,7 @@ To add or change a checkstyle rule you are required to create your own [config.x
 
 ``` xml
 <property>
-	<checkstyle.config.location>${basedir}/my-checkstyle-config.xml</checkstyle.config.location>
+  <checkstyle.config.location>${basedir}/my-checkstyle-config.xml</checkstyle.config.location>
 </property>
 ```
 
@@ -114,17 +117,18 @@ Create a [suppression](http://checkstyle.sourceforge.net/config_filters.html) fi
 
 ``` xml
 <property>
-	<checkstyle.suppressions.location>${basedir}/my-suppression.xml</checkstyle.suppressions.location>
+  <checkstyle.suppressions.location>${basedir}/my-suppression.xml</checkstyle.suppressions.location>
 </property>
 ```
 
 Example suppression file:-
+
 ``` xml
 <?xml version="1.0"?>
 <!DOCTYPE suppressions PUBLIC "-//Puppy Crawl//DTD Suppressions 1.0//EN" "http://www.puppycrawl.com/dtds/suppressions_1_0.dtd">
 <suppressions>
-	<!-- Ignores for all files -->
-	<suppress checks="NPathComplexity" files="."/>
+  <!-- Ignores for all files -->
+  <suppress checks="NPathComplexity" files="."/>
 </suppressions>
 ```
 
@@ -136,8 +140,8 @@ Refer to [PMD plugin](https://maven.apache.org/plugins/maven-pmd-plugin/) for al
 
 ``` xml
 <property>
-	<pmd.skip>true</pmd.skip>
-	<cpd.skip>true</cpd.skip>
+  <pmd.skip>true</pmd.skip>
+  <cpd.skip>true</cpd.skip>
 </property>
 ```
 
@@ -149,7 +153,7 @@ You can override the default by creating your own custom [rule set](https://pmd.
 
 ``` xml
 <property>
-	<bt.pmd.rules.file>${basedir}/my-rules.xml</bt.pmd.rules.file>
+  <bt.pmd.rules.file>${basedir}/my-rules.xml</bt.pmd.rules.file>
 </property>
 ```
 
@@ -159,14 +163,14 @@ An extra [rule set](https://pmd.github.io/latest/pmd_userdocs_making_rulesets.ht
 
 ``` xml
 <plugin>
-	...
-	<configuration>
-		<rulesets>
-			<ruleset>${bt.pmd.rules.file}</ruleset>
-			<ruleset>${basedir}/my-rules.xml</ruleset>
-		</rulesets>
-	</configuration>
-	...
+  ...
+  <configuration>
+    <rulesets>
+      <ruleset>${bt.pmd.rules.file}</ruleset>
+      <ruleset>${basedir}/my-rules.xml</ruleset>
+    </rulesets>
+  </configuration>
+  ...
 </plugin>
 ```
 
@@ -176,7 +180,7 @@ Create an [excludes](https://pmd.github.io/latest/pmd_userdocs_suppressing_warni
 
 ``` xml
 <property>
-	<pmd.excludeFromFailureFile>${basedir}/my-pmd-excludes.properties</pmd.excludeFromFailureFile>
+  <pmd.excludeFromFailureFile>${basedir}/my-pmd-excludes.properties</pmd.excludeFromFailureFile>
 </property>
 ```
 
@@ -194,7 +198,7 @@ Refer to [spotbugs plugin](https://spotbugs.github.io/spotbugs-maven-plugin/spot
 
 ``` xml
 <property>
-	<spotbugs.skip>true</spotbugs.skip>
+  <spotbugs.skip>true</spotbugs.skip>
 </property>
 ```
 
@@ -204,8 +208,8 @@ Create a [filter](https://spotbugs.readthedocs.io/en/latest/filter.html) file an
 
 ``` xml
 <property>
-	<!-- List of exclude filter files -->
-	<spotbugs.excludeFilterFile>${basedir}/my-spotbugs-exclude-file.xml</spotbugs.excludeFilterFile>
+  <!-- List of exclude filter files -->
+  <spotbugs.excludeFilterFile>${basedir}/my-spotbugs-exclude-file.xml</spotbugs.excludeFilterFile>
 </property>
 ```
 
@@ -214,10 +218,10 @@ Example filter file:-
 ``` xml
 <?xml version="1.0" encoding="UTF-8"?>
 <FindBugsFilter>
-	<!-- False Positive on Loading Property Filenames -->
-	<Match>
-		<Bug pattern="PATH_TRAVERSAL_IN" />
-	</Match>
+  <!-- False Positive on Loading Property Filenames -->
+  <Match>
+    <Bug pattern="PATH_TRAVERSAL_IN" />
+  </Match>
 </FindBugsFilter>
 ```
 
@@ -229,7 +233,7 @@ Refer to [OWASP plugin](https://jeremylong.github.io/DependencyCheck/dependency-
 
 ``` xml
 <property>
-	<dependency-check.skip>true</dependency-check.skip>
+  <dependency-check.skip>true</dependency-check.skip>
 </property>
 ```
 
@@ -239,7 +243,7 @@ Create a [suppression](https://jeremylong.github.io/DependencyCheck/general/supp
 
 ``` xml
 <property>
-	<suppression.file>${basedir}/my-owasp-suppressions.xml</suppression.file>
+  <suppression.file>${basedir}/my-owasp-suppressions.xml</suppression.file>
 </property>
 ```
 
@@ -247,7 +251,7 @@ Create a [suppression](https://jeremylong.github.io/DependencyCheck/general/supp
 
 If you are behind a Proxy then the OWASP plugin needs to be told which proxy to use. You can set the `mavenSettingsProxyId` property in your settings.xml to the appropriate PROXY-ID (which is usually defined in the same settings.xml).
 
-``` XML
+``` xml
 <properties>
   <mavenSettingsProxyId>MY-PROXY-ID</mavenSettingsProxyId>
 </properties>
@@ -263,7 +267,7 @@ Refer to [enforcer plugin](https://maven.apache.org/enforcer/maven-enforcer-plug
 
 ``` xml
 <property>
-	<enforcer.skip>true</enforcer.skip>
+  <enforcer.skip>true</enforcer.skip>
 </property>
 ```
 
@@ -271,7 +275,7 @@ Refer to [enforcer plugin](https://maven.apache.org/enforcer/maven-enforcer-plug
 
 ``` xml
 <property>
-	<enforcer.fail>false</enforcer.fail>
+  <enforcer.fail>false</enforcer.fail>
 </property>
 ```
 
@@ -282,15 +286,15 @@ If your project has multiple modules and you want to provide the same override/e
 ``` xml
 <!-- Example of adding a custom build-tools module to spotbugs -->
 <plugin>
-	<groupId>com.github.spotbugs</groupId>
-	<artifactId>spotbugs-maven-plugin</artifactId>
-	<dependencies>
-		<!-- My project build-tools module. -->
-		<dependency>
-			<groupId>com.my.project</groupId>
-			<artifactId>build-tools</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
-		</dependency>
-	</dependencies>
+  <groupId>com.github.spotbugs</groupId>
+  <artifactId>spotbugs-maven-plugin</artifactId>
+  <dependencies>
+    <!-- My project build-tools module. -->
+    <dependency>
+      <groupId>com.my.project</groupId>
+      <artifactId>build-tools</artifactId>
+      <version>1.0.0-SNAPSHOT</version>
+    </dependency>
+  </dependencies>
 </plugin>
 ```
