@@ -39,9 +39,9 @@ Refer to qa-parent's [pom.xml](https://github.com/BorderTech/java-common/blob/ma
 
 The qa-parent also runs:
 
-* [OWASP plugin](https://jeremylong.github.io/DependencyCheck/dependency-check-maven/index.html) to check security vulnerabilities
-* [Enforcer plugin](https://maven.apache.org/enforcer/maven-enforcer-plugin/) to check dependency convergence
-* [Version checker plugin](https://www.mojohaus.org/versions-maven-plugin/) to report project dependencies that have new versions 
+*  [OWASP plugin](https://jeremylong.github.io/DependencyCheck/dependency-check-maven/index.html) to check security vulnerabilities
+* The [Enforcer plugin](https://maven.apache.org/enforcer/maven-enforcer-plugin/) to check dependency convergence
+*  The [Version checker plugin](https://www.mojohaus.org/versions-maven-plugin/) to report project dependencies that have new versions 
 
 The qa-parent inherits all of the release functionality from bordertech-parent, discussed below.
 
