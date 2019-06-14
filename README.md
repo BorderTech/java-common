@@ -49,6 +49,7 @@ The qa-parent inherits all of the release functionality from bordertech-parent, 
 ## bordertech-parent
 
 This is the top-level pom.xml file.
+
 It configures the maven release plugin for open source BorderTech projects to release to Maven Central.
 
 _Note that java projects should generally not consume this directly but instead should use qa-parent as a parent POM instead._
@@ -121,6 +122,7 @@ Create a [suppression](http://checkstyle.sourceforge.net/config_filters.html) fi
 ```
 
 Example suppression file:-
+
 ``` xml
 <?xml version="1.0"?>
 <!DOCTYPE suppressions PUBLIC "-//Puppy Crawl//DTD Suppressions 1.0//EN" "http://www.puppycrawl.com/dtds/suppressions_1_0.dtd">
