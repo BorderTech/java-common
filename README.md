@@ -38,9 +38,9 @@ By default qa checks do not run, you must enable them on a per-module basis or p
 Refer to qa-parent's [pom.xml](https://github.com/BorderTech/java-common/blob/master/qa-parent/pom.xml) for other project properties.
 
 The qa-parent also runs:
-- [OWASP plugin](https://jeremylong.github.io/DependencyCheck/dependency-check-maven/index.html) to check security vulnerabilities
-- [Enforcer plugin](https://maven.apache.org/enforcer/maven-enforcer-plugin/) to check dependency convergence
-- [Version checker plugin](https://www.mojohaus.org/versions-maven-plugin/) to report project dependencies that have new versions available
+  [OWASP plugin](https://jeremylong.github.io/DependencyCheck/dependency-check-maven/index.html) to check security vulnerabilities
+  [Enforcer plugin](https://maven.apache.org/enforcer/maven-enforcer-plugin/) to check dependency convergence
+  [Version checker plugin](https://www.mojohaus.org/versions-maven-plugin/) to report project dependencies that have new versions available
 
 The qa-parent inherits all of the release functionality from bordertech-parent, discussed below.
 
@@ -293,5 +293,4 @@ If your project has multiple modules and you want to provide the same override/e
 		</dependency>
 	</dependencies>
 </plugin>
-```			
-
+```
