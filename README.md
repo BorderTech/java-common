@@ -25,7 +25,7 @@ BorderTech java projects should generally use this as their parent POM.
 </project>
 ```
 
-It runs quality assurance checks on your java code using tools such as checkstyle, pmd and spotbugs.
+It runs quality assurance checks on your java code using tools such as [Checkstyle](https://maven.apache.org/plugins/maven-checkstyle-plugin/checkstyle-mojo.html), [PMD](https://maven.apache.org/plugins/maven-pmd-plugin/) and [Spotbugs](https://spotbugs.github.io/spotbugs-maven-plugin/spotbugs-mojo.html).
 
 By default qa checks do not run, you must enable them on a per-module basis or parent pom like so:
 
@@ -76,6 +76,19 @@ Full documentation is available in the wiki under [Releasing](https://github.com
 This is primarily a shared resources module used by qa-parent and potentially other BorderTech maven modules.
 
 ## qa-parent overrides
+
+### Plugins used in QA Parent
+
+Refer to the plugins for all override details:
+
+- [Checkstyle plugin](https://maven.apache.org/plugins/maven-checkstyle-plugin/checkstyle-mojo.html)
+- [PMD plugin](https://maven.apache.org/plugins/maven-pmd-plugin/)
+- [Spotbugs plugin](https://spotbugs.github.io/spotbugs-maven-plugin/spotbugs-mojo.html)
+- [OWASP plugin](https://jeremylong.github.io/DependencyCheck/dependency-check-maven/index.html)
+- [Enforcer plugin](https://maven.apache.org/enforcer/maven-enforcer-plugin/enforce-mojo.html)
+- [JaCoCo plugin](https://www.eclemma.org/jacoco/trunk/doc/maven.html)
+- [Surefire plugin](https://maven.apache.org/surefire/maven-surefire-plugin)
+- [Version checker plugin](https://www.mojohaus.org/versions-maven-plugin)
 
 ### Enable Static Analysis
 
