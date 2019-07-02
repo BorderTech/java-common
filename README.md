@@ -43,6 +43,8 @@ The qa-parent also runs:
 - the [OWASP plugin](https://jeremylong.github.io/DependencyCheck/dependency-check-maven/index.html) to check security vulnerabilities
 - the [Enforcer plugin](https://maven.apache.org/enforcer/maven-enforcer-plugin/) to check dependency convergence
 - the [Version checker plugin](https://www.mojohaus.org/versions-maven-plugin/) to report project dependencies that have new versions
+- the [JaCoCo plugin](https://www.eclemma.org/jacoco/trunk/doc/maven.html) for code coverage reports
+- the [Surefire plugin](https://maven.apache.org/surefire/maven-surefire-plugin) for running unit tests
 
 The qa-parent inherits all of the release functionality from bordertech-parent, discussed below.
 
@@ -86,9 +88,9 @@ Refer to the plugins for all override details:
 - [Spotbugs plugin](https://spotbugs.github.io/spotbugs-maven-plugin/spotbugs-mojo.html)
 - [OWASP plugin](https://jeremylong.github.io/DependencyCheck/dependency-check-maven/index.html)
 - [Enforcer plugin](https://maven.apache.org/enforcer/maven-enforcer-plugin/enforce-mojo.html)
+- [Version checker plugin](https://www.mojohaus.org/versions-maven-plugin)
 - [JaCoCo plugin](https://www.eclemma.org/jacoco/trunk/doc/maven.html)
 - [Surefire plugin](https://maven.apache.org/surefire/maven-surefire-plugin)
-- [Version checker plugin](https://www.mojohaus.org/versions-maven-plugin)
 
 ### Enable Static Analysis
 
