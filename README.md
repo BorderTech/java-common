@@ -1,17 +1,36 @@
-# java-common
-
-Reusable build configuration for BorderTech open source projects.
-
-## Status
+# Status
 [![Build Status](https://travis-ci.com/BorderTech/java-common.svg?branch=master)](https://travis-ci.com/BorderTech/java-common)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=bordertech-java-common&metric=alert_status)](https://sonarcloud.io/dashboard?id=bordertech-java-common)
 [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=bordertech-java-common&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=bordertech-java-common)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/c7a2226acd574943af9ae966c54b05e6)](https://app.codacy.com/app/BorderTech/java-common?utm_source=github.com&utm_medium=referral&utm_content=BorderTech/java-common&utm_campaign=Badge_Grade_Dashboard)
 [![Maven Central](https://img.shields.io/maven-central/v/com.github.bordertech.common/bordertech-parent.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22com.github.bordertech.common%22%20AND%20a:%22bordertech-parent%22)
 
-## qa-parent
+# Content
 
-BorderTech java projects should generally use this as their parent POM.
+- [What is java-common?](#what-is-javacommon)
+- [Why use java-common?](#why-use-javacommon)
+- [Getting started](#getting-started)
+- [Features](#features)
+- [Configuration](#configuration)
+- [Contributing](#contributing)
+
+# What is java-common?
+
+Reusable build configuration for BorderTech open source projects.
+
+# Why use java-common?
+
+- Makes it easy to release your project to Maven Central
+- Provides quality assurance and security checks on your project code
+
+# Getting started
+
+java-common provides two parent pom projects:
+
+- bordertech-parent - The top level pom that configures maven release plugin
+- qa-parent - Configures quality assurance and security checks
+
+BorderTech java projects should generally use qa-parent as their parent POM:
 
 ``` xml
 <project>
@@ -25,18 +44,19 @@ BorderTech java projects should generally use this as their parent POM.
 </project>
 ```
 
+# Features
+
+## bordertech-parent
+
+This is the top-level pom.xml file.
+
+It configures the maven release plugin for open source BorderTech projects to release to Maven Central.
+
+_Note that java projects should generally not consume this directly but instead should use qa-parent as a parent POM instead._
+
+## qa-parent
+
 It runs quality assurance checks on your java code using tools such as [Checkstyle](https://maven.apache.org/plugins/maven-checkstyle-plugin/checkstyle-mojo.html), [PMD](https://maven.apache.org/plugins/maven-pmd-plugin/) and [Spotbugs](https://spotbugs.github.io/spotbugs-maven-plugin/spotbugs-mojo.html).
-
-By default qa checks do not run, you must enable them on a per-module basis or parent pom like so:
-
-``` xml
-<properties>
-  <!-- Set bt.qa.skip to false to run QA checks. -->
-  <bt.qa.skip>false</bt.qa.skip>
-</properties>
-```
-
-Refer to qa-parent's [pom.xml](https://github.com/BorderTech/java-common/blob/master/qa-parent/pom.xml) for other project properties.
 
 The qa-parent also runs:
 
@@ -48,26 +68,7 @@ The qa-parent also runs:
 
 The qa-parent inherits all of the release functionality from bordertech-parent, discussed below.
 
-## bordertech-parent
-
-This is the top-level pom.xml file.
-
-It configures the maven release plugin for open source BorderTech projects to release to Maven Central.
-
-_Note that java projects should generally not consume this directly but instead should use qa-parent as a parent POM instead._
-
-Projects using this must ensure the necessary POM sections are overriden - these are marked in the bordertech-parent pom, for example:
-
-``` xml
-<!--
-  Descendants SHOULD override the url.
--->
-<url>https://github.com/bordertech/java-common/</url>
-```
-
-Once you have configured your project and environment you can release to Maven Central. It may look a little something like the examples below.
-
-### Releasing
+## Releasing
 
 The golden rule is ALWAYS do the release on a separate branch (it makes [backing out](https://github.com/BorderTech/java-common/wiki/Releasing#dealing-with-failure) much easier when problems arise).
 
@@ -77,7 +78,24 @@ Full documentation is available in the wiki under [Releasing](https://github.com
 
 This is primarily a shared resources module used by qa-parent and potentially other BorderTech maven modules.
 
-## qa-parent overrides
+# Configuration
+
+## bordertech-parent
+
+Projects must ensure the necessary POM sections are overriden - these are marked in the bordertech-parent pom, for example:
+
+``` xml
+<!--
+  Descendants SHOULD override the url.
+-->
+<url>https://github.com/bordertech/java-common/</url>
+```
+
+Once you have configured your project and environment you can release to Maven Central.
+
+## qa-parent
+
+Refer to qa-parent's [pom.xml](https://github.com/BorderTech/java-common/blob/master/qa-parent/pom.xml) for all project properties.
 
 ### Plugins used in QA Parent
 
@@ -313,3 +331,7 @@ If your project has multiple modules and you want to provide the same override/e
   </dependencies>
 </plugin>
 ```
+
+# Contributing
+
+Refer to these guidelines for [Workflow](https://github.com/BorderTech/java-common/wiki/Workflow) and [Releasing](https://github.com/BorderTech/java-common/wiki/Releasing).
