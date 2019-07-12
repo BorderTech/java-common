@@ -9,18 +9,18 @@
 
 ## Content
 
-- [What is java-common?](#what-is-java-common)
-- [Why use java-common?](#why-use-java-common)
+- [What is java-common](#what-is-java-common)
+- [Why use java-common](#why-use-java-common)
 - [Getting started](#getting-started)
 - [Features](#features)
 - [Configuration](#configuration)
 - [Contributing](#contributing)
 
-## What is java-common?
+## What is java-common
 
 Reusable build configuration and parent pom modules for BorderTech open source projects.
 
-## Why use java-common?
+## Why use java-common
 
 - Simplifies the steps to release your project to Maven Central
 - Enforce quality assurance and security checks on your project code
@@ -105,7 +105,7 @@ This is primarily a shared resources module used by qa-parent and potentially ot
 
 ## Configuration
 
-### bordertech-parent
+### bordertech-parent config
 
 Refer to bordertech-parent's [pom.xml](https://github.com/BorderTech/java-common/blob/master/pom.xml) for all project properties.
 
@@ -118,7 +118,7 @@ Projects must ensure the necessary POM sections are overriden - these are marked
 <url>https://github.com/bordertech/java-common/</url>
 ```
 
-### qa-parent
+### qa-parent config
 
 Refer to qa-parent's [pom.xml](https://github.com/BorderTech/java-common/blob/master/qa-parent/pom.xml) for all project properties.
 
