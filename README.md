@@ -7,8 +7,8 @@
 
 # Content
 
-- [What is java-common?](#what-is-javacommon)
-- [Why use java-common?](#why-use-javacommon)
+- [What is java-common?](#what-is-java-common)
+- [Why use java-common?](#why-use-java-common)
 - [Getting started](#getting-started)
 - [Features](#features)
 - [Configuration](#configuration)
@@ -20,8 +20,8 @@ Reusable build configuration for open source projects.
 
 # Why use java-common?
 
-- Easy to release project to Maven Central
-- Enforce quality assurance and security checks on project code
+- Easy to release your project to Maven Central
+- Enforce quality assurance and security checks on your project code
 
 # Getting started
 
@@ -44,7 +44,7 @@ Projects should generally use qa-parent as their parent POM:
 </project>
 ```
 
-By default qa checks do not run, you must enable them on a per-module basis or in the project parent pom:
+By default qa checks do not run, you must enable them on a per-module basis or in your project parent pom:
 
 ``` xml
 <property>
@@ -115,8 +115,6 @@ Once you have configured your project and environment you can release to Maven C
 ## qa-parent
 
 Refer to qa-parent's [pom.xml](https://github.com/BorderTech/java-common/blob/master/qa-parent/pom.xml) for all project properties.
-
-### Plugins used in QA Parent
 
 Refer to the plugins for all override details:
 
