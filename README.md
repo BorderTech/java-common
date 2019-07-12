@@ -16,18 +16,18 @@
 
 # What is java-common?
 
-Reusable build configuration for open source projects.
+Reusable build configuration and parent pom modules for BorderTech open source projects.
 
 # Why use java-common?
 
-- Easy to release your project to Maven Central
+- Simplifies the steps to release your project to Maven Central
 - Enforce quality assurance and security checks on your project code
 
 # Getting started
 
 java-common provides two parent pom modules:
 
-- [bordertech-parent](https://github.com/BorderTech/java-common/blob/master/pom.xml) is the top level pom that configures maven release plugin
+- [bordertech-parent](https://github.com/BorderTech/java-common/blob/master/pom.xml) is the top level pom that configures [maven release plugin](https://maven.apache.org/maven-release/maven-release-plugin/)
 - [qa-parent](https://github.com/BorderTech/java-common/blob/master/qa-parent/pom.xml) provides quality assurance and security checks
 
 Projects should generally use qa-parent as their parent POM:
@@ -44,7 +44,7 @@ Projects should generally use qa-parent as their parent POM:
 </project>
 ```
 
-By default qa checks do not run, you must enable them on a per-module basis or in your project parent pom:
+By default qa checks (i.e. Checkstyle, PMD and Spotbugs) do not run, you must enable them on a per-module basis or in your project parent pom:
 
 ``` xml
 <property>
@@ -75,13 +75,17 @@ Full documentation is available in the wiki under [Releasing](https://github.com
 
 This is the top-level pom.xml file.
 
-It configures the maven release plugin for open source BorderTech projects to release to Maven Central.
+It configures the [maven release plugin](https://maven.apache.org/maven-release/maven-release-plugin/index.html) for projects to release to Maven Central.
 
 _Note that java projects should generally not consume this directly but instead should use qa-parent as a parent POM instead._
 
 ## qa-parent
 
-It runs quality assurance checks on your java code using tools such as [Checkstyle](https://maven.apache.org/plugins/maven-checkstyle-plugin/checkstyle-mojo.html), [PMD](https://maven.apache.org/plugins/maven-pmd-plugin/) and [Spotbugs](https://spotbugs.github.io/spotbugs-maven-plugin/spotbugs-mojo.html).
+It runs quality assurance checks on your java code using tools such as:
+
+- the [Checkstyle plugin](https://maven.apache.org/plugins/maven-checkstyle-plugin) to check the code style used by the developers
+- the [PMD plugin](https://maven.apache.org/plugins/maven-pmd-plugin) for source code analysis
+- the [Spotbugs plugin](https://spotbugs.github.io/spotbugs-maven-plugin) that looks for bugs in Java programs using bug patterns
 
 The qa-parent also runs:
 
@@ -91,7 +95,7 @@ The qa-parent also runs:
 - the [JaCoCo plugin](https://www.eclemma.org/jacoco/trunk/doc/maven.html) for code coverage reports
 - the [Surefire plugin](https://maven.apache.org/surefire/maven-surefire-plugin) for running unit tests
 
-The qa-parent inherits all of the release functionality from bordertech-parent, discussed below.
+The qa-parent inherits all of the release functionality from bordertech-parent.
 
 ## build-tools
 
@@ -100,6 +104,8 @@ This is primarily a shared resources module used by qa-parent and potentially ot
 # Configuration
 
 ## bordertech-parent
+
+Refer to bordertech-parent's [pom.xml](https://github.com/BorderTech/java-common/blob/master/pom.xml) for all project properties.
 
 Projects must ensure the necessary POM sections are overriden - these are marked in the bordertech-parent pom, for example:
 
@@ -110,26 +116,24 @@ Projects must ensure the necessary POM sections are overriden - these are marked
 <url>https://github.com/bordertech/java-common/</url>
 ```
 
-Once you have configured your project and environment you can release to Maven Central.
-
 ## qa-parent
 
 Refer to qa-parent's [pom.xml](https://github.com/BorderTech/java-common/blob/master/qa-parent/pom.xml) for all project properties.
 
-Refer to the plugins for all override details:
+Refer to the plugins used by qa-parent for all override details:
 
-- [Checkstyle plugin](https://maven.apache.org/plugins/maven-checkstyle-plugin/checkstyle-mojo.html)
-- [PMD plugin](https://maven.apache.org/plugins/maven-pmd-plugin/)
-- [Spotbugs plugin](https://spotbugs.github.io/spotbugs-maven-plugin/spotbugs-mojo.html)
-- [OWASP plugin](https://jeremylong.github.io/DependencyCheck/dependency-check-maven/index.html)
-- [Enforcer plugin](https://maven.apache.org/enforcer/maven-enforcer-plugin/enforce-mojo.html)
+- [Checkstyle plugin](https://maven.apache.org/plugins/maven-checkstyle-plugin)
+- [PMD plugin](https://maven.apache.org/plugins/maven-pmd-plugin)
+- [Spotbugs plugin](https://spotbugs.github.io/spotbugs-maven-plugin)
+- [OWASP plugin](https://jeremylong.github.io/DependencyCheck/dependency-check-maven)
+- [Enforcer plugin](https://maven.apache.org/enforcer/maven-enforcer-plugin)
 - [Version checker plugin](https://www.mojohaus.org/versions-maven-plugin)
 - [JaCoCo plugin](https://www.eclemma.org/jacoco/trunk/doc/maven.html)
 - [Surefire plugin](https://maven.apache.org/surefire/maven-surefire-plugin)
 
 ### Enable Static Analysis
 
-By default qa checks do not run, you must enable them on a per-module basis or the project parent pom:
+By default qa checks (i.e. Checkstyle, PMD and Spotbugs) do not run, you must enable them on a per-module basis or the project parent pom:
 
 ``` xml
 <property>
@@ -139,7 +143,7 @@ By default qa checks do not run, you must enable them on a per-module basis or t
 
 ### Checkstyle
 
-Refer to [Checkstyle plugin](https://maven.apache.org/plugins/maven-checkstyle-plugin/checkstyle-mojo.html) for all override details.
+Refer to [Checkstyle plugin](https://maven.apache.org/plugins/maven-checkstyle-plugin) for all override details.
 
 #### Skip Checkstyle
 
@@ -184,7 +188,7 @@ Example suppression file:-
 
 ### PMD and CPD
 
-Refer to [PMD plugin](https://maven.apache.org/plugins/maven-pmd-plugin/) for all override details.
+Refer to [PMD plugin](https://maven.apache.org/plugins/maven-pmd-plugin) for all override details.
 
 #### Skip PMD and CPD
 
@@ -242,7 +246,7 @@ com.my.example.MyClass=LoggerIsNotStaticFinal
 
 ### Spotbugs
 
-Refer to [spotbugs plugin](https://spotbugs.github.io/spotbugs-maven-plugin/spotbugs-mojo.html) or [doco](https://spotbugs.readthedocs.io/en/latest/index.html) for all override details.
+Refer to [spotbugs plugin](https://spotbugs.github.io/spotbugs-maven-plugin) or [doco](https://spotbugs.readthedocs.io/en/latest/index.html) for all override details.
 
 #### Skip spotbugs
 
@@ -277,7 +281,7 @@ Example filter file:-
 
 ### OWASP
 
-Refer to [OWASP plugin](https://jeremylong.github.io/DependencyCheck/dependency-check-maven/index.html) for all override details.
+Refer to [OWASP plugin](https://jeremylong.github.io/DependencyCheck/dependency-check-maven) for all override details.
 
 #### Skip OWASP
 
@@ -311,7 +315,7 @@ Updating the OWASP vulnerability database can also be blocked by the PROXY block
 
 ### Enforcer Plugin
 
-Refer to [enforcer plugin](https://maven.apache.org/enforcer/maven-enforcer-plugin/enforce-mojo.html) for all override details.
+Refer to [enforcer plugin](https://maven.apache.org/enforcer/maven-enforcer-plugin) for all override details.
 
 #### Skip enforcer
 
@@ -331,7 +335,9 @@ Refer to [enforcer plugin](https://maven.apache.org/enforcer/maven-enforcer-plug
 
 ### Build tools module for override artefacts
 
-If your project has multiple modules and you want to provide the same override/exclude files for all the submodules, then a good solution is to use a `build-tools` module similar to [java-common/build-tools](https://github.com/BorderTech/java-common/tree/master/build-tools). Define a `build-tools` submodule that holds the override/exclude files and then define the plugins you want to override in the project parent pom with the custom build-tools module as a dependency.
+If your project has multiple modules and you want to provide the same override/exclude files for all the submodules, then a good solution is to use a `build-tools` module similar to [java-common/build-tools](https://github.com/BorderTech/java-common/tree/master/build-tools).
+
+Once you have created a build-tools submodule, define the plugins you want to override in the project parent pom with the custom build-tools module as a dependency.
 
 ``` xml
 <!-- Example of adding a custom build-tools module to spotbugs -->
