@@ -27,8 +27,8 @@ Reusable build configuration for open source projects.
 
 java-common provides two parent pom modules:
 
-- bordertech-parent [pom](https://github.com/BorderTech/java-common/blob/master/pom.xml) is the top level pom that configures maven release plugin
-- qa-parent [pom](https://github.com/BorderTech/java-common/blob/master/qa-parent/pom.xml) provides quality assurance and security checks
+- [bordertech-parent](https://github.com/BorderTech/java-common/blob/master/pom.xml) is the top level pom that configures maven release plugin
+- [qa-parent](https://github.com/BorderTech/java-common/blob/master/qa-parent/pom.xml) provides quality assurance and security checks
 
 Projects should generally use qa-parent as their parent POM:
 
@@ -51,6 +51,23 @@ By default qa checks do not run, you must enable them on a per-module basis or i
   <bt.qa.skip>false</bt.qa.skip>
 </property>
 ```
+
+## Releasing
+
+If using maven release ensure the necessary POM sections are overriden - these are marked in the bordertech-parent pom, for example:
+
+``` xml
+<!--
+  Descendants SHOULD override the url.
+-->
+<url>https://github.com/bordertech/java-common/</url>
+```
+
+Once you have configured your project and environment you can release to Maven Central.
+
+The golden rule for releasing is ALWAYS do the release on a separate branch (it makes [backing out](https://github.com/BorderTech/java-common/wiki/Releasing#dealing-with-failure) much easier when problems arise).
+
+Full documentation is available in the wiki under [Releasing](https://github.com/BorderTech/java-common/wiki/Releasing).
 
 # Features
 
@@ -94,12 +111,6 @@ Projects must ensure the necessary POM sections are overriden - these are marked
 ```
 
 Once you have configured your project and environment you can release to Maven Central.
-
-### Releasing
-
-The golden rule is ALWAYS do the release on a separate branch (it makes [backing out](https://github.com/BorderTech/java-common/wiki/Releasing#dealing-with-failure) much easier when problems arise).
-
-Full documentation is available in the wiki under [Releasing](https://github.com/BorderTech/java-common/wiki/Releasing).
 
 ## qa-parent
 
