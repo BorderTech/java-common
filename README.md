@@ -1,11 +1,13 @@
-# Status
+# java-common
+
+## Status
 [![Build Status](https://travis-ci.com/BorderTech/java-common.svg?branch=master)](https://travis-ci.com/BorderTech/java-common)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=bordertech-java-common&metric=alert_status)](https://sonarcloud.io/dashboard?id=bordertech-java-common)
 [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=bordertech-java-common&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=bordertech-java-common)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/c7a2226acd574943af9ae966c54b05e6)](https://app.codacy.com/app/BorderTech/java-common?utm_source=github.com&utm_medium=referral&utm_content=BorderTech/java-common&utm_campaign=Badge_Grade_Dashboard)
 [![Maven Central](https://img.shields.io/maven-central/v/com.github.bordertech.common/bordertech-parent.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22com.github.bordertech.common%22%20AND%20a:%22bordertech-parent%22)
 
-# Content
+## Content
 
 - [What is java-common?](#what-is-java-common)
 - [Why use java-common?](#why-use-java-common)
@@ -14,16 +16,16 @@
 - [Configuration](#configuration)
 - [Contributing](#contributing)
 
-# What is java-common?
+## What is java-common?
 
 Reusable build configuration and parent pom modules for BorderTech open source projects.
 
-# Why use java-common?
+## Why use java-common?
 
 - Simplifies the steps to release your project to Maven Central
 - Enforce quality assurance and security checks on your project code
 
-# Getting started
+## Getting started
 
 java-common provides two parent pom modules:
 
@@ -44,7 +46,7 @@ Projects should generally use qa-parent as their parent POM:
 </project>
 ```
 
-By default qa checks (i.e. Checkstyle, PMD and Spotbugs) do not run, you must enable them on a per-module basis or in your project parent pom:
+By default qa checks do not run, you must enable them on a per-module basis or in your project parent pom:
 
 ``` xml
 <property>
@@ -52,7 +54,7 @@ By default qa checks (i.e. Checkstyle, PMD and Spotbugs) do not run, you must en
 </property>
 ```
 
-## Releasing
+### Releasing
 
 If using maven release ensure the necessary POM sections are overriden - these are marked in the bordertech-parent pom, for example:
 
@@ -69,9 +71,9 @@ The golden rule for releasing is ALWAYS do the release on a separate branch (it 
 
 Full documentation is available in the wiki under [Releasing](https://github.com/BorderTech/java-common/wiki/Releasing).
 
-# Features
+## Features
 
-## bordertech-parent
+### bordertech-parent
 
 This is the top-level pom.xml file.
 
@@ -79,9 +81,9 @@ It configures the [maven release plugin](https://maven.apache.org/maven-release/
 
 _Note that java projects should generally not consume this directly but instead should use qa-parent as a parent POM instead._
 
-## qa-parent
+### qa-parent
 
-It runs quality assurance checks on your java code using tools such as:
+The qa-parent runs quality assurance checks on your java code using tools such as:
 
 - the [Checkstyle plugin](https://maven.apache.org/plugins/maven-checkstyle-plugin) to check the code style used by the developers
 - the [PMD plugin](https://maven.apache.org/plugins/maven-pmd-plugin) for source code analysis
@@ -97,13 +99,13 @@ The qa-parent also runs:
 
 The qa-parent inherits all of the release functionality from bordertech-parent.
 
-## build-tools
+### build-tools
 
 This is primarily a shared resources module used by qa-parent and potentially other BorderTech maven modules.
 
-# Configuration
+## Configuration
 
-## bordertech-parent
+### bordertech-parent
 
 Refer to bordertech-parent's [pom.xml](https://github.com/BorderTech/java-common/blob/master/pom.xml) for all project properties.
 
@@ -116,7 +118,7 @@ Projects must ensure the necessary POM sections are overriden - these are marked
 <url>https://github.com/bordertech/java-common/</url>
 ```
 
-## qa-parent
+### qa-parent
 
 Refer to qa-parent's [pom.xml](https://github.com/BorderTech/java-common/blob/master/qa-parent/pom.xml) for all project properties.
 
@@ -131,7 +133,7 @@ Refer to the plugins used by qa-parent for all override details:
 - [JaCoCo plugin](https://www.eclemma.org/jacoco/trunk/doc/maven.html)
 - [Surefire plugin](https://maven.apache.org/surefire/maven-surefire-plugin)
 
-### Enable Static Analysis
+#### Enable Static Analysis
 
 By default qa checks (i.e. Checkstyle, PMD and Spotbugs) do not run, you must enable them on a per-module basis or the project parent pom:
 
@@ -141,11 +143,11 @@ By default qa checks (i.e. Checkstyle, PMD and Spotbugs) do not run, you must en
 </property>
 ```
 
-### Checkstyle
+#### Checkstyle
 
 Refer to [Checkstyle plugin](https://maven.apache.org/plugins/maven-checkstyle-plugin) for all override details.
 
-#### Skip Checkstyle
+##### Skip Checkstyle
 
 ``` xml
 <property>
@@ -153,7 +155,7 @@ Refer to [Checkstyle plugin](https://maven.apache.org/plugins/maven-checkstyle-p
 </property>
 ```
 
-#### Change or Add Checkstyle Rules
+##### Change or Add Checkstyle Rules
 
 The checkstyle config defaults to `bordertech/bt-checkstyle.xml`. This config is based on `sun-checks.xml` provided by checkstyle.
 
@@ -165,7 +167,7 @@ To add or change a checkstyle rule you are required to create your own [config.x
 </property>
 ```
 
-#### Ignore Checkstyle Rule
+##### Ignore Checkstyle Rule
 
 Create a [suppression](http://checkstyle.sourceforge.net/config_filters.html) file add set the `checkstyle.suppressions.location` property.
 
@@ -186,11 +188,11 @@ Example suppression file:-
 </suppressions>
 ```
 
-### PMD and CPD
+#### PMD and CPD
 
 Refer to [PMD plugin](https://maven.apache.org/plugins/maven-pmd-plugin) for all override details.
 
-#### Skip PMD and CPD
+##### Skip PMD and CPD
 
 ``` xml
 <property>
@@ -199,7 +201,7 @@ Refer to [PMD plugin](https://maven.apache.org/plugins/maven-pmd-plugin) for all
 </property>
 ```
 
-#### Change PMD Rule Set
+##### Change PMD Rule Set
 
 The default rule set is `bordertech/bt-pmd-rules.xml`.
 
@@ -211,7 +213,7 @@ You can override the default by creating your own custom [rule set](https://pmd.
 </property>
 ```
 
-#### Add extra PMD Rule set
+##### Add extra PMD Rule set
 
 An extra [rule set](https://pmd.github.io/latest/pmd_userdocs_making_rulesets.html) can be added via the plugin `rulesets` configuration.
 
@@ -228,7 +230,7 @@ An extra [rule set](https://pmd.github.io/latest/pmd_userdocs_making_rulesets.ht
 </plugin>
 ```
 
-#### Ignore PMD Rule
+##### Ignore PMD Rule
 
 Create an [excludes](https://pmd.github.io/latest/pmd_userdocs_suppressing_warnings.html#xpath-and-regex-message-suppression) file that lists classes and rules to be excluded from failures and set the `pmd.excludeFromFailureFile` property.
 
@@ -244,11 +246,11 @@ Example properties file:
 com.my.example.MyClass=LoggerIsNotStaticFinal
 ```
 
-### Spotbugs
+#### Spotbugs
 
 Refer to [spotbugs plugin](https://spotbugs.github.io/spotbugs-maven-plugin) or [doco](https://spotbugs.readthedocs.io/en/latest/index.html) for all override details.
 
-#### Skip spotbugs
+##### Skip spotbugs
 
 ``` xml
 <property>
@@ -256,7 +258,7 @@ Refer to [spotbugs plugin](https://spotbugs.github.io/spotbugs-maven-plugin) or 
 </property>
 ```
 
-#### Ignore Spotbugs Rule
+##### Ignore Spotbugs Rule
 
 Create a [filter](https://spotbugs.readthedocs.io/en/latest/filter.html) file and set `spotbugs.excludeFilterFile` property.
 
@@ -279,11 +281,11 @@ Example filter file:-
 </FindBugsFilter>
 ```
 
-### OWASP
+#### OWASP
 
 Refer to [OWASP plugin](https://jeremylong.github.io/DependencyCheck/dependency-check-maven) for all override details.
 
-#### Skip OWASP
+##### Skip OWASP
 
 ``` xml
 <property>
@@ -291,7 +293,7 @@ Refer to [OWASP plugin](https://jeremylong.github.io/DependencyCheck/dependency-
 </property>
 ```
 
-#### Ignore OWASP Rule
+##### Ignore OWASP Rule
 
 Create a [suppression](https://jeremylong.github.io/DependencyCheck/general/suppression.html) file add set the `suppression.file` property.
 
@@ -301,7 +303,7 @@ Create a [suppression](https://jeremylong.github.io/DependencyCheck/general/supp
 </property>
 ```
 
-#### Using OWASP behind a Proxy
+##### Using OWASP behind a Proxy
 
 If you are behind a Proxy then the OWASP plugin needs to be told which proxy to use. You can set the `mavenSettingsProxyId` property in your settings.xml to the appropriate PROXY-ID (which is usually defined in the same settings.xml).
 
@@ -313,11 +315,11 @@ If you are behind a Proxy then the OWASP plugin needs to be told which proxy to 
 
 Updating the OWASP vulnerability database can also be blocked by the PROXY blocking HTTP HEAD requests. To work around this you will need a command line option: `-Ddownloader.quick.query.timestamp=false`
 
-### Enforcer Plugin
+#### Enforcer Plugin
 
 Refer to [enforcer plugin](https://maven.apache.org/enforcer/maven-enforcer-plugin) for all override details.
 
-#### Skip enforcer
+##### Skip enforcer
 
 ``` xml
 <property>
@@ -325,7 +327,7 @@ Refer to [enforcer plugin](https://maven.apache.org/enforcer/maven-enforcer-plug
 </property>
 ```
 
-#### Report issues but dont fail
+##### Report issues but dont fail
 
 ``` xml
 <property>
@@ -333,7 +335,7 @@ Refer to [enforcer plugin](https://maven.apache.org/enforcer/maven-enforcer-plug
 </property>
 ```
 
-### Build tools module for override artefacts
+#### Build tools module for override artefacts
 
 If your project has multiple modules and you want to provide the same override/exclude files for all the submodules, then a good solution is to use a `build-tools` module similar to [java-common/build-tools](https://github.com/BorderTech/java-common/tree/master/build-tools).
 
@@ -355,6 +357,6 @@ Once you have created a build-tools submodule, define the plugins you want to ov
 </plugin>
 ```
 
-# Contributing
+## Contributing
 
 Refer to these guidelines for [Workflow](https://github.com/BorderTech/java-common/wiki/Workflow) and [Releasing](https://github.com/BorderTech/java-common/wiki/Releasing).
