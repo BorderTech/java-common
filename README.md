@@ -16,21 +16,21 @@
 
 # What is java-common?
 
-Reusable build configuration for BorderTech open source projects.
+Reusable build configuration for open source projects.
 
 # Why use java-common?
 
-- Makes it easy to release your project to Maven Central
-- Provides quality assurance and security checks on your project code
+- Easy to release project to Maven Central
+- Enforce quality assurance and security checks on project code
 
 # Getting started
 
-java-common provides two parent pom projects:
+java-common provides two parent pom modules:
 
-- bordertech-parent - The top level pom that configures maven release plugin
-- qa-parent - Configures quality assurance and security checks
+- bordertech-parent [pom](https://github.com/BorderTech/java-common/blob/master/pom.xml) is the top level pom that configures maven release plugin
+- qa-parent [pom](https://github.com/BorderTech/java-common/blob/master/qa-parent/pom.xml) provides quality assurance and security checks
 
-BorderTech java projects should generally use qa-parent as their parent POM:
+Projects should generally use qa-parent as their parent POM:
 
 ``` xml
 <project>
@@ -42,6 +42,14 @@ BorderTech java projects should generally use qa-parent as their parent POM:
   </parent>
   ....
 </project>
+```
+
+By default qa checks do not run, you must enable them on a per-module basis or in the project parent pom:
+
+``` xml
+<property>
+  <bt.qa.skip>false</bt.qa.skip>
+</property>
 ```
 
 # Features
@@ -68,12 +76,6 @@ The qa-parent also runs:
 
 The qa-parent inherits all of the release functionality from bordertech-parent, discussed below.
 
-## Releasing
-
-The golden rule is ALWAYS do the release on a separate branch (it makes [backing out](https://github.com/BorderTech/java-common/wiki/Releasing#dealing-with-failure) much easier when problems arise).
-
-Full documentation is available in the wiki under [Releasing](https://github.com/BorderTech/java-common/wiki/Releasing).
-
 ## build-tools
 
 This is primarily a shared resources module used by qa-parent and potentially other BorderTech maven modules.
@@ -92,6 +94,12 @@ Projects must ensure the necessary POM sections are overriden - these are marked
 ```
 
 Once you have configured your project and environment you can release to Maven Central.
+
+### Releasing
+
+The golden rule is ALWAYS do the release on a separate branch (it makes [backing out](https://github.com/BorderTech/java-common/wiki/Releasing#dealing-with-failure) much easier when problems arise).
+
+Full documentation is available in the wiki under [Releasing](https://github.com/BorderTech/java-common/wiki/Releasing).
 
 ## qa-parent
 
@@ -112,7 +120,7 @@ Refer to the plugins for all override details:
 
 ### Enable Static Analysis
 
-By default qa checks do not run, you must enable them on a per-module basis or parent pom.
+By default qa checks do not run, you must enable them on a per-module basis or the project parent pom:
 
 ``` xml
 <property>
