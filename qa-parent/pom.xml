@@ -52,13 +52,13 @@
 		<mavenSettingsProxyId />
 
 		<!-- Versions -->
-		<bt.junit.version>5.4.2</bt.junit.version>
+		<bt.junit.version>5.5.0</bt.junit.version>
 		<bt.jacoco.plugin.version>0.8.4</bt.jacoco.plugin.version>
 		<bt.surefire.plugin.version>2.22.2</bt.surefire.plugin.version>
 		<bt.checkstyle.plugin.version>3.0.0</bt.checkstyle.plugin.version>
-		<bt.checkstyle.version>8.21</bt.checkstyle.version>
+		<bt.checkstyle.version>8.22</bt.checkstyle.version>
 		<bt.pmd.plugin.version>3.12.0</bt.pmd.plugin.version>
-		<bt.pmd.version>6.15.0</bt.pmd.version>
+		<bt.pmd.version>6.16.0</bt.pmd.version>
 		<bt.spotbugs.plugin.version>3.1.11</bt.spotbugs.plugin.version>
 		<bt.fb-contrib.plugin.version>7.4.5</bt.fb-contrib.plugin.version>
 		<bt.spotbugs.version>3.1.12</bt.spotbugs.version>
