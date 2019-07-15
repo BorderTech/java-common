@@ -40,7 +40,7 @@ Projects should generally use qa-parent as their parent POM:
   <parent>
     <groupId>com.github.bordertech.common</groupId>
     <artifactId>qa-parent</artifactId>
-    <version>1.0.14</version>
+    <version>1.0.15</version>
   </parent>
   ....
 </project>
@@ -52,6 +52,12 @@ By default qa checks do not run, you must enable them on a per-module basis or i
 <property>
   <bt.qa.skip>false</bt.qa.skip>
 </property>
+```
+
+Use the following to run the qa-parent verification:
+
+``` java
+mvn verify
 ```
 
 ### Releasing
