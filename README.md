@@ -301,12 +301,28 @@ Refer to [OWASP plugin](https://jeremylong.github.io/DependencyCheck/dependency-
 
 ##### Ignore OWASP Rule
 
-Create a [suppression](https://jeremylong.github.io/DependencyCheck/general/suppression.html) file add set the `suppression.file` property.
+Create a [suppression](https://jeremylong.github.io/DependencyCheck/general/suppression.html) file add set the `suppressionFiles` property.
 
 ``` xml
 <property>
-  <suppression.file>${basedir}/my-owasp-suppressions.xml</suppression.file>
+  <suppressionFiles>${basedir}/my-owasp-suppressions.xml</suppressionFiles>
 </property>
+```
+
+Example suppression file content:
+
+``` xml
+<?xml version="1.0" encoding="UTF-8"?>
+<suppressions xmlns="https://jeremylong.github.io/DependencyCheck/dependency-suppression.1.1.xsd">
+  <suppress>
+    <notes>
+      <![CDATA[
+          Example to suppress a specific CVE.
+      ]]>
+    </notes>
+    <cve>CVE-2019-12814</cve>
+  </suppress>
+</suppressions>
 ```
 
 ##### Using OWASP behind a Proxy
