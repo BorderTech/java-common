@@ -56,7 +56,7 @@
 		<bt.jacoco.plugin.version>0.8.4</bt.jacoco.plugin.version>
 		<bt.surefire.plugin.version>2.22.2</bt.surefire.plugin.version>
 		<bt.checkstyle.plugin.version>3.0.0</bt.checkstyle.plugin.version>
-		<bt.checkstyle.version>8.22</bt.checkstyle.version>
+		<bt.checkstyle.version>8.29</bt.checkstyle.version>
 		<bt.pmd.plugin.version>3.12.0</bt.pmd.plugin.version>
 		<bt.pmd.version>6.16.0</bt.pmd.version>
 		<bt.spotbugs.plugin.version>3.1.11</bt.spotbugs.plugin.version>
