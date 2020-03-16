@@ -8,29 +8,26 @@
 [![Maven Central](https://img.shields.io/maven-central/v/com.github.bordertech.common/bordertech-parent.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22com.github.bordertech.common%22%20AND%20a:%22bordertech-parent%22)
 
 ## Content
-
-- [What is java-common](#what-is-java-common)
-- [Why use java-common](#why-use-java-common)
-- [Getting started](#getting-started)
-- [Features](#features)
-- [Configuration](#configuration)
-- [Contributing](#contributing)
+  - [What is java-common](#what-is-java-common)
+  - [Why use java-common](#why-use-java-common)
+  - [Getting started](#getting-started)
+  - [Features](#features)
+  - [Configuration](#configuration)
+  - [Contributing](#contributing)
 
 ## What is java-common
 
 Reusable build configuration and parent pom modules for BorderTech open source projects.
 
 ## Why use java-common
-
-- Simplifies the steps to release your project to Maven Central
-- Enforce quality assurance and security checks on your project code
+  - Simplifies the steps to release your project to Maven Central
+  - Enforce quality assurance and security checks on your project code
 
 ## Getting started
 
 java-common provides two parent pom modules:
-
-- [bordertech-parent](https://github.com/BorderTech/java-common/blob/master/pom.xml) is the top level pom that configures [maven release plugin](https://maven.apache.org/maven-release/maven-release-plugin/)
-- [qa-parent](https://github.com/BorderTech/java-common/blob/master/qa-parent/pom.xml) provides quality assurance and security checks
+  - [bordertech-parent](https://github.com/BorderTech/java-common/blob/master/pom.xml) is the top level pom that configures [maven release plugin](https://maven.apache.org/maven-release/maven-release-plugin/)
+  - [qa-parent](https://github.com/BorderTech/java-common/blob/master/qa-parent/pom.xml) provides quality assurance and security checks
 
 Projects should generally use qa-parent as their parent POM:
 
@@ -90,18 +87,16 @@ _Note that java projects should generally not consume this directly but instead 
 ### qa-parent
 
 The qa-parent runs quality assurance checks on your java code using tools such as:
-
-- the [Checkstyle plugin](https://maven.apache.org/plugins/maven-checkstyle-plugin) to check the code style used by the developers
-- the [PMD plugin](https://maven.apache.org/plugins/maven-pmd-plugin) for source code analysis
-- the [Spotbugs plugin](https://spotbugs.github.io/spotbugs-maven-plugin) that looks for bugs in Java programs using bug patterns
+  - the [Checkstyle plugin](https://maven.apache.org/plugins/maven-checkstyle-plugin) to check the code style used by the developers
+  - the [PMD plugin](https://maven.apache.org/plugins/maven-pmd-plugin) for source code analysis
+  - the [Spotbugs plugin](https://spotbugs.github.io/spotbugs-maven-plugin) that looks for bugs in Java programs using bug patterns
 
 The qa-parent also runs:
-
-- the [OWASP plugin](https://jeremylong.github.io/DependencyCheck/dependency-check-maven/index.html) to check security vulnerabilities
-- the [Enforcer plugin](https://maven.apache.org/enforcer/maven-enforcer-plugin/) to check dependency convergence
-- the [Version checker plugin](https://www.mojohaus.org/versions-maven-plugin/) to report project dependencies that have new versions
-- the [JaCoCo plugin](https://www.eclemma.org/jacoco/trunk/doc/maven.html) for code coverage reports
-- the [Surefire plugin](https://maven.apache.org/surefire/maven-surefire-plugin) for running unit tests
+  - the [OWASP plugin](https://jeremylong.github.io/DependencyCheck/dependency-check-maven/index.html) to check security vulnerabilities
+  - the [Enforcer plugin](https://maven.apache.org/enforcer/maven-enforcer-plugin/) to check dependency convergence
+  - the [Version checker plugin](https://www.mojohaus.org/versions-maven-plugin/) to report project dependencies that have new versions
+  - the [JaCoCo plugin](https://www.eclemma.org/jacoco/trunk/doc/maven.html) for code coverage reports
+  - the [Surefire plugin](https://maven.apache.org/surefire/maven-surefire-plugin) for running unit tests
 
 The qa-parent inherits all of the release functionality from bordertech-parent.
 
@@ -129,15 +124,14 @@ Projects must ensure the necessary POM sections are overriden - these are marked
 Refer to qa-parent's [pom.xml](https://github.com/BorderTech/java-common/blob/master/qa-parent/pom.xml) for all project properties.
 
 Refer to the plugins used by qa-parent for all override details:
-
-- [Checkstyle plugin](https://maven.apache.org/plugins/maven-checkstyle-plugin)
-- [PMD plugin](https://maven.apache.org/plugins/maven-pmd-plugin)
-- [Spotbugs plugin](https://spotbugs.github.io/spotbugs-maven-plugin)
-- [OWASP plugin](https://jeremylong.github.io/DependencyCheck/dependency-check-maven)
-- [Enforcer plugin](https://maven.apache.org/enforcer/maven-enforcer-plugin)
-- [Version checker plugin](https://www.mojohaus.org/versions-maven-plugin)
-- [JaCoCo plugin](https://www.eclemma.org/jacoco/trunk/doc/maven.html)
-- [Surefire plugin](https://maven.apache.org/surefire/maven-surefire-plugin)
+  - [Checkstyle plugin](https://maven.apache.org/plugins/maven-checkstyle-plugin)
+  - [PMD plugin](https://maven.apache.org/plugins/maven-pmd-plugin)
+  - [Spotbugs plugin](https://spotbugs.github.io/spotbugs-maven-plugin)
+  - [OWASP plugin](https://jeremylong.github.io/DependencyCheck/dependency-check-maven)
+  - [Enforcer plugin](https://maven.apache.org/enforcer/maven-enforcer-plugin)
+  - [Version checker plugin](https://www.mojohaus.org/versions-maven-plugin)
+  - [JaCoCo plugin](https://www.eclemma.org/jacoco/trunk/doc/maven.html)
+  - [Surefire plugin](https://maven.apache.org/surefire/maven-surefire-plugin)
 
 #### Enable Static Analysis
 
