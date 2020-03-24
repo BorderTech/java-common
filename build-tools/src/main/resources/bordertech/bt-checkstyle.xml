@@ -18,6 +18,7 @@
   https://checkstyle.org (or in your downloaded distribution).
   Most Checks are configurable, be sure to consult the documentation.
   To completely disable a check, just comment it out or delete it from the file.
+  To suppress certain violations please review suppression filters.
   Finally, it is worth reading the documentation.
 -->
 
@@ -30,7 +31,8 @@
 	-->
 	<property name="severity" value="error"/>
 
-	<!-- BorderTech: Filter out Checkstyle warnings that have been suppressed with the @SuppressWarnings annotation -->
+	<!-- BorderTech: Filter out Checkstyle warnings that have been suppressed with the @SuppressWarnings annotation. -->
+	<!-- SuppressWarningsFilter and SuppressWarningsHolder have to be used together. -->
 	<module name="SuppressWarningsFilter" />
 
 	<!-- BorderTech: only check java files
@@ -66,22 +68,23 @@
 	<!-- Checks for Size Violations.                    -->
 	<!-- See https://checkstyle.org/config_sizes.html -->
 	<module name="FileLength">
-		<!-- Bordertech: override to warning -->
+		<!-- BorderTech: Override to warning -->
 		<property name="severity" value="warning" />
 	</module>
 	<module name="LineLength">
 		<property name="fileExtensions" value="java"/>
-		<!-- BorderTech: override from 80 to 150 -->
+		<!-- BorderTech: Override from 80 to 150 -->
 		<property name="max" value="150" />
-		<!-- Bordertech: override to warning -->
+		<!-- BorderTech: Override to warning -->
 		<property name="severity" value="warning" />
 	</module>
 
 	<!-- See https://checkstyle.org/config_whitespace.html -->
-	<!-- Bordetech: This check is removed as it fails if there are tabs
+	<!-- BorderTech: This check is removed as it fails if there are tabs
 	<module name="FileTabCharacter"/>
 	-->
-	<!-- Bordertech: Use tabs for indenting -->
+
+	<!-- BorderTech: Use tabs for indenting -->
 	<module name="RegexpSingleline">
 		<property name="format" value="^(\t*( +\t*(?! \*|\S))|(  ))"/>
 		<property name="message" value="Indentation should be tabs."/>
@@ -95,7 +98,7 @@
 		<property name="minimum" value="0"/>
 		<property name="maximum" value="0"/>
 		<property name="message" value="Line has trailing spaces."/>
-		<!-- Bordertech: override to warning -->
+		<!-- BorderTech: Override to warning -->
 		<property name="severity" value="warning" />
 	</module>
 
@@ -112,18 +115,19 @@
 		<property name="tabWidth" value="4"/>
 
 		<!-- BorderTech: Make the @SuppressWarnings annotations available to Checkstyle -->
+		<!-- SuppressWarningsFilter and SuppressWarningsHolder have to be used together. -->
 		<module name="SuppressWarningsHolder" />
 
 		<!-- Checks for Javadoc comments.                     -->
 		<!-- See https://checkstyle.org/config_javadoc.html -->
 		<module name="InvalidJavadocPosition"/>
 		<module name="JavadocMethod">
-			<!-- Bordertech: Javadoc not required for methods with these annotations -->
+			<!-- BorderTech: Javadoc not required for methods with these annotations -->
 			<property name="allowedAnnotations" value="Override,Test,Before,After,BeforeClass,AfterClass"/>
 		</module>
 		<module name="JavadocType"/>
 		<module name="JavadocVariable">
-			<!-- Bordertech: Push scope that is checked from private to protected -->
+			<!-- BorderTech: Push scope that is checked from private to protected -->
 			<property name="scope" value="protected"/>
 		</module>
 		<module name="JavadocStyle"/>
@@ -154,11 +158,11 @@
 		<!-- Checks for Size Violations.                    -->
 		<!-- See https://checkstyle.org/config_sizes.html -->
 		<module name="MethodLength">
-			<!-- Bordertech: override to warning -->
+			<!-- BorderTech: Override to warning -->
 			<property name="severity" value="warning" />
 		</module>
 		<module name="ParameterNumber">
-			<!-- Bordertech: override to warning -->
+			<!-- BorderTech: Override to warning -->
 			<property name="severity" value="warning" />
 		</module>
 
@@ -182,7 +186,7 @@
 		<!-- See https://checkstyle.org/config_modifiers.html -->
 		<module name="ModifierOrder"/>
 		<module name="RedundantModifier">
-			<!-- Bordertech: override to warning -->
+			<!-- BorderTech: Override to warning -->
 			<property name="severity" value="warning" />
 		</module>
 
@@ -193,7 +197,7 @@
 			<property name="allowInSwitchCase" value="true"/>
 		</module>
 		<module name="EmptyBlock">
-			<!-- Bordertech: override to warning -->
+			<!-- BorderTech: Override to warning -->
 			<property name="severity" value="warning" />
 		</module>
 		<module name="LeftCurly"/>
@@ -203,22 +207,30 @@
 		<!-- Checks for common coding problems               -->
 		<!-- See https://checkstyle.org/config_coding.html -->
 		<module name="EmptyStatement">
-			<!-- Bordertech: override to warning -->
+			<!-- BorderTech: Override to warning -->
 			<property name="severity" value="warning" />
 		</module>
 		<module name="EqualsHashCode"/>
 		<module name="HiddenField">
-			<!-- Bordertech: override to ignore -->
-			<property name="severity" value="ignore" />
+			<!-- BorderTech: Override from false for constructor parameters -->
+			<property name="ignoreConstructorParameter" value = "true" />
+			<!-- BorderTech: Override from false for setter parameters -->
+			<property name="ignoreSetter" value = "true" />
+			<!-- BorderTech: Override to warning -->
+			<property name="severity" value="warning" />
 		</module>
 		<module name="IllegalInstantiation"/>
 		<module name="InnerAssignment"/>
 		<module name="MagicNumber">
-			<!-- Bordertech: override to ignore -->
-			<property name="severity" value="ignore" />
+			<!-- BorderTech: Override from false for hash code methods -->
+			<property name="ignoreHashCodeMethod" value = "true" />
+			<!-- BorderTech: Override from false for annotation methods -->
+			<property name="ignoreAnnotation" value = "true" />
+			<!-- BorderTech: Override to warning -->
+			<property name="severity" value="warning" />
 		</module>
 		<module name="MissingSwitchDefault">
-			<!-- Bordertech: override to warning -->
+			<!-- BorderTech: Override to warning -->
 			<property name="severity" value="warning" />
 		</module>
 		<module name="MultipleVariableDeclarations"/>
@@ -238,11 +250,11 @@
 		<!-- Miscellaneous other checks.                   -->
 		<!-- See https://checkstyle.org/config_misc.html -->
 		<!--
-	   <module name="ArrayTypeStyle"/>
+		<module name="ArrayTypeStyle"/>
 		-->
 		<module name="FinalParameters"/>
 		<module name="TodoComment">
-			<!-- Bordertech: override to warning -->
+			<!-- BorderTech: Override to warning -->
 			<property name="severity" value="warning" />
 		</module>
 		<module name="UpperEll"/>
