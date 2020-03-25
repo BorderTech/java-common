@@ -86,6 +86,31 @@
 		configuration from bordertech-parent.
 	</description>
 
+	<profiles>
+		<!-- Quick build profile with testing and QA turned off -->
+		<profile>
+			<id>quick-build</id>
+			<properties>
+				<!-- Skip tests -->
+				<skipTests>true</skipTests>
+				<jacoco.skip>true</jacoco.skip>
+				<!-- Skip QA -->
+				<bt.qa.skip>true</bt.qa.skip>
+				<!-- Skip each plugin individually to handle projects that have set bt.qa.skip to false -->
+				<checkstyle.skip>true</checkstyle.skip>
+				<pmd.skip>true</pmd.skip>
+				<cpd.skip>true</cpd.skip>
+				<spotbugs.skip>true</spotbugs.skip>
+				<!-- Skip OWASP -->
+				<dependency-check.skip>true</dependency-check.skip>
+				<!-- Skip enforcer -->
+				<enforcer.skip>true</enforcer.skip>
+				<!-- Skip javadoc -->
+				<maven.javadoc.skip>true</maven.javadoc.skip>
+			</properties>
+		</profile>
+	</profiles>
+
 	<dependencyManagement>
 		<dependencies>
 			<!-- Junit 5 -->
