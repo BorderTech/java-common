@@ -11,6 +11,7 @@
 	</rule>
 	<rule ref="category/java/design.xml">
 		<exclude name="LawOfDemeter"/>
+		<exclude name="LoosePackageCoupling"/>
 	</rule>
 	<rule ref="category/java/documentation.xml">
 		<exclude name="CommentSize"/>
@@ -48,12 +49,10 @@
 		<priority>3</priority>
 	</rule>
 
-	<!-- Property override not working
 	<rule ref="category/java/documentation.xml/CommentRequired">
 		<properties>
-			<property name="fieldCommentRequirement">Ignored</property>
+			<property name="fieldCommentRequirement" value="Ignored"/>
 		</properties>
 	</rule>
-	-->
 
 </ruleset>

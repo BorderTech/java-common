@@ -30,10 +30,15 @@
 		<!-- Config file -->
 		<checkstyle.config.location>bordertech/bt-checkstyle.xml</checkstyle.config.location>
 		<!-- PMD -->
+		<pmd.printFailingErrors>true</pmd.printFailingErrors>
 		<!-- Priority: 1 (High) - 5 (Low) -->
 		<pmd.failurePriority>2</pmd.failurePriority>
+		<!-- Print details of check failures to build output -->
+		<pmd.verbose>true</pmd.verbose>
 		<!-- Rules file -->
 		<bt.pmd.rules.file>bordertech/bt-pmd-rules.xml</bt.pmd.rules.file>
+		<!-- CPD (Default to report only) -->
+		<cpd.failOnViolation>false</cpd.failOnViolation>
 
 		<!-- Spotbugs -->
 		<!-- Effort -->
@@ -43,27 +48,35 @@
 		<!-- Rank: Scariest (1-4), Scary (5-9), Troubling (10-14), Of concern (15-20) -->
 		<spotbugs.maxRank>14</spotbugs.maxRank>
 
-		<!-- OWASP -->
+		<!-- OWASP (Default to Critical) -->
 		<!-- Check every 12 hours (default is 4) -->
 		<cveValidForHours>12</cveValidForHours>
 		<!-- Min cvss score to fail on. Range 0-10 : LOW: 0-3.9, MEDIUM: 4-6.9, HIGH: 7.0-8.9, Critical: 9.0-10.0 (Default is 11 which means it never fails) -->
-		<failBuildOnCVSS>4</failBuildOnCVSS>
+		<failBuildOnCVSS>9</failBuildOnCVSS>
 		<!-- If set, owasp uses the proxy id in maven settings to download its db. -->
 		<mavenSettingsProxyId />
+		<!-- Disable analyzers -->
+		<!-- Disable retirejs analyzer -->
+		<retireJsAnalyzerEnabled>false</retireJsAnalyzerEnabled>
+		<!-- Disable swift analyzer -->
+		<swiftPackageManagerAnalyzerEnabled>false</swiftPackageManagerAnalyzerEnabled>
+		<!-- Disbale .net analyzers -->
+		<nuspecAnalyzerEnabled>false</nuspecAnalyzerEnabled>
+		<assemblyAnalyzerEnabled>false</assemblyAnalyzerEnabled>
 
 		<!-- Versions -->
-		<bt.junit.version>5.5.0</bt.junit.version>
-		<bt.jacoco.plugin.version>0.8.4</bt.jacoco.plugin.version>
+		<bt.junit.version>5.6.1</bt.junit.version>
+		<bt.jacoco.plugin.version>0.8.5</bt.jacoco.plugin.version>
 		<bt.surefire.plugin.version>2.22.2</bt.surefire.plugin.version>
-		<bt.checkstyle.plugin.version>3.0.0</bt.checkstyle.plugin.version>
-		<bt.checkstyle.version>8.22</bt.checkstyle.version>
-		<bt.pmd.plugin.version>3.12.0</bt.pmd.plugin.version>
-		<bt.pmd.version>6.16.0</bt.pmd.version>
-		<bt.spotbugs.plugin.version>3.1.11</bt.spotbugs.plugin.version>
-		<bt.fb-contrib.plugin.version>7.4.5</bt.fb-contrib.plugin.version>
-		<bt.spotbugs.version>3.1.12</bt.spotbugs.version>
-		<bt.findsecbugs.plugin.version>1.9.0</bt.findsecbugs.plugin.version>
-		<bt.owasp.plugin.version>5.0.0-M3</bt.owasp.plugin.version>
+		<bt.checkstyle.plugin.version>3.1.1</bt.checkstyle.plugin.version>
+		<bt.checkstyle.version>8.30</bt.checkstyle.version>
+		<bt.pmd.plugin.version>3.13.0</bt.pmd.plugin.version>
+		<bt.pmd.version>6.22.0</bt.pmd.version>
+		<bt.spotbugs.plugin.version>4.0.0</bt.spotbugs.plugin.version>
+		<bt.fb-contrib.plugin.version>7.4.7</bt.fb-contrib.plugin.version>
+		<bt.spotbugs.version>4.0.1</bt.spotbugs.version>
+		<bt.findsecbugs.plugin.version>1.10.1</bt.findsecbugs.plugin.version>
+		<bt.owasp.plugin.version>5.2.4</bt.owasp.plugin.version>
 
 	</properties>
 
@@ -72,6 +85,31 @@
 		Note that projects inheriting from this POM also inherit the release
 		configuration from bordertech-parent.
 	</description>
+
+	<profiles>
+		<!-- Quick build profile with testing and QA turned off -->
+		<profile>
+			<id>quick-build</id>
+			<properties>
+				<!-- Skip tests -->
+				<skipTests>true</skipTests>
+				<jacoco.skip>true</jacoco.skip>
+				<!-- Skip QA -->
+				<bt.qa.skip>true</bt.qa.skip>
+				<!-- Skip each plugin individually to handle projects that have set bt.qa.skip to false -->
+				<checkstyle.skip>true</checkstyle.skip>
+				<pmd.skip>true</pmd.skip>
+				<cpd.skip>true</cpd.skip>
+				<spotbugs.skip>true</spotbugs.skip>
+				<!-- Skip OWASP -->
+				<dependency-check.skip>true</dependency-check.skip>
+				<!-- Skip enforcer -->
+				<enforcer.skip>true</enforcer.skip>
+				<!-- Skip javadoc -->
+				<maven.javadoc.skip>true</maven.javadoc.skip>
+			</properties>
+		</profile>
+	</profiles>
 
 	<dependencyManagement>
 		<dependencies>
@@ -130,11 +168,6 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-checkstyle-plugin</artifactId>
 				<version>${bt.checkstyle.plugin.version}</version>
-				<configuration>
-					<failsOnError>true</failsOnError>
-					<linkXRef>false</linkXRef>
-					<consoleOutput>true</consoleOutput>
-				</configuration>
 				<dependencies>
 					<!-- Latest checkstyle version -->
 					<dependency>
@@ -169,9 +202,6 @@
 					<rulesets>
 						<ruleset>${bt.pmd.rules.file}</ruleset>
 					</rulesets>
-					<printFailingErrors>true</printFailingErrors>
-					<linkXRef>false</linkXRef>
-					<verbose>true</verbose>
 				</configuration>
 				<dependencies>
 					<!-- Latest pmd version -->
@@ -215,9 +245,6 @@
 					<execution>
 						<id>checkCpd</id>
 						<phase>verify</phase>
-						<configuration>
-							<failOnViolation>false</failOnViolation>
-						</configuration>
 						<goals>
 							<goal>cpd-check</goal>
 						</goals>
@@ -276,12 +303,6 @@
 				<groupId>org.owasp</groupId>
 				<artifactId>dependency-check-maven</artifactId>
 				<version>${bt.owasp.plugin.version}</version>
-				<configuration>
-					<retireJsAnalyzerEnabled>false</retireJsAnalyzerEnabled>
-					<nuspecAnalyzerEnabled>false</nuspecAnalyzerEnabled>
-					<swiftPackageManagerAnalyzerEnabled>false</swiftPackageManagerAnalyzerEnabled>
-					<assemblyAnalyzerEnabled>false</assemblyAnalyzerEnabled>
-				</configuration>
 				<executions>
 					<execution>
 						<id>checkDependencies</id>
