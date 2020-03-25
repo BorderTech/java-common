@@ -1,6 +1,8 @@
 # Change log
 
 ## Release in-progress
+
+## 1.0.16
 * Add quick-build profile that skips tests and QA checks #63
 * Change OWASP checker to fail on Critical (Level 9-10) issues and check for updates every 12 hours #60
 * Update dependencies and plugin versions.
