@@ -55,6 +55,7 @@
 		<failBuildOnCVSS>9</failBuildOnCVSS>
 		<!-- If set, owasp uses the proxy id in maven settings to download its db. -->
 		<mavenSettingsProxyId />
+		<!-- Disable analyzers -->
 		<!-- Disable retirejs analyzer -->
 		<retireJsAnalyzerEnabled>false</retireJsAnalyzerEnabled>
 		<!-- Disable swift analyzer -->
@@ -64,7 +65,7 @@
 		<assemblyAnalyzerEnabled>false</assemblyAnalyzerEnabled>
 
 		<!-- Versions -->
-		<bt.junit.version>5.6.0</bt.junit.version>
+		<bt.junit.version>5.6.1</bt.junit.version>
 		<bt.jacoco.plugin.version>0.8.5</bt.jacoco.plugin.version>
 		<bt.surefire.plugin.version>2.22.2</bt.surefire.plugin.version>
 		<bt.checkstyle.plugin.version>3.1.1</bt.checkstyle.plugin.version>
