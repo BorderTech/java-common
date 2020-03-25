@@ -11,6 +11,7 @@
 	</rule>
 	<rule ref="category/java/design.xml">
 		<exclude name="LawOfDemeter"/>
+		<exclude name="LoosePackageCoupling"/>
 	</rule>
 	<rule ref="category/java/documentation.xml">
 		<exclude name="CommentSize"/>
