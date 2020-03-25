@@ -1,10 +1,11 @@
 # Change log
 
 ## Release in-progress
-* Add quick-build profile.
+* Add quick-build profile that skips tests and QA checks #63
+* Change OWASP checker to fail on Critical (Level 9-10) issues and check for updates every 12 hours #60
 * Update dependencies and plugin versions.
-* Update bt-checkstyle.xml to include latest checks from sun_check.xml.
-* Plugin configuration is only done via user properties which is easier for projects to override.
+* Update bt-checkstyle.xml to include latest checks from checkstyle's sun_check.xml.
+* Plugin configuration is only done via user properties which is easier for projects to override #59
 
 ## 1.0.15
 * Refactor README #52
