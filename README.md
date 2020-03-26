@@ -37,7 +37,7 @@ Projects should generally use qa-parent as their parent POM:
   <parent>
     <groupId>com.github.bordertech.common</groupId>
     <artifactId>qa-parent</artifactId>
-    <version>1.0.15</version>
+    <version>1.0.16</version>
   </parent>
   ....
 </project>
@@ -99,6 +99,8 @@ The qa-parent also runs:
   - the [Surefire plugin](https://maven.apache.org/surefire/maven-surefire-plugin) for running unit tests
 
 The qa-parent inherits all of the release functionality from bordertech-parent.
+
+The qa-parent provides a profile `quick-build` that for convenience skips all tests and QA. This is very useful when developing a project and a quick build of the project is required.
 
 ### build-tools
 
