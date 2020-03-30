@@ -100,6 +100,8 @@ The qa-parent also runs:
 
 The qa-parent inherits all of the release functionality from bordertech-parent.
 
+#### quick-build profile
+
 The qa-parent provides a profile `quick-build` that for convenience skips all tests and QA. This is very useful when developing a project and a quick build of the project is required.
 
 ### build-tools
@@ -125,15 +127,15 @@ Projects must ensure the necessary POM sections are overriden - these are marked
 
 Refer to qa-parent's [pom.xml](https://github.com/BorderTech/java-common/blob/master/qa-parent/pom.xml) for all project properties.
 
-Refer to the plugins used by qa-parent for all override details:
-  - [Checkstyle plugin](https://maven.apache.org/plugins/maven-checkstyle-plugin)
-  - [PMD plugin](https://maven.apache.org/plugins/maven-pmd-plugin)
-  - [Spotbugs plugin](https://spotbugs.github.io/spotbugs-maven-plugin)
-  - [OWASP plugin](https://jeremylong.github.io/DependencyCheck/dependency-check-maven)
-  - [Enforcer plugin](https://maven.apache.org/enforcer/maven-enforcer-plugin)
-  - [Version checker plugin](https://www.mojohaus.org/versions-maven-plugin)
-  - [JaCoCo plugin](https://www.eclemma.org/jacoco/trunk/doc/maven.html)
-  - [Surefire plugin](https://maven.apache.org/surefire/maven-surefire-plugin)
+Refer to the plugin sections below for basic override details:
+  - [Checkstyle plugin](#checkstyle)
+  - [PMD plugin](#pmd-and-cpd)
+  - [Spotbugs plugin](#spotbugs)
+  - [OWASP plugin](#owasp)
+  - [Enforcer plugin](#enforcer-plugin)
+  - [Version checker plugin](#version-checker)
+  - [JaCoCo plugin](#jacoco)
+  - [Surefire plugin](#surefire)
 
 #### Enable Static Analysis
 
@@ -350,6 +352,33 @@ Refer to [enforcer plugin](https://maven.apache.org/enforcer/maven-enforcer-plug
 ``` xml
 <property>
   <enforcer.fail>false</enforcer.fail>
+</property>
+```
+#### Version checker
+
+Refer to [Version checker plugin](https://www.mojohaus.org/versions-maven-plugin/) for all override details.
+
+#### JaCoCo
+
+Refer to [JaCoCo plugin](https://www.eclemma.org/jacoco/trunk/doc/maven.html) for all override details.
+
+##### Skip JaCoCo
+
+``` xml
+<property>
+  <jacoco.skip>true</jacoco.skip>
+</property>
+```
+
+#### Surefire
+
+Refer to [Surefire plugin](https://maven.apache.org/surefire/maven-surefire-plugin) for all override details.
+
+##### Skip Surefire
+
+``` xml
+<property>
+  <skipTests>true</skipTests>
 </property>
 ```
 
