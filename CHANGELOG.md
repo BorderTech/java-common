@@ -1,7 +1,9 @@
 # Change log
 
 ## Release in-progress
-* Update plugin versions
+
+## 1.0.17
+* Update plugins to latest version
 
 ## 1.0.16
 * Add quick-build profile that skips tests and QA checks #63
