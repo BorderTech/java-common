@@ -1,6 +1,7 @@
 # Change log
 
 ## Release in-progress
+* Switch from travis-ci to GitHub Actions #75
 
 ## 1.0.17
 * Update plugins to latest version
