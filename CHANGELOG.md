@@ -1,6 +1,7 @@
 # Change log
 
 ## Release in-progress
+* Move versions-maven-plugin into a profile display-versions to allow projects to opt in or out #74
 * Switch from travis-ci to GitHub Actions #75
 
 ## 1.0.17
