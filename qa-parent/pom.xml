@@ -21,6 +21,7 @@
 		<pmd.skip>${bt.qa.skip}</pmd.skip>
 		<cpd.skip>${bt.qa.skip}</cpd.skip>
 		<spotbugs.skip>${bt.qa.skip}</spotbugs.skip>
+		<dependency-check.skip>${bt.qa.skip}</dependency-check.skip>
 		<bt.convergence.check.skip>${bt.qa.skip}</bt.convergence.check.skip>
 
 		<!--
