@@ -94,7 +94,6 @@ The qa-parent runs quality assurance checks on your java code using tools such a
 The qa-parent also runs:
   - the [OWASP plugin](https://jeremylong.github.io/DependencyCheck/dependency-check-maven/index.html) to check security vulnerabilities
   - the [Enforcer plugin](https://maven.apache.org/enforcer/maven-enforcer-plugin/) to check dependency convergence
-  - the [Version checker plugin](https://www.mojohaus.org/versions-maven-plugin/) to report project dependencies that have new versions
   - the [JaCoCo plugin](https://www.eclemma.org/jacoco/trunk/doc/maven.html) for code coverage reports
   - the [Surefire plugin](https://maven.apache.org/surefire/maven-surefire-plugin) for running unit tests
 
@@ -103,6 +102,10 @@ The qa-parent inherits all of the release functionality from bordertech-parent.
 #### quick-build profile
 
 The qa-parent provides a profile `quick-build` that for convenience skips all tests and QA. This is very useful when developing a project and a quick build of the project is required.
+
+#### display-versions profile
+
+The qa-parent provides a profile `display-versions` that uses the [Version checker plugin](https://www.mojohaus.org/versions-maven-plugin/) to report project dependencies that have new versions.
 
 ### build-tools
 
