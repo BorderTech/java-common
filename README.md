@@ -90,10 +90,10 @@ The qa-parent runs quality assurance checks on your java code using tools such a
   - the [Checkstyle plugin](https://maven.apache.org/plugins/maven-checkstyle-plugin) to check the code style used by the developers
   - the [PMD plugin](https://maven.apache.org/plugins/maven-pmd-plugin) for source code analysis
   - the [Spotbugs plugin](https://spotbugs.github.io/spotbugs-maven-plugin) that looks for bugs in Java programs using bug patterns
-
-The qa-parent also runs:
   - the [OWASP plugin](https://jeremylong.github.io/DependencyCheck/dependency-check-maven/index.html) to check security vulnerabilities
   - the [Enforcer plugin](https://maven.apache.org/enforcer/maven-enforcer-plugin/) to check dependency convergence
+
+The qa-parent also runs:
   - the [JaCoCo plugin](https://www.eclemma.org/jacoco/trunk/doc/maven.html) for code coverage reports
   - the [Surefire plugin](https://maven.apache.org/surefire/maven-surefire-plugin) for running unit tests
 
@@ -106,6 +106,8 @@ The qa-parent provides a profile `quick-build` that for convenience skips all te
 #### display-versions profile
 
 The qa-parent provides a profile `display-versions` that uses the [Version checker plugin](https://www.mojohaus.org/versions-maven-plugin/) to report project dependencies that have new versions.
+
+Refer to [Version checker plugin](https://www.mojohaus.org/versions-maven-plugin/) for all override details.
 
 ### build-tools
 
@@ -136,13 +138,12 @@ Refer to the plugin sections below for basic override details:
   - [Spotbugs plugin](#spotbugs)
   - [OWASP plugin](#owasp)
   - [Enforcer plugin](#enforcer-plugin)
-  - [Version checker plugin](#version-checker)
   - [JaCoCo plugin](#jacoco)
   - [Surefire plugin](#surefire)
 
-#### Enable Static Analysis
+#### Enable Quality Checks
 
-By default qa checks (i.e. Checkstyle, PMD and Spotbugs) do not run, you must enable them on a per-module basis or the project parent pom:
+By default qa checks (i.e. Checkstyle, PMD, Spotbugs, OWASP, Convergence Check) do not run, you must enable them on a per-module basis or the project parent pom:
 
 ``` xml
 <property>
@@ -342,11 +343,11 @@ Updating the OWASP vulnerability database can also be blocked by the PROXY block
 
 Refer to [enforcer plugin](https://maven.apache.org/enforcer/maven-enforcer-plugin) for all override details.
 
-##### Skip enforcer
+##### Skip enforcer convergence check
 
 ``` xml
 <property>
-  <enforcer.skip>true</enforcer.skip>
+  <bt.convergence.check.skip>true</bt.convergence.check.skip>
 </property>
 ```
 
@@ -357,9 +358,6 @@ Refer to [enforcer plugin](https://maven.apache.org/enforcer/maven-enforcer-plug
   <enforcer.fail>false</enforcer.fail>
 </property>
 ```
-#### Version checker
-
-Refer to [Version checker plugin](https://www.mojohaus.org/versions-maven-plugin/) for all override details.
 
 #### JaCoCo
 
