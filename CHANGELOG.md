@@ -1,6 +1,7 @@
 # Change log
 
 ## Release in-progress
+* Move enforcer convergence check into verify phase. Can be skipped using bt.convergence.check.skip=true property. #78
 * Move versions-maven-plugin into a profile display-versions to allow projects to opt in or out #74
 * Switch from travis-ci to GitHub Actions #75
 
