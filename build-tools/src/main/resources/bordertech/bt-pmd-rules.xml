@@ -33,6 +33,9 @@
 	<rule ref="category/java/errorprone.xml/ReturnEmptyArrayRatherThanNull">
 		<priority>3</priority>
 	</rule>
+	<rule ref="category/java/errorprone.xml/ReturnEmptyCollectionRatherThanNull">
+		<priority>3</priority>
+	</rule>
 	<rule ref="category/java/errorprone.xml/SingletonClassReturningNewInstance">
 		<priority>3</priority>
 	</rule>
