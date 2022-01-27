@@ -151,6 +151,32 @@ By default qa checks (i.e. Checkstyle, PMD, Spotbugs, OWASP, Convergence Check) 
 </property>
 ```
 
+#### Generated Sources
+
+By default, qa-parent configures the code analysis plugins to ignore generated source code and only analyse the project's main source directory.
+
+The following properties are set in qa-parent for Checkstyle and PMD:
+
+``` xml
+<property>
+  <bt.checkstyle.src>${project.build.sourceDirectory}</bt.checkstyle.src>
+  <bt.pmd.src>${project.build.sourceDirectory}</bt.pmd.src>
+</property>
+```
+
+Spotbugs is different from Checkstyle and PMD as it requires an exclude filter to be configured to ignore generated files.
+
+The following properties are set in qa-parent for Spotbugs:
+
+``` xml
+<property>
+  <!-- Exclude files in the generated-sources directory -->
+  <spotbugs.excludeFilterFile>bordertech/bt-spotbugs-exclude-generated-files.xml</spotbugs.excludeFilterFile>
+  <!-- Need to add sources for source tag in exclude and include filters to work -->
+ <spotbugs.addSourceDirs>true</spotbugs.addSourceDirs>
+</property>
+```
+
 #### Checkstyle
 
 Refer to [Checkstyle plugin](https://maven.apache.org/plugins/maven-checkstyle-plugin) for all override details.
@@ -288,6 +314,16 @@ Example filter file:-
   </Match>
 </FindBugsFilter>
 ```
+
+When adding a custom exclude filter and the module still needs to ignore generated source, then merge the excludes used in the default filter [bt-spotbugs-exclude-generated-files](https://github.com/BorderTech/java-common/blob/master/build-tools/src/main/resources/bordertech/bt-spotbugs-exclude-generated-files.xml):
+
+```
+<FindBugsFilter>
+  <!-- Exclude files in the generated-sources directory. For the source tag to work with the full path of the source files the addSourceDirs property on the plugin must be set to true. -->
+  <Match>
+    <Source name="~.*generated-sources.*" />
+  </Match>
+</FindBugsFilter>```
 
 #### OWASP
 
