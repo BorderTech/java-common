@@ -1,6 +1,8 @@
 # Change log
 
 ## Release in-progress
+
+## 1.0.18
 * Default QA plugins to ignore generated code #61
 * Update OWASP plugin skip property default to use bt.qa.skip #79
 * Move enforcer convergence check into verify phase. Can be skipped using bt.convergence.check.skip=true property. #78

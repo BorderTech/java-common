@@ -37,7 +37,7 @@ Projects should generally use qa-parent as their parent POM:
   <parent>
     <groupId>com.github.bordertech.common</groupId>
     <artifactId>qa-parent</artifactId>
-    <version>1.0.17</version>
+    <version>1.0.18</version>
   </parent>
   ....
 </project>
@@ -317,13 +317,14 @@ Example filter file:-
 
 When adding a custom exclude filter and the module still needs to ignore generated source, then merge the excludes used in the default filter [bt-spotbugs-exclude-generated-files](https://github.com/BorderTech/java-common/blob/master/build-tools/src/main/resources/bordertech/bt-spotbugs-exclude-generated-files.xml):
 
-```
+``` xml
 <FindBugsFilter>
   <!-- Exclude files in the generated-sources directory. For the source tag to work with the full path of the source files the addSourceDirs property on the plugin must be set to true. -->
   <Match>
     <Source name="~.*generated-sources.*" />
   </Match>
-</FindBugsFilter>```
+</FindBugsFilter>
+```
 
 #### OWASP
 
