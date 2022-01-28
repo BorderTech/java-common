@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FindBugsFilter>
+	<!-- Exclude files in the generated-sources directory. For the source tag to work with the full path of the source files the addSourceDirs property on the plugin must be set to true. -->
+	<Match>
+		<Source name="~.*generated-sources.*" />
+	</Match>
+</FindBugsFilter>

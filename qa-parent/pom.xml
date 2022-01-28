@@ -31,6 +31,8 @@
 		<!-- Checkstyle -->
 		<!-- Config file -->
 		<checkstyle.config.location>bordertech/bt-checkstyle.xml</checkstyle.config.location>
+		<!-- Override default to only use main src (ignore generated) -->
+		<bt.checkstyle.src>${project.build.sourceDirectory}</bt.checkstyle.src>
 		<!-- PMD -->
 		<pmd.printFailingErrors>true</pmd.printFailingErrors>
 		<!-- Priority: 1 (High) - 5 (Low) -->
@@ -39,6 +41,8 @@
 		<pmd.verbose>true</pmd.verbose>
 		<!-- Rules file -->
 		<bt.pmd.rules.file>bordertech/bt-pmd-rules.xml</bt.pmd.rules.file>
+		<!-- Override default to only use main src (ignore generated) -->
+		<bt.pmd.src>${project.build.sourceDirectory}</bt.pmd.src>
 		<!-- CPD (Default to report only) -->
 		<cpd.failOnViolation>false</cpd.failOnViolation>
 
@@ -49,6 +53,11 @@
 		<spotbugs.threshold>Medium</spotbugs.threshold>
 		<!-- Rank: Scariest (1-4), Scary (5-9), Troubling (10-14), Of concern (15-20) -->
 		<spotbugs.maxRank>14</spotbugs.maxRank>
+		<!-- To ignore generated files Spotbugs is different from checkstyle and PMD as it requires an exclude filter to be configured. -->
+		<!-- Exclude files in the generated-sources directory -->
+		<spotbugs.excludeFilterFile>bordertech/bt-spotbugs-exclude-generated-files.xml</spotbugs.excludeFilterFile>
+		<!-- Need to add sources for source tag in exclude and include filters to work -->
+		<spotbugs.addSourceDirs>true</spotbugs.addSourceDirs>
 
 		<!-- OWASP (Default to Critical) -->
 		<!-- Check every 12 hours (default is 4) -->
@@ -199,6 +208,11 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-checkstyle-plugin</artifactId>
 				<version>${bt.checkstyle.plugin.version}</version>
+				<configuration>
+					<sourceDirectories>
+						<sourceDirectory>${bt.checkstyle.src}</sourceDirectory>
+					</sourceDirectories>
+				</configuration>
 				<dependencies>
 					<!-- Latest checkstyle version -->
 					<dependency>
@@ -233,6 +247,7 @@
 					<rulesets>
 						<ruleset>${bt.pmd.rules.file}</ruleset>
 					</rulesets>
+					<compileSourceRoots>${bt.pmd.src}</compileSourceRoots>
 				</configuration>
 				<dependencies>
 					<!-- Latest pmd version -->
