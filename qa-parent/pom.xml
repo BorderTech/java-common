@@ -24,6 +24,18 @@
 		<dependency-check.skip>${bt.qa.skip}</dependency-check.skip>
 		<bt.convergence.check.skip>${bt.qa.skip}</bt.convergence.check.skip>
 
+		<!-- FAIL QA -->
+		<bt.qa.fail>true</bt.qa.fail>
+		<checkstyle.failOnViolation>${bt.qa.fail}</checkstyle.failOnViolation>
+		<pmd.failOnViolation>${bt.qa.fail}</pmd.failOnViolation>
+		<spotbugs.failOnError>${bt.qa.fail}</spotbugs.failOnError>
+		<!-- OWASP -->
+		<failOnError>${bt.qa.fail}</failOnError>
+		<!-- Convergence Check -->
+		<bt.convergence.check.fail>${bt.qa.fail}</bt.convergence.check.fail>
+		<!-- CPD (Default to report only) -->
+		<cpd.failOnViolation>false</cpd.failOnViolation>
+
 		<!--
 		These plugin settings are set as properties instead of being included in the default configuration to make it easier for projects to override.
 		Property values are ignored if a default value is set in a configuation.
@@ -43,8 +55,6 @@
 		<bt.pmd.rules.file>bordertech/bt-pmd-rules.xml</bt.pmd.rules.file>
 		<!-- Override default to only use main src (ignore generated) -->
 		<bt.pmd.src>${project.build.sourceDirectory}</bt.pmd.src>
-		<!-- CPD (Default to report only) -->
-		<cpd.failOnViolation>false</cpd.failOnViolation>
 
 		<!-- Spotbugs -->
 		<!-- Effort -->
@@ -375,8 +385,9 @@
 							<rules>
 								<dependencyConvergence />
 							</rules>
-							<!-- Use a different skip property to not override and skip the enforcer plugin in bordertech_parent. -->
+							<!-- Use a different skip and fail property to not override the enforcer plugin in bordertech_parent. -->
 							<skip>${bt.convergence.check.skip}</skip>
+							<fail>${bt.convergence.check.fail}</fail>
 						</configuration>
 					</execution>
 				</executions>
