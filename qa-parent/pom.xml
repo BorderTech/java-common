@@ -90,9 +90,9 @@
 		<bt.jacoco.plugin.version>0.8.7</bt.jacoco.plugin.version>
 		<bt.surefire.plugin.version>2.22.2</bt.surefire.plugin.version>
 		<bt.checkstyle.plugin.version>3.1.2</bt.checkstyle.plugin.version>
-		<bt.checkstyle.version>9.2.1</bt.checkstyle.version>
+		<bt.checkstyle.version>9.3</bt.checkstyle.version>
 		<bt.pmd.plugin.version>3.15.0</bt.pmd.plugin.version>
-		<bt.pmd.version>6.41.0</bt.pmd.version>
+		<bt.pmd.version>6.42.0</bt.pmd.version>
 		<bt.spotbugs.plugin.version>4.5.3.0</bt.spotbugs.plugin.version>
 		<bt.sb-contrib.plugin.version>7.4.7</bt.sb-contrib.plugin.version>
 		<bt.spotbugs.version>4.5.3</bt.spotbugs.version>

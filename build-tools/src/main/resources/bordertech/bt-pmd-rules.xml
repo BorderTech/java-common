@@ -27,6 +27,9 @@
 	<rule ref="category/java/codestyle.xml/ClassNamingConventions" >
 		<priority>3</priority>
 	</rule>
+	<rule ref="category/java/codestyle.xml/FinalParameterInAbstractMethod" >
+		<priority>3</priority>
+	</rule>
 	<rule ref="category/java/errorprone.xml/ConstructorCallsOverridableMethod">
 		<priority>3</priority>
 	</rule>
