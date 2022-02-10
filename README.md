@@ -51,6 +51,14 @@ By default qa checks do not run, you must enable them on a per-module basis or i
 </property>
 ```
 
+The qa-parent default is to fail the build if QA violations are found. This can be overridden by setting the following property:
+
+``` xml
+<property>
+  <bt.qa.fail>false</bt.qa.fail>
+</property>
+```
+
 Use the following to run the qa-parent verification:
 
 ``` java
@@ -148,6 +156,16 @@ By default qa checks (i.e. Checkstyle, PMD, Spotbugs, OWASP, Convergence Check) 
 ``` xml
 <property>
   <bt.qa.skip>false</bt.qa.skip>
+</property>
+```
+
+#### Failing Build with QA Violations
+
+The qa-parent default is to fail the build if QA violations are found. This can be overridden by setting the following property:
+
+``` xml
+<property>
+  <bt.qa.fail>false</bt.qa.fail>
 </property>
 ```
 
@@ -392,7 +410,7 @@ Refer to [enforcer plugin](https://maven.apache.org/enforcer/maven-enforcer-plug
 
 ``` xml
 <property>
-  <enforcer.fail>false</enforcer.fail>
+  <bt.convergence.check.fail>false</bt.convergence.check.fail>
 </property>
 ```
 

@@ -24,6 +24,18 @@
 		<dependency-check.skip>${bt.qa.skip}</dependency-check.skip>
 		<bt.convergence.check.skip>${bt.qa.skip}</bt.convergence.check.skip>
 
+		<!-- FAIL QA -->
+		<bt.qa.fail>true</bt.qa.fail>
+		<checkstyle.failOnViolation>${bt.qa.fail}</checkstyle.failOnViolation>
+		<pmd.failOnViolation>${bt.qa.fail}</pmd.failOnViolation>
+		<spotbugs.failOnError>${bt.qa.fail}</spotbugs.failOnError>
+		<!-- OWASP -->
+		<failOnError>${bt.qa.fail}</failOnError>
+		<!-- Convergence Check -->
+		<bt.convergence.check.fail>${bt.qa.fail}</bt.convergence.check.fail>
+		<!-- CPD (Default to report only) -->
+		<cpd.failOnViolation>false</cpd.failOnViolation>
+
 		<!--
 		These plugin settings are set as properties instead of being included in the default configuration to make it easier for projects to override.
 		Property values are ignored if a default value is set in a configuation.
@@ -43,8 +55,6 @@
 		<bt.pmd.rules.file>bordertech/bt-pmd-rules.xml</bt.pmd.rules.file>
 		<!-- Override default to only use main src (ignore generated) -->
 		<bt.pmd.src>${project.build.sourceDirectory}</bt.pmd.src>
-		<!-- CPD (Default to report only) -->
-		<cpd.failOnViolation>false</cpd.failOnViolation>
 
 		<!-- Spotbugs -->
 		<!-- Effort -->
@@ -80,9 +90,9 @@
 		<bt.jacoco.plugin.version>0.8.7</bt.jacoco.plugin.version>
 		<bt.surefire.plugin.version>2.22.2</bt.surefire.plugin.version>
 		<bt.checkstyle.plugin.version>3.1.2</bt.checkstyle.plugin.version>
-		<bt.checkstyle.version>9.2.1</bt.checkstyle.version>
+		<bt.checkstyle.version>9.3</bt.checkstyle.version>
 		<bt.pmd.plugin.version>3.15.0</bt.pmd.plugin.version>
-		<bt.pmd.version>6.41.0</bt.pmd.version>
+		<bt.pmd.version>6.42.0</bt.pmd.version>
 		<bt.spotbugs.plugin.version>4.5.3.0</bt.spotbugs.plugin.version>
 		<bt.sb-contrib.plugin.version>7.4.7</bt.sb-contrib.plugin.version>
 		<bt.spotbugs.version>4.5.3</bt.spotbugs.version>
@@ -375,8 +385,9 @@
 							<rules>
 								<dependencyConvergence />
 							</rules>
-							<!-- Use a different skip property to not override and skip the enforcer plugin in bordertech_parent. -->
+							<!-- Use a different skip and fail property to not override the enforcer plugin in bordertech_parent. -->
 							<skip>${bt.convergence.check.skip}</skip>
+							<fail>${bt.convergence.check.fail}</fail>
 						</configuration>
 					</execution>
 				</executions>

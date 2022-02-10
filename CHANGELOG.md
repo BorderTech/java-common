@@ -1,6 +1,9 @@
 # Change log
 
 ## Release in-progress
+* Added bt.qa.fail property as a convenience property to allow projects to fail builds or only report QA violations. #84
+* Added bt.convergence.check.fail property to allow the convergence check to be set to fail without overriding the enforcer plugin in bordertech_parent. #84
+* Update PMD and Checkstyle to latest versions
 
 ## 1.0.18
 * Default QA plugins to ignore generated code #61
