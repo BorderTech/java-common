@@ -8,6 +8,7 @@
   * Changed tab indention check to no longer allow any violations by removing the maximum property which was set to 10
   * Changed JavadocPackage check to warning
   * Changed EmptyForIteratorPad check to warning as IntelliJ code formatting does not currently allow for this
+* Added a new checkstyle config file bt-checkstyle-format-only.xml for projects that only want to check basic code formatting.
 
 ## 1.0.19
 * Added bt.qa.fail property as a convenience property to allow projects to fail builds or only report QA violations. #84
