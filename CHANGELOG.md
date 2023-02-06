@@ -2,6 +2,7 @@
 
 ## Release in-progress
 * Update plugin dependencies in bordertech_parent
+* Update plugin dependencies in qa_parent
 
 ## 1.0.19
 * Added bt.qa.fail property as a convenience property to allow projects to fail builds or only report QA violations. #84
