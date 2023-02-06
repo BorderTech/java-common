@@ -31,9 +31,12 @@ Checkstyle configuration that checks the sun coding conventions from:
 	-->
 	<property name="severity" value="error"/>
 
+	<!-- BorderTech: Override for how many spaces a tab takes from 8 to 4 when Checkstyle prints messages. -->
+	<property name="tabWidth" value="4"/>
+
 	<!-- BorderTech: Filter out Checkstyle warnings that have been suppressed with the @SuppressWarnings annotation. -->
 	<!-- SuppressWarningsFilter and SuppressWarningsHolder have to be used together. -->
-	<module name="SuppressWarningsFilter" />
+	<module name="SuppressWarningsFilter"/>
 
 	<!-- BorderTech: only check java files
 		<property name="fileExtensions" value="java, properties, xml"/>
@@ -49,13 +52,16 @@ Checkstyle configuration that checks the sun coding conventions from:
 	<!-- https://checkstyle.org/config_filters.html#SuppressionFilter -->
 	<module name="SuppressionFilter">
 		<property name="file" value="${org.checkstyle.sun.suppressionfilter.config}"
-				  default="checkstyle-suppressions.xml" />
+				  default="checkstyle-suppressions.xml"/>
 		<property name="optional" value="true"/>
 	</module>
 
 	<!-- Checks that a package-info.java file exists for each package.     -->
 	<!-- See https://checkstyle.org/config_javadoc.html#JavadocPackage -->
-	<module name="JavadocPackage"/>
+	<module name="JavadocPackage">
+		<!-- BorderTech: Override to warning -->
+		<property name="severity" value="warning"/>
+	</module>
 
 	<!-- Checks whether files end with a new line.                        -->
 	<!-- See https://checkstyle.org/config_misc.html#NewlineAtEndOfFile -->
@@ -69,14 +75,14 @@ Checkstyle configuration that checks the sun coding conventions from:
 	<!-- See https://checkstyle.org/config_sizes.html -->
 	<module name="FileLength">
 		<!-- BorderTech: Override to warning -->
-		<property name="severity" value="warning" />
+		<property name="severity" value="warning"/>
 	</module>
 	<module name="LineLength">
 		<property name="fileExtensions" value="java"/>
 		<!-- BorderTech: Override from 80 to 150 -->
-		<property name="max" value="150" />
+		<property name="max" value="150"/>
 		<!-- BorderTech: Override to warning -->
-		<property name="severity" value="warning" />
+		<property name="severity" value="warning"/>
 	</module>
 
 	<!-- See https://checkstyle.org/config_whitespace.html -->
@@ -88,7 +94,6 @@ Checkstyle configuration that checks the sun coding conventions from:
 	<module name="RegexpSingleline">
 		<property name="format" value="^(\t*( +\t*(?! \*|\S))|(  ))"/>
 		<property name="message" value="Indentation should be tabs."/>
-		<property name="maximum" value="10"/>
 	</module>
 
 	<!-- Miscellaneous other checks.                   -->
@@ -99,7 +104,7 @@ Checkstyle configuration that checks the sun coding conventions from:
 		<property name="maximum" value="0"/>
 		<property name="message" value="Line has trailing spaces."/>
 		<!-- BorderTech: Override to warning -->
-		<property name="severity" value="warning" />
+		<property name="severity" value="warning"/>
 	</module>
 
 	<!-- Checks for Headers                                -->
@@ -111,18 +116,15 @@ Checkstyle configuration that checks the sun coding conventions from:
 
 	<module name="TreeWalker">
 
-		<!-- BorderTech: Override for how many spaces a tab takes from 8 to 4 -->
-		<property name="tabWidth" value="4"/>
-
 		<!-- BorderTech: Make the @SuppressWarnings annotations available to Checkstyle -->
 		<!-- SuppressWarningsFilter and SuppressWarningsHolder have to be used together. -->
-		<module name="SuppressWarningsHolder" />
+		<module name="SuppressWarningsHolder"/>
 
 		<!-- Checks for Javadoc comments.                     -->
 		<!-- See https://checkstyle.org/config_javadoc.html -->
 		<module name="InvalidJavadocPosition">
 			<!-- BorderTech: Override to warning -->
-			<property name="severity" value="warning" />
+			<property name="severity" value="warning"/>
 		</module>
 
 		<module name="JavadocMethod">
@@ -156,23 +158,26 @@ Checkstyle configuration that checks the sun coding conventions from:
 		<module name="RedundantImport"/>
 		<module name="UnusedImports">
 			<!-- BorderTech: Check javadoc as well -->
-			<property name="processJavadoc" value="true" />
+			<property name="processJavadoc" value="true"/>
 		</module>
 
 		<!-- Checks for Size Violations.                    -->
 		<!-- See https://checkstyle.org/config_sizes.html -->
 		<module name="MethodLength">
 			<!-- BorderTech: Override to warning -->
-			<property name="severity" value="warning" />
+			<property name="severity" value="warning"/>
 		</module>
 		<module name="ParameterNumber">
 			<!-- BorderTech: Override to warning -->
-			<property name="severity" value="warning" />
+			<property name="severity" value="warning"/>
 		</module>
 
 		<!-- Checks for whitespace                               -->
 		<!-- See https://checkstyle.org/config_whitespace.html -->
-		<module name="EmptyForIteratorPad"/>
+		<module name="EmptyForIteratorPad">
+			<!-- BorderTech: Override to warning as IntelliJ does not currently allow for this-->
+			<property name="severity" value="warning"/>
+		</module>
 		<module name="GenericWhitespace"/>
 		<module name="MethodParamPad"/>
 		<module name="NoWhitespaceAfter">
@@ -191,7 +196,7 @@ Checkstyle configuration that checks the sun coding conventions from:
 		<module name="ModifierOrder"/>
 		<module name="RedundantModifier">
 			<!-- BorderTech: Override to warning -->
-			<property name="severity" value="warning" />
+			<property name="severity" value="warning"/>
 		</module>
 
 		<!-- Checks for blocks. You know, those {}'s         -->
@@ -202,7 +207,7 @@ Checkstyle configuration that checks the sun coding conventions from:
 		</module>
 		<module name="EmptyBlock">
 			<!-- BorderTech: Override to warning -->
-			<property name="severity" value="warning" />
+			<property name="severity" value="warning"/>
 		</module>
 		<module name="LeftCurly"/>
 		<module name="NeedBraces"/>
@@ -212,30 +217,30 @@ Checkstyle configuration that checks the sun coding conventions from:
 		<!-- See https://checkstyle.org/config_coding.html -->
 		<module name="EmptyStatement">
 			<!-- BorderTech: Override to warning -->
-			<property name="severity" value="warning" />
+			<property name="severity" value="warning"/>
 		</module>
 		<module name="EqualsHashCode"/>
 		<module name="HiddenField">
 			<!-- BorderTech: Override from false for constructor parameters -->
-			<property name="ignoreConstructorParameter" value = "true" />
+			<property name="ignoreConstructorParameter" value = "true"/>
 			<!-- BorderTech: Override from false for setter parameters -->
-			<property name="ignoreSetter" value = "true" />
+			<property name="ignoreSetter" value = "true"/>
 			<!-- BorderTech: Override to warning -->
-			<property name="severity" value="warning" />
+			<property name="severity" value="warning"/>
 		</module>
 		<module name="IllegalInstantiation"/>
 		<module name="InnerAssignment"/>
 		<module name="MagicNumber">
 			<!-- BorderTech: Override from false for hash code methods -->
-			<property name="ignoreHashCodeMethod" value = "true" />
+			<property name="ignoreHashCodeMethod" value = "true"/>
 			<!-- BorderTech: Override from false for annotation methods -->
-			<property name="ignoreAnnotation" value = "true" />
+			<property name="ignoreAnnotation" value = "true"/>
 			<!-- BorderTech: Override to warning -->
-			<property name="severity" value="warning" />
+			<property name="severity" value="warning"/>
 		</module>
 		<module name="MissingSwitchDefault">
 			<!-- BorderTech: Override to warning -->
-			<property name="severity" value="warning" />
+			<property name="severity" value="warning"/>
 		</module>
 		<module name="MultipleVariableDeclarations"/>
 		<module name="SimplifyBooleanExpression"/>
@@ -259,14 +264,14 @@ Checkstyle configuration that checks the sun coding conventions from:
 		<module name="FinalParameters"/>
 		<module name="TodoComment">
 			<!-- BorderTech: Override to warning -->
-			<property name="severity" value="warning" />
+			<property name="severity" value="warning"/>
 		</module>
 		<module name="UpperEll"/>
 
 		<!-- https://checkstyle.org/config_filters.html#SuppressionXpathFilter -->
 		<module name="SuppressionXpathFilter">
 			<property name="file" value="${org.checkstyle.sun.suppressionxpathfilter.config}"
-					  default="checkstyle-xpath-suppressions.xml" />
+					  default="checkstyle-xpath-suppressions.xml"/>
 			<property name="optional" value="true"/>
 		</module>
 

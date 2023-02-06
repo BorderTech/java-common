@@ -3,6 +3,11 @@
 ## Release in-progress
 * Update plugin dependencies in bordertech_parent
 * Update plugin dependencies in qa_parent
+* Made the following modifications to CheckStyle config file bt-checkstyle.xml:
+  * Moved tabWidth override to the top level checker element
+  * Changed tab indention check to no longer allow any violations by removing the maximum property which was set to 10
+  * Changed JavadocPackage check to warning
+  * Changed EmptyForIteratorPad check to warning as IntelliJ code formatting does not currently allow for this
 
 ## 1.0.19
 * Added bt.qa.fail property as a convenience property to allow projects to fail builds or only report QA violations. #84
