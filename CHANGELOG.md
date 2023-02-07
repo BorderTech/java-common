@@ -1,6 +1,8 @@
 # Change log
 
 ## Release in-progress
+
+## 1.0.20
 * Update plugin dependencies in bordertech_parent
 * Update plugin dependencies in qa_parent
 * Made the following modifications to CheckStyle config file bt-checkstyle.xml:
