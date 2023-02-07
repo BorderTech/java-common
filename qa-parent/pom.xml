@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>com.github.bordertech.common</groupId>
 		<artifactId>bordertech-parent</artifactId>
-		<version>1.0.20</version>
+		<version>1.0.21-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
@@ -236,7 +236,7 @@
 					<dependency>
 						<groupId>com.github.bordertech.common</groupId>
 						<artifactId>build-tools</artifactId>
-						<version>1.0.20</version>
+						<version>1.0.21-SNAPSHOT</version>
 					</dependency>
 				</dependencies>
 				<executions>
@@ -287,7 +287,7 @@
 					<dependency>
 						<groupId>com.github.bordertech.common</groupId>
 						<artifactId>build-tools</artifactId>
-						<version>1.0.20</version>
+						<version>1.0.21-SNAPSHOT</version>
 					</dependency>
 				</dependencies>
 				<executions>
@@ -351,7 +351,7 @@
 					<dependency>
 						<groupId>com.github.bordertech.common</groupId>
 						<artifactId>build-tools</artifactId>
-						<version>1.0.20</version>
+						<version>1.0.21-SNAPSHOT</version>
 					</dependency>
 				</dependencies>
 			</plugin>
