@@ -86,19 +86,19 @@
 		<assemblyAnalyzerEnabled>false</assemblyAnalyzerEnabled>
 
 		<!-- Versions -->
-		<bt.junit.version>5.8.2</bt.junit.version>
-		<bt.jacoco.plugin.version>0.8.7</bt.jacoco.plugin.version>
+		<bt.junit.version>5.9.2</bt.junit.version>
+		<bt.jacoco.plugin.version>0.8.8</bt.jacoco.plugin.version>
 		<bt.surefire.plugin.version>2.22.2</bt.surefire.plugin.version>
-		<bt.checkstyle.plugin.version>3.1.2</bt.checkstyle.plugin.version>
-		<bt.checkstyle.version>9.3</bt.checkstyle.version>
-		<bt.pmd.plugin.version>3.15.0</bt.pmd.plugin.version>
-		<bt.pmd.version>6.42.0</bt.pmd.version>
-		<bt.spotbugs.plugin.version>4.5.3.0</bt.spotbugs.plugin.version>
+		<bt.checkstyle.plugin.version>3.2.1</bt.checkstyle.plugin.version>
+		<bt.checkstyle.version>10.7.0</bt.checkstyle.version>
+		<bt.pmd.plugin.version>3.20.0</bt.pmd.plugin.version>
+		<bt.pmd.version>6.54.0</bt.pmd.version>
+		<bt.spotbugs.plugin.version>4.7.3.0</bt.spotbugs.plugin.version>
 		<bt.sb-contrib.plugin.version>7.4.7</bt.sb-contrib.plugin.version>
-		<bt.spotbugs.version>4.5.3</bt.spotbugs.version>
-		<bt.findsecbugs.plugin.version>1.11.0</bt.findsecbugs.plugin.version>
-		<bt.owasp.plugin.version>6.5.3</bt.owasp.plugin.version>
-		<bt.versions.plugin>2.8.1</bt.versions.plugin>
+		<bt.spotbugs.version>4.7.3</bt.spotbugs.version>
+		<bt.findsecbugs.plugin.version>1.12.0</bt.findsecbugs.plugin.version>
+		<bt.owasp.plugin.version>8.0.2</bt.owasp.plugin.version>
+		<bt.versions.plugin>2.14.2</bt.versions.plugin>
 
 	</properties>
 
@@ -182,6 +182,14 @@
 
 	<build>
 		<plugins>
+
+			<!-- Surefire -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>${bt.surefire.plugin.version}</version>
+			</plugin>
+
 			<!-- Code coverage. -->
 			<plugin>
 				<groupId>org.jacoco</groupId>
@@ -196,21 +204,15 @@
 						</goals>
 					</execution>
 					<!-- Jacoco Coverage Report -->
+					<!-- As this is bound to the same phase as surefire but needs to run after surefire it must be defined after the surefire plugin. -->
 					<execution>
 						<id>post-unit-test</id>
-						<phase>prepare-package</phase>
+						<phase>test</phase>
 						<goals>
 							<goal>report</goal>
 						</goals>
 					</execution>
 				</executions>
-			</plugin>
-
-			<!-- Surefire -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<version>${bt.surefire.plugin.version}</version>
 			</plugin>
 
 			<!-- Verify: Check the code style. -->

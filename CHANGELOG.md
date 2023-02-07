@@ -1,6 +1,15 @@
 # Change log
 
 ## Release in-progress
+* Update plugin dependencies in bordertech_parent
+* Update plugin dependencies in qa_parent
+* Made the following modifications to CheckStyle config file bt-checkstyle.xml:
+  * Moved tabWidth override to the top level checker element
+  * Changed tab indention check to no longer allow any violations by removing the maximum property which was set to 10
+  * Changed JavadocPackage check to warning
+  * Changed EmptyForIteratorPad check to warning as IntelliJ code formatting does not currently allow for this
+* Added a new checkstyle config file bt-checkstyle-format-only.xml for projects that only want to check basic code formatting.
+* Modified the jacoco report goal to the test phase and to make sure it runs after surefire, moved the jacoco plugin after the surefire plugin in the pom file which is how maven determines the run order of plugins defined on the same phase #88
 
 ## 1.0.19
 * Added bt.qa.fail property as a convenience property to allow projects to fail builds or only report QA violations. #84
