@@ -186,7 +186,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-enforcer-plugin</artifactId>
-				<version>3.2.1</version>
+				<version>3.5.0</version>
 				<executions>
 					<execution>
 						<id>enforcer</id>
@@ -196,7 +196,7 @@
 						<configuration>
 							<rules>
 								<requireMavenVersion>
-									<version>[3.3.9,)</version>
+									<version>[3.6.3,)</version>
 								</requireMavenVersion>
 								<requireJavaVersion>
 									<version>[1.8,)</version>
@@ -212,7 +212,7 @@
 					<dependency>
 						<groupId>org.codehaus.mojo</groupId>
 						<artifactId>extra-enforcer-rules</artifactId>
-						<version>1.6.1</version>
+						<version>1.8.0</version>
 					</dependency>
 				</dependencies>
 			</plugin>

@@ -86,19 +86,20 @@
 		<assemblyAnalyzerEnabled>false</assemblyAnalyzerEnabled>
 
 		<!-- Versions -->
-		<bt.junit.version>5.9.2</bt.junit.version>
-		<bt.jacoco.plugin.version>0.8.8</bt.jacoco.plugin.version>
-		<bt.surefire.plugin.version>2.22.2</bt.surefire.plugin.version>
-		<bt.checkstyle.plugin.version>3.2.1</bt.checkstyle.plugin.version>
+		<bt.junit.version>5.11.0</bt.junit.version>
+		<bt.jacoco.plugin.version>0.8.12</bt.jacoco.plugin.version>
+		<bt.surefire.plugin.version>3.5.0</bt.surefire.plugin.version>
+		<bt.checkstyle.plugin.version>3.5.0</bt.checkstyle.plugin.version>
+		<!-- Checkstyle 10.X requires JDK 11 -->
 		<bt.checkstyle.version>9.3</bt.checkstyle.version>
-		<bt.pmd.plugin.version>3.20.0</bt.pmd.plugin.version>
-		<bt.pmd.version>6.54.0</bt.pmd.version>
-		<bt.spotbugs.plugin.version>4.7.3.0</bt.spotbugs.plugin.version>
-		<bt.sb-contrib.plugin.version>7.4.7</bt.sb-contrib.plugin.version>
-		<bt.spotbugs.version>4.7.3</bt.spotbugs.version>
-		<bt.findsecbugs.plugin.version>1.12.0</bt.findsecbugs.plugin.version>
-		<bt.owasp.plugin.version>8.0.2</bt.owasp.plugin.version>
-		<bt.versions.plugin>2.14.2</bt.versions.plugin>
+		<bt.pmd.plugin.version>3.25.0</bt.pmd.plugin.version>
+		<bt.pmd.version>7.5.0</bt.pmd.version>
+		<bt.spotbugs.plugin.version>4.8.6.3</bt.spotbugs.plugin.version>
+		<bt.sb-contrib.plugin.version>7.6.4</bt.sb-contrib.plugin.version>
+		<bt.spotbugs.version>4.8.6</bt.spotbugs.version>
+		<bt.findsecbugs.plugin.version>1.13.0</bt.findsecbugs.plugin.version>
+		<bt.owasp.plugin.version>10.0.4</bt.owasp.plugin.version>
+		<bt.versions.plugin>2.17.1</bt.versions.plugin>
 
 	</properties>
 
@@ -145,7 +146,7 @@
 						<executions>
 							<execution>
 								<id>display-version-updates</id>
-								<phase>verify</phase>
+								<phase>validate</phase>
 								<goals>
 									<goal>display-dependency-updates</goal>
 									<goal>display-parent-updates</goal>
@@ -376,6 +377,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-enforcer-plugin</artifactId>
+				<version>3.5.0</version>
 				<executions>
 					<execution>
 						<id>enforcer-convergence-check</id>

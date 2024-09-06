@@ -4,7 +4,6 @@
 [![Build Status](https://github.com/BorderTech/java-common/actions/workflows/github-actions-build.yml/badge.svg)](https://github.com/BorderTech/java-common/actions/workflows/github-actions-build.yml)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=bordertech-java-common&metric=alert_status)](https://sonarcloud.io/dashboard?id=bordertech-java-common)
 [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=bordertech-java-common&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=bordertech-java-common)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/fd8ef044a86d44e8931410382035f8e2)](https://www.codacy.com/gh/BorderTech/java-common?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=BorderTech/java-common&amp;utm_campaign=Badge_Grade)
 [![Maven Central](https://img.shields.io/maven-central/v/com.github.bordertech.common/bordertech-parent.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22com.github.bordertech.common%22%20AND%20a:%22bordertech-parent%22)
 
 ## Content
@@ -37,7 +36,7 @@ Projects should generally use qa-parent as their parent POM:
   <parent>
     <groupId>com.github.bordertech.common</groupId>
     <artifactId>qa-parent</artifactId>
-    <version>1.0.20</version>
+    <version>1.0.21</version>
   </parent>
   ....
 </project>

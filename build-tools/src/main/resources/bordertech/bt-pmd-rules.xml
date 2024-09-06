@@ -33,9 +33,6 @@
 	<rule ref="category/java/errorprone.xml/ConstructorCallsOverridableMethod">
 		<priority>3</priority>
 	</rule>
-	<rule ref="category/java/errorprone.xml/ReturnEmptyArrayRatherThanNull">
-		<priority>3</priority>
-	</rule>
 	<rule ref="category/java/errorprone.xml/ReturnEmptyCollectionRatherThanNull">
 		<priority>3</priority>
 	</rule>

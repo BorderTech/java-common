@@ -1,6 +1,10 @@
 # Change log
 
 ## Release in-progress
+* Update to latest plugin dependencies
+* Latest plugin dependencies now have a minimum maven version of 3.6.3.
+* Removed ReturnEmptyArrayRatherThanNull pmd rule that is no longer supported.
+* Modified the versions-maven-plugin phase in the display-versions profile to validate to make it easier to run.
 
 ## 1.0.20
 * Update plugin dependencies in bordertech_parent
