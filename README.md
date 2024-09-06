@@ -37,7 +37,7 @@ Projects should generally use qa-parent as their parent POM:
   <parent>
     <groupId>com.github.bordertech.common</groupId>
     <artifactId>qa-parent</artifactId>
-    <version>1.0.20</version>
+    <version>1.0.21</version>
   </parent>
   ....
 </project>
