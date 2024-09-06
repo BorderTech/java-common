@@ -146,7 +146,7 @@
 						<executions>
 							<execution>
 								<id>display-version-updates</id>
-								<phase>verify</phase>
+								<phase>validate</phase>
 								<goals>
 									<goal>display-dependency-updates</goal>
 									<goal>display-parent-updates</goal>
