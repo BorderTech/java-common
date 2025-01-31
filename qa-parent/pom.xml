@@ -93,7 +93,7 @@
 		<!-- Checkstyle 10.X requires JDK 11 -->
 		<bt.checkstyle.version>9.3</bt.checkstyle.version>
 		<bt.pmd.plugin.version>3.25.0</bt.pmd.plugin.version>
-		<bt.pmd.version>7.5.0</bt.pmd.version>
+		<bt.pmd.version>7.10.0</bt.pmd.version>
 		<bt.spotbugs.plugin.version>4.8.6.3</bt.spotbugs.plugin.version>
 		<bt.sb-contrib.plugin.version>7.6.4</bt.sb-contrib.plugin.version>
 		<bt.spotbugs.version>4.8.6</bt.spotbugs.version>
