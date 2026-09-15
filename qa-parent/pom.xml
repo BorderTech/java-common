@@ -86,20 +86,26 @@
 		<assemblyAnalyzerEnabled>false</assemblyAnalyzerEnabled>
 
 		<!-- Versions -->
-		<bt.junit.version>5.11.0</bt.junit.version>
-		<bt.jacoco.plugin.version>0.8.12</bt.jacoco.plugin.version>
-		<bt.surefire.plugin.version>3.5.0</bt.surefire.plugin.version>
-		<bt.checkstyle.plugin.version>3.5.0</bt.checkstyle.plugin.version>
+		<!-- junit 6.X.X requires JDK17 -->
+		<bt.junit.version>5.14.4</bt.junit.version>
+		<bt.jacoco.plugin.version>0.8.15</bt.jacoco.plugin.version>
+		<bt.surefire.plugin.version>3.6.0</bt.surefire.plugin.version>
+		<bt.checkstyle.plugin.version>3.6.0</bt.checkstyle.plugin.version>
 		<!-- Checkstyle 10.X requires JDK 11 -->
 		<bt.checkstyle.version>9.3</bt.checkstyle.version>
-		<bt.pmd.plugin.version>3.25.0</bt.pmd.plugin.version>
-		<bt.pmd.version>7.5.0</bt.pmd.version>
-		<bt.spotbugs.plugin.version>4.8.6.3</bt.spotbugs.plugin.version>
-		<bt.sb-contrib.plugin.version>7.6.4</bt.sb-contrib.plugin.version>
+		<!-- PMD versions -->
+		<bt.pmd.plugin.version>3.28.0</bt.pmd.plugin.version>
+		<bt.pmd.version>7.27.0</bt.pmd.version>
+		<!-- Spotbugs versions -->
+		<!-- Spotbugs 4.9.X and above requires JDK11 -->
+		<bt.spotbugs.plugin.version>4.8.6.8</bt.spotbugs.plugin.version>
 		<bt.spotbugs.version>4.8.6</bt.spotbugs.version>
+		<!-- Last version of extensions compatible with spotbugs 4.8.6 -->
+		<bt.sb-contrib.plugin.version>7.6.4</bt.sb-contrib.plugin.version>
 		<bt.findsecbugs.plugin.version>1.13.0</bt.findsecbugs.plugin.version>
+		<!-- OWASP 11.X.X requires JDK11 -->
 		<bt.owasp.plugin.version>10.0.4</bt.owasp.plugin.version>
-		<bt.versions.plugin>2.17.1</bt.versions.plugin>
+		<bt.versions.plugin>2.22.0</bt.versions.plugin>
 
 	</properties>
 
@@ -377,7 +383,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-enforcer-plugin</artifactId>
-				<version>3.5.0</version>
+				<version>3.6.3</version>
 				<executions>
 					<execution>
 						<id>enforcer-convergence-check</id>

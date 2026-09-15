@@ -11,6 +11,16 @@
   * org.codehaus.mojo:extra-enforcer-rules         from 1.8.0  to 1.12.1
   * org.apache.maven.plugins:maven-source-plugin   from 3.2.1  to 3.4.0
   * org.apache.maven.plugins:maven-gpg-plugin      from 3.0.1  to 3.2.8
+* Update qa-parent pom.xml plugins:
+  * org.junit                                        from 5.11.0 to 5.14.4
+  * org.jacoco:jacoco-maven-plugin                   from 0.8.12 to 0.8.15
+  * org.apache.maven.plugins:maven-surefire-plugin   from 3.5.0  to 3.6.0
+  * org.apache.maven.plugins:maven-checkstyle-plugin from 3.5.0  to 3.6.0
+  * org.apache.maven.plugins:maven-pmd-plugin        from 3.25.0 to 3.28.0
+  * net.sourceforge.pmd:pmd*                         from 7.5.0  to 7.27.0
+  * com.github.spotbugs:spotbugs-maven-plugin        from 4.8.6.3 to 4.8.6.8
+  * org.codehaus.mojo:versions-maven-plugin          from 2.17.1 to 2.22.0
+  * org.apache.maven.plugins:maven-enforcer-plugin   from 3.5.0  to 3.6.3
 
 ## 1.0.21
 * Update to latest plugin dependencies
