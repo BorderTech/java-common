@@ -1,6 +1,16 @@
 # Change log
 
 ## Release in-progress
+* Update bordertech-parent pom.xml plugins:
+  * org.apache.maven.plugins:maven-jar-plugin      from default to 3.5.1
+  * org.apache.maven.plugins:maven-assembly-plugin from default to 3.8.0
+  * org.apache.maven.plugins:maven-release-plugin  from 2.5.3  to 3.3.1
+  * org.apache.maven.plugins:maven-compiler-plugin from 3.10.1 to 3.16.0
+  * org.apache.maven.plugins:maven-javadoc-plugin  from 3.4.1  to 3.12.0
+  * org.apache.maven.plugins:maven-enforcer-plugin from 3.5.0  to 3.6.3
+  * org.codehaus.mojo:extra-enforcer-rules         from 1.8.0  to 1.12.1
+  * org.apache.maven.plugins:maven-source-plugin   from 3.2.1  to 3.4.0
+  * org.apache.maven.plugins:maven-gpg-plugin      from 3.0.1  to 3.2.8
 
 ## 1.0.21
 * Update to latest plugin dependencies
