@@ -24,6 +24,15 @@
 	<rule ref="category/java/security.xml"/>
 
 	<!-- Downgrade rules from Failure to Warning. -->
+	<rule ref="category/java/bestpractices.xml/ImplicitFunctionalInterface">
+		<priority>3</priority>
+	</rule>
+	<rule ref="category/java/bestpractices.xml/GuardLogStatement" >
+		<priority>3</priority>
+	</rule>
+	<rule ref="category/java/bestpractices.xml/SystemPrintln">
+		<priority>3</priority>
+	</rule>
 	<rule ref="category/java/codestyle.xml/ClassNamingConventions" >
 		<priority>3</priority>
 	</rule>
@@ -42,19 +51,15 @@
 	<rule ref="category/java/errorprone.xml/SuspiciousEqualsMethodName">
 		<priority>3</priority>
 	</rule>
-	<rule ref="category/java/bestpractices.xml/GuardLogStatement" >
-		<priority>3</priority>
-	</rule>
-	<rule ref="category/java/bestpractices.xml/SystemPrintln">
+	<rule ref="category/java/errorprone.xml/WrongTestAnnotation">
 		<priority>3</priority>
 	</rule>
 	<rule ref="category/java/performance.xml/AvoidFileStream" >
 		<priority>3</priority>
 	</rule>
-
 	<rule ref="category/java/documentation.xml/CommentRequired">
 		<properties>
-			<property name="fieldCommentRequirement" value="Ignored"/>
+			<property name="fieldCommentRequirement" value="ignored"/>
 		</properties>
 	</rule>
 
