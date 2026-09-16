@@ -116,6 +116,12 @@ The qa-parent provides a profile `display-versions` that uses the [Version check
 
 Refer to [Version checker plugin](https://www.mojohaus.org/versions-maven-plugin/) for all override details.
 
+#### check-dep profile
+
+The qa-parent provides a profile `check-dep` that runs the OWASP plugin. This plugin has its own profile as it requires JDK11 and needs to be run seperately from projects built on JDK8.
+
+After building a project on JDK8 the JDK can be switched to JDK11 and then run `mvn verify -Pquick-build -Pcheck-dep`
+
 ### build-tools
 
 This is primarily a shared resources module used by qa-parent and potentially other BorderTech maven modules.
@@ -347,13 +353,7 @@ When adding a custom exclude filter and the module still needs to ignore generat
 
 Refer to [OWASP plugin](https://jeremylong.github.io/DependencyCheck/dependency-check-maven) for all override details.
 
-##### Skip OWASP
-
-``` xml
-<property>
-  <dependency-check.skip>true</dependency-check.skip>
-</property>
-```
+The OWASP plugin is only run in profile `check-dep` as it requires JDK11.
 
 ##### Ignore OWASP Rule
 

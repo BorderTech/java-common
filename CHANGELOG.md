@@ -21,6 +21,9 @@
   * com.github.spotbugs:spotbugs-maven-plugin        from 4.8.6.3 to 4.8.6.8
   * org.codehaus.mojo:versions-maven-plugin          from 2.17.1 to 2.22.0
   * org.apache.maven.plugins:maven-enforcer-plugin   from 3.5.0  to 3.6.3
+* Moved dependency-check-maven plugin into own profile check-dep as it requires JDK11
+* Included central-publishing-maven-plugin in release profile to publish to maven central
+* Moved javadoc plugin into the release profile so only created when doing a release
 
 ## 1.0.21
 * Update to latest plugin dependencies
