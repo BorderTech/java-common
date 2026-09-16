@@ -1,6 +1,8 @@
 # Change log
 
 ## Release in-progress
+
+## 1.0.22
 * Update bordertech-parent pom.xml plugins:
   * org.apache.maven.plugins:maven-jar-plugin      from default to 3.5.1
   * org.apache.maven.plugins:maven-assembly-plugin from default to 3.8.0
