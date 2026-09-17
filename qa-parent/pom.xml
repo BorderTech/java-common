@@ -11,6 +11,8 @@
 	</parent>
 
 	<artifactId>qa-parent</artifactId>
+	<name>qa-parent</name>
+
 	<packaging>pom</packaging>
 
 	<properties>
