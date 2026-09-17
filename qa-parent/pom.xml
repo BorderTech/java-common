@@ -11,6 +11,8 @@
 	</parent>
 
 	<artifactId>qa-parent</artifactId>
+	<name>qa-parent</name>
+
 	<packaging>pom</packaging>
 
 	<properties>
@@ -111,8 +113,6 @@
 				<spotbugs.skip>true</spotbugs.skip>
 				<!-- Skip convergence check -->
 				<bt.convergence.check.skip>true</bt.convergence.check.skip>
-				<!-- Skip javadoc -->
-				<maven.javadoc.skip>true</maven.javadoc.skip>
 			</properties>
 		</profile>
 		
