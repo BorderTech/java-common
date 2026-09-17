@@ -21,7 +21,6 @@
 		<pmd.skip>${bt.qa.skip}</pmd.skip>
 		<cpd.skip>${bt.qa.skip}</cpd.skip>
 		<spotbugs.skip>${bt.qa.skip}</spotbugs.skip>
-		<dependency-check.skip>${bt.qa.skip}</dependency-check.skip>
 		<bt.convergence.check.skip>${bt.qa.skip}</bt.convergence.check.skip>
 
 		<!-- FAIL QA -->
@@ -29,8 +28,6 @@
 		<checkstyle.failOnViolation>${bt.qa.fail}</checkstyle.failOnViolation>
 		<pmd.failOnViolation>${bt.qa.fail}</pmd.failOnViolation>
 		<spotbugs.failOnError>${bt.qa.fail}</spotbugs.failOnError>
-		<!-- OWASP -->
-		<failOnError>${bt.qa.fail}</failOnError>
 		<!-- Convergence Check -->
 		<bt.convergence.check.fail>${bt.qa.fail}</bt.convergence.check.fail>
 		<!-- CPD (Default to report only) -->
@@ -69,37 +66,25 @@
 		<!-- Need to add sources for source tag in exclude and include filters to work -->
 		<spotbugs.addSourceDirs>true</spotbugs.addSourceDirs>
 
-		<!-- OWASP (Default to Critical) -->
-		<!-- Check every 12 hours (default is 4) -->
-		<cveValidForHours>12</cveValidForHours>
-		<!-- Min cvss score to fail on. Range 0-10 : LOW: 0-3.9, MEDIUM: 4-6.9, HIGH: 7.0-8.9, Critical: 9.0-10.0 (Default is 11 which means it never fails) -->
-		<failBuildOnCVSS>9</failBuildOnCVSS>
-		<!-- If set, owasp uses the proxy id in maven settings to download its db. -->
-		<mavenSettingsProxyId />
-		<!-- Disable analyzers -->
-		<!-- Disable retirejs analyzer -->
-		<retireJsAnalyzerEnabled>false</retireJsAnalyzerEnabled>
-		<!-- Disable swift analyzer -->
-		<swiftPackageManagerAnalyzerEnabled>false</swiftPackageManagerAnalyzerEnabled>
-		<!-- Disbale .net analyzers -->
-		<nuspecAnalyzerEnabled>false</nuspecAnalyzerEnabled>
-		<assemblyAnalyzerEnabled>false</assemblyAnalyzerEnabled>
-
 		<!-- Versions -->
-		<bt.junit.version>5.11.0</bt.junit.version>
-		<bt.jacoco.plugin.version>0.8.12</bt.jacoco.plugin.version>
-		<bt.surefire.plugin.version>3.5.0</bt.surefire.plugin.version>
-		<bt.checkstyle.plugin.version>3.5.0</bt.checkstyle.plugin.version>
+		<!-- junit 6.X.X requires JDK17 -->
+		<bt.junit.version>5.14.4</bt.junit.version>
+		<bt.jacoco.plugin.version>0.8.15</bt.jacoco.plugin.version>
+		<bt.surefire.plugin.version>3.6.0</bt.surefire.plugin.version>
+		<bt.checkstyle.plugin.version>3.6.0</bt.checkstyle.plugin.version>
 		<!-- Checkstyle 10.X requires JDK 11 -->
 		<bt.checkstyle.version>9.3</bt.checkstyle.version>
-		<bt.pmd.plugin.version>3.25.0</bt.pmd.plugin.version>
-		<bt.pmd.version>7.5.0</bt.pmd.version>
-		<bt.spotbugs.plugin.version>4.8.6.3</bt.spotbugs.plugin.version>
-		<bt.sb-contrib.plugin.version>7.6.4</bt.sb-contrib.plugin.version>
+		<!-- PMD versions -->
+		<bt.pmd.plugin.version>3.28.0</bt.pmd.plugin.version>
+		<bt.pmd.version>7.27.0</bt.pmd.version>
+		<!-- Spotbugs versions -->
+		<!-- Spotbugs 4.9.X and above requires JDK11 -->
+		<bt.spotbugs.plugin.version>4.8.6.8</bt.spotbugs.plugin.version>
 		<bt.spotbugs.version>4.8.6</bt.spotbugs.version>
+		<!-- Last version of extensions compatible with spotbugs 4.8.6 -->
+		<bt.sb-contrib.plugin.version>7.6.4</bt.sb-contrib.plugin.version>
 		<bt.findsecbugs.plugin.version>1.13.0</bt.findsecbugs.plugin.version>
-		<bt.owasp.plugin.version>10.0.4</bt.owasp.plugin.version>
-		<bt.versions.plugin>2.17.1</bt.versions.plugin>
+		<bt.versions.plugin>2.22.0</bt.versions.plugin>
 
 	</properties>
 
@@ -124,13 +109,52 @@
 				<pmd.skip>true</pmd.skip>
 				<cpd.skip>true</cpd.skip>
 				<spotbugs.skip>true</spotbugs.skip>
-				<!-- Skip OWASP -->
-				<dependency-check.skip>true</dependency-check.skip>
 				<!-- Skip convergence check -->
 				<bt.convergence.check.skip>true</bt.convergence.check.skip>
 				<!-- Skip javadoc -->
 				<maven.javadoc.skip>true</maven.javadoc.skip>
 			</properties>
+		</profile>
+		
+		<!-- OWASP dependency vulnerability scanner in own profile as requires min JDK11 -->
+		<!-- After build project on JDK8 can run mvn verify -Pquick-build -Pcheck-dep -->
+		<profile>
+			<id>check-dep</id>
+			<properties>
+				<!-- OWASP 11.X.X and above requires JDK11 -->
+				<bt.owasp.plugin.version>13.0.0</bt.owasp.plugin.version>
+				<!-- OWASP (Default to Critical) -->
+				<!-- Min cvss score to fail on. Range 0-10 : LOW: 0-3.9, MEDIUM: 4-6.9, HIGH: 7.0-8.9, Critical: 9.0-10.0 (Default is 11 which means it never fails) -->
+				<failBuildOnCVSS>9</failBuildOnCVSS>
+				<!-- If set, owasp uses the proxy id in maven settings to download its db. -->
+				<mavenSettingsProxyId />
+				<!-- Disable analyzers -->
+				<!-- Disable retirejs analyzer -->
+				<retireJsAnalyzerEnabled>false</retireJsAnalyzerEnabled>
+				<!-- Disable swift analyzer -->
+				<swiftPackageManagerAnalyzerEnabled>false</swiftPackageManagerAnalyzerEnabled>
+				<!-- Disbale .net analyzers -->
+				<nuspecAnalyzerEnabled>false</nuspecAnalyzerEnabled>
+				<assemblyAnalyzerEnabled>false</assemblyAnalyzerEnabled>
+			</properties>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.owasp</groupId>
+						<artifactId>dependency-check-maven</artifactId>
+						<version>${bt.owasp.plugin.version}</version>
+						<executions>
+							<execution>
+								<id>checkDependencies</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>check</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
 		</profile>
 
 		<!-- Profile to display new dependency versions in the build console. -->
@@ -357,27 +381,11 @@
 				</dependencies>
 			</plugin>
 
-			<!-- Verify: OWASP dependency vulnerability scanner. -->
-			<plugin>
-				<groupId>org.owasp</groupId>
-				<artifactId>dependency-check-maven</artifactId>
-				<version>${bt.owasp.plugin.version}</version>
-				<executions>
-					<execution>
-						<id>checkDependencies</id>
-						<phase>verify</phase>
-						<goals>
-							<goal>check</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-
 			<!-- Verify: Enforcer check for Dependency Convergence -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-enforcer-plugin</artifactId>
-				<version>3.5.0</version>
+				<version>3.6.3</version>
 				<executions>
 					<execution>
 						<id>enforcer-convergence-check</id>
