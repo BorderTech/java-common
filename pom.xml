@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
 
@@ -14,10 +15,6 @@
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<stagingBaseUrl>https://oss.sonatype.org/</stagingBaseUrl>
-		<stagingUrl>${stagingBaseUrl}service/local/staging/deploy/maven2/</stagingUrl>
-		<snapshotUrl>${stagingBaseUrl}content/repositories/snapshots</snapshotUrl>
-		<stagingId>ossrh</stagingId>
 	</properties>
 
 	<!--
@@ -81,17 +78,6 @@
 		</developer>
 	</developers>
 
-	<distributionManagement>
-		<snapshotRepository>
-			<id>${stagingId}</id>
-			<url>${snapshotUrl}</url>
-		</snapshotRepository>
-		<repository>
-			<id>${stagingId}</id>
-			<url>${stagingUrl}</url>
-		</repository>
-	</distributionManagement>
-
 	<build>
 		<pluginManagement>
 			<plugins>
@@ -103,7 +89,7 @@
 					<configuration>
 						<archive>
 							<manifestEntries>
-								<Built-By /><!-- blank build user in manifest file -->
+								<Built-By/><!-- blank build user in manifest file -->
 							</manifestEntries>
 						</archive>
 					</configuration>
@@ -125,7 +111,7 @@
 					<configuration>
 						<archive>
 							<manifestEntries>
-								<Built-By /><!-- blank build user in manifest file -->
+								<Built-By/><!-- blank build user in manifest file -->
 							</manifestEntries>
 						</archive>
 					</configuration>
@@ -217,7 +203,7 @@
 						<configuration>
 							<archive>
 								<manifestEntries>
-									<Built-By /><!-- blank build user in manifest file -->
+									<Built-By/><!-- blank build user in manifest file -->
 								</manifestEntries>
 							</archive>
 							<charset>UTF-8</charset>
@@ -246,7 +232,7 @@
 						<configuration>
 							<archive>
 								<manifestEntries>
-									<Built-By /><!-- blank build user in manifest file -->
+									<Built-By/><!-- blank build user in manifest file -->
 								</manifestEntries>
 							</archive>
 							<includes>

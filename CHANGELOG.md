@@ -1,6 +1,7 @@
 # Change log
 
 ## Release in-progress
+* Remove the legacy staging properties (stagingBaseUrl, stagingUrl, snapshotUrl and stagingId) and the `distributionManagement` section. These are no longer required when publishing through central-publishing-maven-plugin. Projects deploying to an internal Nexus repository, or deploying snapshots without the Central plugin, must configure their own `distributionManagement`.
 
 ## 1.0.22
 * Update bordertech-parent pom.xml plugins:
