@@ -2,7 +2,8 @@
 
 ## Release in-progress
 * Remove the legacy staging properties (stagingBaseUrl, stagingUrl, snapshotUrl and stagingId) and the `distributionManagement` section. These are no longer required when publishing through central-publishing-maven-plugin. Projects deploying to an internal Nexus repository, or deploying snapshots without the Central plugin, must configure their own `distributionManagement`.
-* Move maven-javadoc-plugin and maven-source-plugin configuration into pluginManagement.
+* Move `maven-javadoc-plugin` and `maven-source-plugin` configuration into `pluginManagement`.
+* Rename the `release` profile to `central-release` and configure it through the `releaseProfiles` property to make it easier for projects to override.
 
 ## 1.0.22
 * Update bordertech-parent pom.xml plugins:

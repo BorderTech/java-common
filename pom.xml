@@ -15,6 +15,8 @@
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<!-- Default release profile -->
+		<releaseProfiles>central-release</releaseProfiles>
 	</properties>
 
 	<!--
@@ -155,6 +157,7 @@
 				</plugin>
 
 				<!-- Handle release. -->
+				<!-- Release profile set as a property above -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-release-plugin</artifactId>
@@ -166,8 +169,6 @@
 						<mavenExecutorId>forked-path</mavenExecutorId>
 						<!-- Manually push commits created by the release plugin -->
 						<pushChanges>false</pushChanges>
-						<!-- Perform defaults -->
-						<releaseProfiles>release</releaseProfiles>
 						<localCheckout>true</localCheckout>
 					</configuration>
 				</plugin>
@@ -227,7 +228,7 @@
 			The build cannot release to maven central without configuring several secrets in settings.xml
 			Read here: https://github.com/BorderTech/wcomponents/wiki/Releasing
 			-->
-			<id>release</id>
+			<id>central-release</id>
 			<build>
 
 				<plugins>
