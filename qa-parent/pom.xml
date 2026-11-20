@@ -71,14 +71,14 @@
 		<!-- Versions -->
 		<!-- junit 6.X.X requires JDK17 -->
 		<bt.junit.version>5.14.4</bt.junit.version>
-		<bt.jacoco.plugin.version>0.8.15</bt.jacoco.plugin.version>
-		<bt.surefire.plugin.version>3.6.0</bt.surefire.plugin.version>
+		<bt.jacoco.plugin.version>0.8.16</bt.jacoco.plugin.version>
+		<bt.surefire.plugin.version>3.6.1</bt.surefire.plugin.version>
 		<bt.checkstyle.plugin.version>3.6.0</bt.checkstyle.plugin.version>
 		<!-- Checkstyle 10.X requires JDK 11 -->
 		<bt.checkstyle.version>9.3</bt.checkstyle.version>
 		<!-- PMD versions -->
 		<bt.pmd.plugin.version>3.28.0</bt.pmd.plugin.version>
-		<bt.pmd.version>7.27.0</bt.pmd.version>
+		<bt.pmd.version>7.29.0</bt.pmd.version>
 		<!-- Spotbugs versions -->
 		<!-- Spotbugs 4.9.X and above requires JDK11 -->
 		<bt.spotbugs.plugin.version>4.8.6.8</bt.spotbugs.plugin.version>
@@ -115,7 +115,7 @@
 				<bt.convergence.check.skip>true</bt.convergence.check.skip>
 			</properties>
 		</profile>
-		
+
 		<!-- OWASP dependency vulnerability scanner in own profile as requires min JDK11 -->
 		<!-- After build project on JDK8 can run mvn verify -Pquick-build -Pcheck-dep -->
 		<profile>

@@ -4,6 +4,10 @@
 * Remove the legacy staging properties (stagingBaseUrl, stagingUrl, snapshotUrl and stagingId) and the `distributionManagement` section. These are no longer required when publishing through central-publishing-maven-plugin. Projects deploying to an internal Nexus repository, or deploying snapshots without the Central plugin, must configure their own `distributionManagement`.
 * Move `maven-javadoc-plugin` and `maven-source-plugin` configuration into `pluginManagement`.
 * Rename the `release` profile to `central-release` and configure it through the `releaseProfiles` property to make it easier for projects to override.
+* Update qa-parent pom.xml plugins:
+  * org.jacoco:jacoco-maven-plugin                   from 0.8.15 to 0.8.16
+  * org.apache.maven.plugins:maven-surefire-plugin   from 3.6.0  to 3.6.1
+  * net.sourceforge.pmd:pmd*                         from 7.27.0 to 7.29.0
 
 ## 1.0.22
 * Update bordertech-parent pom.xml plugins:
