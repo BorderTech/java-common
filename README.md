@@ -36,7 +36,7 @@ Projects should generally use qa-parent as their parent POM:
   <parent>
     <groupId>com.github.bordertech.common</groupId>
     <artifactId>qa-parent</artifactId>
-    <version>1.0.22</version>
+    <version>1.0.23</version>
   </parent>
   ....
 </project>
@@ -45,17 +45,17 @@ Projects should generally use qa-parent as their parent POM:
 By default qa checks do not run, you must enable them on a per-module basis or in your project parent pom:
 
 ``` xml
-<property>
+<properties>
   <bt.qa.skip>false</bt.qa.skip>
-</property>
+</properties>
 ```
 
 The qa-parent default is to fail the build if QA violations are found. This can be overridden by setting the following property:
 
 ``` xml
-<property>
+<properties>
   <bt.qa.fail>false</bt.qa.fail>
-</property>
+</properties>
 ```
 
 Use the following to run the qa-parent verification:
@@ -159,9 +159,9 @@ Refer to the plugin sections below for basic override details:
 By default qa checks (i.e. Checkstyle, PMD, Spotbugs, OWASP, Convergence Check) do not run, you must enable them on a per-module basis or the project parent pom:
 
 ``` xml
-<property>
+<properties>
   <bt.qa.skip>false</bt.qa.skip>
-</property>
+</properties>
 ```
 
 #### Failing Build with QA Violations
@@ -169,9 +169,9 @@ By default qa checks (i.e. Checkstyle, PMD, Spotbugs, OWASP, Convergence Check) 
 The qa-parent default is to fail the build if QA violations are found. This can be overridden by setting the following property:
 
 ``` xml
-<property>
+<properties>
   <bt.qa.fail>false</bt.qa.fail>
-</property>
+</properties>
 ```
 
 #### Generated Sources
@@ -181,10 +181,10 @@ By default, qa-parent configures the code analysis plugins to ignore generated s
 The following properties are set in qa-parent for Checkstyle and PMD:
 
 ``` xml
-<property>
+<properties>
   <bt.checkstyle.src>${project.build.sourceDirectory}</bt.checkstyle.src>
   <bt.pmd.src>${project.build.sourceDirectory}</bt.pmd.src>
-</property>
+</properties>
 ```
 
 Spotbugs is different from Checkstyle and PMD as it requires an exclude filter to be configured to ignore generated files.
@@ -192,12 +192,12 @@ Spotbugs is different from Checkstyle and PMD as it requires an exclude filter t
 The following properties are set in qa-parent for Spotbugs:
 
 ``` xml
-<property>
+<properties>
   <!-- Exclude files in the generated-sources directory -->
   <spotbugs.excludeFilterFile>bordertech/bt-spotbugs-exclude-generated-files.xml</spotbugs.excludeFilterFile>
   <!-- Need to add sources for source tag in exclude and include filters to work -->
  <spotbugs.addSourceDirs>true</spotbugs.addSourceDirs>
-</property>
+</properties>
 ```
 
 #### Checkstyle
@@ -207,9 +207,9 @@ Refer to [Checkstyle plugin](https://maven.apache.org/plugins/maven-checkstyle-p
 ##### Skip Checkstyle
 
 ``` xml
-<property>
+<properties>
   <checkstyle.skip>true</checkstyle.skip>
-</property>
+</properties>
 ```
 
 ##### Change or Add Checkstyle Rules
@@ -219,9 +219,9 @@ The checkstyle config defaults to `bordertech/bt-checkstyle.xml`. This config is
 To add or change a checkstyle rule you are required to create your own [config.xml](http://checkstyle.sourceforge.net/config.html) file and set the `checkstyle.config.location` property.
 
 ``` xml
-<property>
+<properties>
   <checkstyle.config.location>${basedir}/my-checkstyle-config.xml</checkstyle.config.location>
-</property>
+</properties>
 ```
 
 ##### Ignore Checkstyle Rule
@@ -229,9 +229,9 @@ To add or change a checkstyle rule you are required to create your own [config.x
 Create a [suppression](http://checkstyle.sourceforge.net/config_filters.html) file add set the `checkstyle.suppressions.location` property.
 
 ``` xml
-<property>
+<properties>
   <checkstyle.suppressions.location>${basedir}/my-suppression.xml</checkstyle.suppressions.location>
-</property>
+</properties>
 ```
 
 Example suppression file:-
@@ -252,10 +252,10 @@ Refer to [PMD plugin](https://maven.apache.org/plugins/maven-pmd-plugin) for all
 ##### Skip PMD and CPD
 
 ``` xml
-<property>
+<properties>
   <pmd.skip>true</pmd.skip>
   <cpd.skip>true</cpd.skip>
-</property>
+</properties>
 ```
 
 ##### Change PMD Rule Set
@@ -265,9 +265,9 @@ The default rule set is `bordertech/bt-pmd-rules.xml`.
 You can override the default by creating your own custom [rule set](https://pmd.github.io/latest/pmd_userdocs_making_rulesets.html) and set the `bt.pmd.rules.file` property.
 
 ``` xml
-<property>
+<properties>
   <bt.pmd.rules.file>${basedir}/my-rules.xml</bt.pmd.rules.file>
-</property>
+</properties>
 ```
 
 ##### Add extra PMD Rule set
@@ -292,9 +292,9 @@ An extra [rule set](https://pmd.github.io/latest/pmd_userdocs_making_rulesets.ht
 Create an [excludes](https://pmd.github.io/latest/pmd_userdocs_suppressing_warnings.html#xpath-and-regex-message-suppression) file that lists classes and rules to be excluded from failures and set the `pmd.excludeFromFailureFile` property.
 
 ``` xml
-<property>
+<properties>
   <pmd.excludeFromFailureFile>${basedir}/my-pmd-excludes.properties</pmd.excludeFromFailureFile>
-</property>
+</properties>
 ```
 
 Example properties file:
@@ -310,9 +310,9 @@ Refer to [spotbugs plugin](https://spotbugs.github.io/spotbugs-maven-plugin) or 
 ##### Skip spotbugs
 
 ``` xml
-<property>
+<properties>
   <spotbugs.skip>true</spotbugs.skip>
-</property>
+</properties>
 ```
 
 ##### Ignore Spotbugs Rule
@@ -320,10 +320,10 @@ Refer to [spotbugs plugin](https://spotbugs.github.io/spotbugs-maven-plugin) or 
 Create a [filter](https://spotbugs.readthedocs.io/en/latest/filter.html) file and set `spotbugs.excludeFilterFile` property.
 
 ``` xml
-<property>
+<properties>
   <!-- List of exclude filter files -->
   <spotbugs.excludeFilterFile>${basedir}/my-spotbugs-exclude-file.xml</spotbugs.excludeFilterFile>
-</property>
+</properties>
 ```
 
 Example filter file:-
@@ -360,9 +360,9 @@ The OWASP plugin is only run in profile `check-dep` as it requires JDK11.
 Create a [suppression](https://jeremylong.github.io/DependencyCheck/general/suppression.html) file add set the `suppressionFiles` property.
 
 ``` xml
-<property>
+<properties>
   <suppressionFiles>${basedir}/my-owasp-suppressions.xml</suppressionFiles>
-</property>
+</properties>
 ```
 
 Example suppression file content:
@@ -400,17 +400,17 @@ Refer to [enforcer plugin](https://maven.apache.org/enforcer/maven-enforcer-plug
 ##### Skip enforcer convergence check
 
 ``` xml
-<property>
+<properties>
   <bt.convergence.check.skip>true</bt.convergence.check.skip>
-</property>
+</properties>
 ```
 
 ##### Report issues but dont fail
 
 ``` xml
-<property>
+<properties>
   <bt.convergence.check.fail>false</bt.convergence.check.fail>
-</property>
+</properties>
 ```
 
 #### JaCoCo
@@ -420,9 +420,9 @@ Refer to [JaCoCo plugin](https://www.eclemma.org/jacoco/trunk/doc/maven.html) fo
 ##### Skip JaCoCo
 
 ``` xml
-<property>
+<properties>
   <jacoco.skip>true</jacoco.skip>
-</property>
+</properties>
 ```
 
 #### Surefire
@@ -432,9 +432,9 @@ Refer to [Surefire plugin](https://maven.apache.org/surefire/maven-surefire-plug
 ##### Skip Surefire
 
 ``` xml
-<property>
+<properties>
   <skipTests>true</skipTests>
-</property>
+</properties>
 ```
 
 #### Build tools module for override artefacts

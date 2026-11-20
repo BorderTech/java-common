@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
 
@@ -14,10 +15,8 @@
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<stagingBaseUrl>https://oss.sonatype.org/</stagingBaseUrl>
-		<stagingUrl>${stagingBaseUrl}service/local/staging/deploy/maven2/</stagingUrl>
-		<snapshotUrl>${stagingBaseUrl}content/repositories/snapshots</snapshotUrl>
-		<stagingId>ossrh</stagingId>
+		<!-- Default release profile -->
+		<releaseProfiles>central-release</releaseProfiles>
 	</properties>
 
 	<!--
@@ -81,17 +80,6 @@
 		</developer>
 	</developers>
 
-	<distributionManagement>
-		<snapshotRepository>
-			<id>${stagingId}</id>
-			<url>${snapshotUrl}</url>
-		</snapshotRepository>
-		<repository>
-			<id>${stagingId}</id>
-			<url>${stagingUrl}</url>
-		</repository>
-	</distributionManagement>
-
 	<build>
 		<pluginManagement>
 			<plugins>
@@ -103,7 +91,7 @@
 					<configuration>
 						<archive>
 							<manifestEntries>
-								<Built-By /><!-- blank build user in manifest file -->
+								<Built-By/><!-- blank build user in manifest file -->
 							</manifestEntries>
 						</archive>
 					</configuration>
@@ -125,13 +113,51 @@
 					<configuration>
 						<archive>
 							<manifestEntries>
-								<Built-By /><!-- blank build user in manifest file -->
+								<Built-By/><!-- blank build user in manifest file -->
 							</manifestEntries>
 						</archive>
 					</configuration>
 				</plugin>
 
+				<!-- Handle Javadoc -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-javadoc-plugin</artifactId>
+					<version>3.12.0</version>
+					<configuration>
+						<archive>
+							<manifestEntries>
+								<Built-By/><!-- blank build user in manifest file -->
+							</manifestEntries>
+						</archive>
+						<charset>UTF-8</charset>
+						<encoding>UTF-8</encoding>
+						<docencoding>UTF-8</docencoding>
+						<breakiterator>true</breakiterator>
+						<version>true</version>
+						<keywords>true</keywords>
+					</configuration>
+				</plugin>
+
+				<!-- Handle source files -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-source-plugin</artifactId>
+					<version>3.4.0</version>
+					<configuration>
+						<archive>
+							<manifestEntries>
+								<Built-By/><!-- blank build user in manifest file -->
+							</manifestEntries>
+						</archive>
+						<includes>
+							<include>**/*.java</include>
+						</includes>
+					</configuration>
+				</plugin>
+
 				<!-- Handle release. -->
+				<!-- Release profile set as a property above -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-release-plugin</artifactId>
@@ -143,8 +169,6 @@
 						<mavenExecutorId>forked-path</mavenExecutorId>
 						<!-- Manually push commits created by the release plugin -->
 						<pushChanges>false</pushChanges>
-						<!-- Perform defaults -->
-						<releaseProfiles>release</releaseProfiles>
 						<localCheckout>true</localCheckout>
 					</configuration>
 				</plugin>
@@ -204,7 +228,7 @@
 			The build cannot release to maven central without configuring several secrets in settings.xml
 			Read here: https://github.com/BorderTech/wcomponents/wiki/Releasing
 			-->
-			<id>release</id>
+			<id>central-release</id>
 			<build>
 
 				<plugins>
@@ -213,20 +237,6 @@
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-javadoc-plugin</artifactId>
-						<version>3.12.0</version>
-						<configuration>
-							<archive>
-								<manifestEntries>
-									<Built-By /><!-- blank build user in manifest file -->
-								</manifestEntries>
-							</archive>
-							<charset>UTF-8</charset>
-							<encoding>UTF-8</encoding>
-							<docencoding>UTF-8</docencoding>
-							<breakiterator>true</breakiterator>
-							<version>true</version>
-							<keywords>true</keywords>
-						</configuration>
 						<executions>
 							<execution>
 								<!-- A release to Maven Central MUST include javadoc Jars - even if they are dummy jars -->
@@ -242,17 +252,6 @@
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-source-plugin</artifactId>
-						<version>3.4.0</version>
-						<configuration>
-							<archive>
-								<manifestEntries>
-									<Built-By /><!-- blank build user in manifest file -->
-								</manifestEntries>
-							</archive>
-							<includes>
-								<include>**/*.java</include>
-							</includes>
-						</configuration>
 						<executions>
 							<execution>
 								<id>sources</id>
