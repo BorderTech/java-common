@@ -1,6 +1,7 @@
 # Change log
 
 ## Release in-progress
+* Configure OWASP dependency-check-maven plugin to use the NVD JSON 2.0 Data Feed to avoid the null API key bug introduced in version 13.0.0.
 
 ## 1.0.23
 * Remove the legacy staging properties (stagingBaseUrl, stagingUrl, snapshotUrl and stagingId) and the `distributionManagement` section. These are no longer required when publishing through central-publishing-maven-plugin. Projects deploying to an internal Nexus repository, or deploying snapshots without the Central plugin, must configure their own `distributionManagement`.
