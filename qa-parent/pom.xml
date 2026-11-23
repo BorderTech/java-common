@@ -185,6 +185,34 @@
 				</plugins>
 			</build>
 		</profile>
+		
+		<!-- Convenient profile to check dependency convergence without full build -->
+		<profile>
+			<id>check-convergence</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-enforcer-plugin</artifactId>
+						<version>3.6.3</version>
+						<executions>
+							<execution>
+								<id>check-dependency-convergence</id>
+								<phase>validate</phase>
+								<goals>
+									<goal>enforce</goal>
+								</goals>
+								<configuration>
+									<rules>
+										<dependencyConvergence />
+									</rules>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
 
 	</profiles>
 

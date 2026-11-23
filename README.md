@@ -134,6 +134,14 @@ After building a project on JDK8 the JDK can be switched to JDK11 and then run:
 mvn validate -Pcheck-dep
 ```
 
+#### check-convergence profile
+
+The qa-parent provides a profile `check-convergence` as a convenient profile to check dependency convergence without doing a full build.
+
+``` bash
+mvn validate -Pcheck-convergence
+```
+
 ### build-tools
 
 This is primarily a shared resources module used by qa-parent and potentially other BorderTech maven modules.
