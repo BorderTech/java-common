@@ -36,7 +36,7 @@ Projects should generally use qa-parent as their parent POM:
   <parent>
     <groupId>com.github.bordertech.common</groupId>
     <artifactId>qa-parent</artifactId>
-    <version>1.0.23</version>
+    <version>1.0.24</version>
   </parent>
   ....
 </project>
@@ -60,7 +60,7 @@ The qa-parent default is to fail the build if QA violations are found. This can 
 
 Use the following to run the qa-parent verification:
 
-``` java
+``` bash
 mvn verify
 ```
 
@@ -110,9 +110,17 @@ The qa-parent inherits all of the release functionality from bordertech-parent.
 
 The qa-parent provides a profile `quick-build` that for convenience skips all tests and QA. This is very useful when developing a project and a quick build of the project is required.
 
+``` bash
+mvn clean install -Pquick-build
+```
+
 #### display-versions profile
 
 The qa-parent provides a profile `display-versions` that uses the [Version checker plugin](https://www.mojohaus.org/versions-maven-plugin/) to report project dependencies that have new versions.
+
+``` bash
+mvn validate -Pdisplay-versions
+```
 
 Refer to [Version checker plugin](https://www.mojohaus.org/versions-maven-plugin/) for all override details.
 
@@ -120,7 +128,19 @@ Refer to [Version checker plugin](https://www.mojohaus.org/versions-maven-plugin
 
 The qa-parent provides a profile `check-dep` that runs the OWASP plugin. This plugin has its own profile as it requires JDK11 and needs to be run seperately from projects built on JDK8.
 
-After building a project on JDK8 the JDK can be switched to JDK11 and then run `mvn verify -Pquick-build -Pcheck-dep`
+After building a project on JDK8 the JDK can be switched to JDK11 and then run:
+
+``` bash
+mvn validate -Pcheck-dep
+```
+
+#### check-convergence profile
+
+The qa-parent provides a profile `check-convergence` as a convenient profile to check dependency convergence without doing a full build.
+
+``` bash
+mvn validate -Pcheck-convergence
+```
 
 ### build-tools
 

@@ -117,12 +117,14 @@
 		</profile>
 
 		<!-- OWASP dependency vulnerability scanner in own profile as requires min JDK11 -->
-		<!-- After build project on JDK8 can run mvn verify -Pquick-build -Pcheck-dep -->
+		<!-- After build project on JDK8 can run mvn validate -Pcheck-dep -->
 		<profile>
 			<id>check-dep</id>
 			<properties>
 				<!-- OWASP 11.X.X and above requires JDK11 -->
 				<bt.owasp.plugin.version>13.0.0</bt.owasp.plugin.version>
+				<!-- Use the NVD JSON 2.0 Data Feed (Avoid null API key bug introduced in version 13.0.0) -->
+				<nvdDatafeedUrl>https://nvd.nist.gov/feeds/json/cve/2.0/nvdcve-2.0-{0}.json.gz</nvdDatafeedUrl>
 				<!-- OWASP (Default to Critical) -->
 				<!-- Min cvss score to fail on. Range 0-10 : LOW: 0-3.9, MEDIUM: 4-6.9, HIGH: 7.0-8.9, Critical: 9.0-10.0 (Default is 11 which means it never fails) -->
 				<failBuildOnCVSS>9</failBuildOnCVSS>
@@ -146,7 +148,7 @@
 						<executions>
 							<execution>
 								<id>checkDependencies</id>
-								<phase>verify</phase>
+								<phase>validate</phase>
 								<goals>
 									<goal>check</goal>
 								</goals>
@@ -177,6 +179,34 @@
 									<goal>display-plugin-updates</goal>
 									<goal>display-property-updates</goal>
 								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		
+		<!-- Convenient profile to check dependency convergence without full build -->
+		<profile>
+			<id>check-convergence</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-enforcer-plugin</artifactId>
+						<version>3.6.3</version>
+						<executions>
+							<execution>
+								<id>check-dependency-convergence</id>
+								<phase>validate</phase>
+								<goals>
+									<goal>enforce</goal>
+								</goals>
+								<configuration>
+									<rules>
+										<dependencyConvergence />
+									</rules>
+								</configuration>
 							</execution>
 						</executions>
 					</plugin>
