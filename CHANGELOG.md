@@ -1,6 +1,8 @@
 # Change log
 
 ## Release in-progress
+
+## 1.0.24
 * Configure OWASP dependency-check-maven plugin to use the NVD JSON 2.0 Data Feed to avoid the null API key bug introduced in version 13.0.0.
 * Add new profile `check-convergence` as a convenient profile to check dependency convergence without doing a full build.
 
